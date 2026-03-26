@@ -5,8 +5,8 @@ import { Input } from "@/components/ui/input";
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { role: "bot" as const, text: "Hi! I'm the DataVerge assistant. How can I help you today?" },
+  const [messages, setMessages] = useState<{ role: "bot" | "user"; text: string }[]>([
+    { role: "bot", text: "Hi! I'm the DataVerge assistant. How can I help you today?" },
   ]);
   const [input, setInput] = useState("");
 
