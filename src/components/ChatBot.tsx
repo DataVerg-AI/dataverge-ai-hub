@@ -34,8 +34,8 @@ const ChatBot = () => {
       {/* Chat Panel */}
       {open && (
         <div className="fixed bottom-24 right-6 z-50 flex h-96 w-80 flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
-          <div className="border-b border-border bg-foreground px-4 py-3">
-            <span className="text-sm font-semibold text-primary-foreground">DataVerge Assistant</span>
+          <div className="border-b border-border bg-accent px-4 py-3">
+            <span className="text-sm font-semibold text-accent-foreground">DataVerge Assistant</span>
           </div>
           <div className="flex-1 space-y-3 overflow-y-auto p-4">
             {messages.map((m, i) => (

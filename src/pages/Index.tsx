@@ -101,23 +101,44 @@ const Index = () => (
 
     <TrustedBy />
 
-    {/* Stats — asymmetric scattered cards instead of grid */}
-    <section className="bg-background py-20">
-      <div className="container">
-        <div className="flex flex-wrap items-center justify-center gap-6">
+    {/* Stats — Premium full-width section */}
+    <section className="relative overflow-hidden bg-secondary py-20">
+      {/* Dot grid background */}
+      <div className="absolute inset-0 opacity-[0.06]" style={{
+        backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--brand-yellow)) 1px, transparent 0)",
+        backgroundSize: "28px 28px",
+      }} />
+      {/* Glow blobs */}
+      <div className="absolute left-1/4 top-0 h-64 w-64 -translate-y-1/2 rounded-full bg-accent/10 blur-3xl" />
+      <div className="absolute right-1/4 bottom-0 h-48 w-48 translate-y-1/2 rounded-full bg-violet-500/5 blur-3xl" />
+ 
+      <div className="container relative">
+        <AnimatedSection>
+          <p className="mb-10 text-center text-sm font-semibold uppercase tracking-widest text-foreground/40">
+            Trusted by data teams worldwide
+          </p>
+        </AnimatedSection>
+ 
+        <div className="grid grid-cols-2 gap-px rounded-2xl border border-border bg-background/50 overflow-hidden md:grid-cols-4 shadow-sm">
           {stats.map((s, i) => (
             <AnimatedSection key={s.label} delay={i * 0.1}>
               <motion.div
-                whileHover={{ y: -6, rotate: i % 2 === 0 ? 1 : -1 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className={`card-elevated border-glow flex flex-col items-center justify-center p-8 ${
-                  i === 0 ? "w-52 h-44" : i === 1 ? "w-44 h-52 mt-8" : i === 2 ? "w-56 h-40 -mt-4" : "w-48 h-48 mt-6"
-                }`}
+                whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }}
+                transition={{ duration: 0.2 }}
+                className="flex flex-col items-center justify-center px-6 py-10 text-center"
               >
-                <div className="text-3xl font-extrabold text-foreground md:text-4xl">
+                {/* Accent line at top */}
+                <motion.div
+                  className="mb-6 h-0.5 w-12 rounded-full bg-accent"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                />
+                <div className="text-4xl font-extrabold text-foreground md:text-5xl">
                   <AnimatedCounter end={s.value} suffix={s.suffix} prefix={s.prefix} />
                 </div>
-                <div className="mt-2 text-center text-xs text-muted-foreground">{s.label}</div>
+                <div className="mt-3 text-sm text-muted-foreground leading-snug">{s.label}</div>
               </motion.div>
             </AnimatedSection>
           ))}
@@ -164,23 +185,23 @@ const Index = () => (
     <HowItWorks />
 
     {/* Data Flow Visualization — asymmetric converging layout */}
-    <section className="relative overflow-hidden bg-foreground py-24">
-      <div className="absolute inset-0 opacity-10" style={{
+    <section className="relative overflow-hidden bg-secondary/30 py-24 border-y border-border/50">
+      <div className="absolute inset-0 opacity-[0.03]" style={{
         backgroundImage: "radial-gradient(circle at 2px 2px, hsl(var(--brand-yellow)) 1px, transparent 0)",
         backgroundSize: "32px 32px",
       }} />
       <div className="container relative">
         <AnimatedSection>
           <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-3xl font-extrabold text-primary-foreground md:text-5xl">
-              Watch your data come <span className="text-accent">alive</span>
+            <h2 className="text-3xl font-extrabold text-foreground md:text-5xl">
+              Watch your data come <span className="text-accent underline underline-offset-8 decoration-accent/20">alive</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-primary-foreground/60">
-              See how DataVerGAI transforms fragmented data streams into actionable intelligence.
+            <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
+              See how DataVerGAI transforms fragmented data streams into actionable intelligence in real-time.
             </p>
           </div>
         </AnimatedSection>
-
+ 
         <AnimatedSection delay={0.2}>
           <div className="mx-auto mt-16 max-w-4xl">
             {/* Converging funnel layout */}
@@ -195,22 +216,22 @@ const Index = () => (
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     whileHover={{ scale: 1.08 }}
-                    className="rounded-xl bg-primary-foreground/8 border border-primary-foreground/10 px-5 py-3 text-xs font-semibold text-primary-foreground/70"
+                    className="rounded-xl bg-background border border-border px-5 py-3 text-xs font-semibold text-foreground/70 shadow-sm"
                   >
                     {node}
                   </motion.div>
                 ))}
               </div>
-
+ 
               {/* Converging lines */}
               <div className="flex h-12 w-full items-center justify-center">
                 <motion.div
-                  className="h-full w-px bg-gradient-to-b from-primary-foreground/20 to-accent/60"
+                  className="h-full w-px bg-gradient-to-b from-border to-accent/60"
                   animate={{ opacity: [0.3, 1, 0.3] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
-
+ 
               {/* Central engine — large card */}
               <motion.div
                 className="relative rounded-2xl bg-accent px-10 py-6 text-center shadow-lg glow-accent"
@@ -221,15 +242,15 @@ const Index = () => (
                 <span className="text-lg font-extrabold text-accent-foreground">DataVerGAI</span>
                 <div className="mt-1 text-xs text-accent-foreground/70">Processing 10M+ records/day</div>
               </motion.div>
-
+ 
               <div className="flex h-12 w-full items-center justify-center">
                 <motion.div
-                  className="h-full w-px bg-gradient-to-b from-accent/60 to-primary-foreground/20"
+                  className="h-full w-px bg-gradient-to-b from-accent/60 to-border"
                   animate={{ opacity: [0.3, 1, 0.3] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                 />
               </div>
-
+ 
               {/* Output row — narrower */}
               <div className="flex flex-wrap justify-center gap-3">
                 {["Dashboards", "Alerts", "Predictions"].map((node, i) => (
@@ -240,7 +261,7 @@ const Index = () => (
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 + i * 0.1 }}
                     whileHover={{ scale: 1.08 }}
-                    className="rounded-xl bg-accent/20 border border-accent/30 px-5 py-3 text-xs font-semibold text-accent"
+                    className="rounded-xl bg-accent/10 border border-accent/20 px-5 py-3 text-xs font-semibold text-accent"
                   >
                     {node}
                   </motion.div>

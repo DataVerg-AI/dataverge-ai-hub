@@ -7,57 +7,57 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 8%;
+    --foreground: 232 87% 3%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card-foreground: 232 87% 3%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover-foreground: 232 87% 3%;
 
-    --primary: 0 0% 8%;
+    --primary: 232 87% 3%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 45 7% 95%;
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 232 87% 96%;
+    --secondary-foreground: 232 87% 3%;
 
-    --muted: 45 7% 95%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 232 87% 96%;
+    --muted-foreground: 232 87% 40%;
 
-    --accent: 48 100% 50%;
-    --accent-foreground: 0 0% 8%;
+    --accent: 60 100% 59%;
+    --accent-foreground: 232 87% 3%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 48 100% 50%;
+    --border: 232 87% 90%;
+    --input: 232 87% 90%;
+    --ring: 60 100% 59%;
 
     --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 0 0% 26%;
-    --sidebar-primary: 0 0% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 91%;
-    --sidebar-ring: 48 100% 50%;
+    --sidebar-foreground: 232 87% 20%;
+    --sidebar-primary: 232 87% 3%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 232 87% 95%;
+    --sidebar-accent-foreground: 232 87% 3%;
+    --sidebar-border: 232 87% 91%;
+    --sidebar-ring: 60 100% 59%;
 
     /* Custom DataVerge tokens */
-    --brand-yellow: 48 100% 50%;
-    --brand-yellow-hover: 48 100% 45%;
-    --brand-yellow-glow: 48 100% 60%;
-    --brand-dark: 0 0% 8%;
-    --brand-dark-hover: 0 0% 15%;
+    --brand-yellow: 60 100% 59%;
+    --brand-yellow-hover: 60 100% 54%;
+    --brand-yellow-glow: 60 100% 64%;
+    --brand-dark: 232 87% 3%;
+    --brand-dark-hover: 232 87% 8%;
     --surface-elevated: 0 0% 98%;
-    --shadow-card: 0 0% 0% / 0.04;
+    --shadow-card: 0 0% 0% / 0.05;
     --shadow-card-hover: 0 0% 0% / 0.1;
-    --gradient-hero: linear-gradient(135deg, hsl(48 100% 50% / 0.12), hsl(48 100% 60% / 0.04), transparent);
-    --gradient-mesh: radial-gradient(at 20% 20%, hsl(48 100% 50% / 0.08) 0%, transparent 50%),
-                     radial-gradient(at 80% 80%, hsl(48 100% 50% / 0.05) 0%, transparent 50%),
-                     radial-gradient(at 50% 0%, hsl(0 0% 0% / 0.02) 0%, transparent 60%);
+    --gradient-hero: linear-gradient(135deg, hsl(60 100% 59% / 0.1), hsl(60 100% 59% / 0.05), transparent);
+    --gradient-mesh: radial-gradient(at 20% 20%, hsl(60 100% 59% / 0.1) 0%, transparent 50%),
+                     radial-gradient(at 80% 80%, hsl(60 100% 59% / 0.05) 0%, transparent 50%),
+                     radial-gradient(at 50% 0%, hsl(232 87% 3% / 0.02) 0%, transparent 60%);
   }
 }
 

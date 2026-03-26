@@ -87,9 +87,9 @@ const ProductShowcase = () => (
                 <div className="text-[10px] text-muted-foreground">AI Accuracy</div>
               </motion.div>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-                className="col-span-1 rounded-xl bg-foreground p-5 flex flex-col items-center justify-center text-center">
-                <div className="text-2xl font-bold text-primary-foreground">Live</div>
-                <div className="text-[10px] text-primary-foreground/60">Streaming</div>
+                className="col-span-1 rounded-xl bg-background border border-border shadow-sm p-5 flex flex-col items-center justify-center text-center">
+                <div className="text-2xl font-bold text-foreground">Live</div>
+                <div className="text-[10px] text-muted-foreground">Streaming</div>
               </motion.div>
             </div>
             <div className="px-5 pb-5">
@@ -139,18 +139,18 @@ const ProductShowcase = () => (
     </section>
 
     {/* Integrations — scattered bubble cloud */}
-    <section className="relative overflow-hidden bg-foreground py-24">
+    <section className="relative overflow-hidden bg-secondary/50 py-24 border-y border-border/50">
       <div className="container relative">
         <AnimatedSection>
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-extrabold text-primary-foreground md:text-5xl">
+            <h2 className="text-3xl font-extrabold text-foreground md:text-5xl">
               Connects to <span className="text-accent">everything</span>
             </h2>
-            <p className="mt-4 text-primary-foreground/60">200+ pre-built connectors and counting.</p>
+            <p className="mt-6 text-muted-foreground">200+ pre-built connectors and counting. New integrations added weekly.</p>
           </div>
         </AnimatedSection>
         {/* Organic bubble cloud */}
-        <div className="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-3">
+        <div className="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-4">
           {integrations.map((name, i) => {
             const sizes = ["px-5 py-3 text-xs", "px-6 py-4 text-sm", "px-5 py-3 text-xs", "px-7 py-4 text-sm"];
             return (
@@ -160,8 +160,8 @@ const ProductShowcase = () => (
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
-                whileHover={{ scale: 1.15, y: -6 }}
-                className={`rounded-full bg-primary-foreground/5 border border-primary-foreground/10 font-semibold text-primary-foreground/70 transition-colors hover:bg-accent/20 hover:text-accent hover:border-accent/30 ${sizes[i % sizes.length]}`}
+                whileHover={{ scale: 1.1, y: -4 }}
+                className={`rounded-full bg-background border border-border font-semibold text-foreground/70 shadow-sm transition-all hover:bg-accent/10 hover:text-accent hover:border-accent/30 ${sizes[i % sizes.length]}`}
               >
                 {name}
               </motion.div>

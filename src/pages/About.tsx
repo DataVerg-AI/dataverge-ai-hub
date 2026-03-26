@@ -119,10 +119,10 @@ const About = () => (
     </section>
 
     {/* Team stats — floating cards */}
-    <section className="bg-foreground py-20">
+    <section className="bg-secondary py-20">
       <div className="container">
         <AnimatedSection>
-          <h2 className="text-center text-2xl font-extrabold text-primary-foreground md:text-4xl">Our Team</h2>
+          <h2 className="text-center text-2xl font-extrabold text-foreground md:text-4xl">Our Team</h2>
         </AnimatedSection>
         <div className="mx-auto mt-12 flex max-w-3xl flex-wrap items-center justify-center gap-6">
           {teamStats.map((s, i) => (
@@ -130,13 +130,13 @@ const About = () => (
               <motion.div
                 whileHover={{ y: -6, scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className={`flex flex-col items-center rounded-2xl bg-primary-foreground/5 border border-primary-foreground/10 p-8 ${
+                className={`flex flex-col items-center rounded-2xl bg-background border border-border shadow-sm p-8 ${
                   i === 1 ? "w-52 h-52 mt-4" : "w-44 h-44"
                 }`}
               >
                 <s.icon size={24} className="mb-3 text-accent" />
-                <div className="text-3xl font-extrabold text-primary-foreground">{s.value}</div>
-                <div className="mt-1 text-xs text-primary-foreground/60">{s.label}</div>
+                <div className="text-3xl font-extrabold text-foreground">{s.value}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{s.label}</div>
               </motion.div>
             </AnimatedSection>
           ))}
