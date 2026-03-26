@@ -12,12 +12,12 @@ import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 
 const features = [
-  { icon: Database, title: "Unified Data Layer", desc: "Consolidate APIs, databases, and cloud storage into a single source of truth." },
-  { icon: Cloud, title: "Cloud-Native", desc: "Built for modern cloud infrastructure with auto-scaling and high availability." },
-  { icon: Cpu, title: "AI-Powered Insights", desc: "DataVerGAI uses machine learning to surface patterns and predict trends." },
-  { icon: Zap, title: "Real-Time Sync", desc: "Sub-second data synchronization across all connected sources." },
-  { icon: Shield, title: "Enterprise Security", desc: "SOC 2 compliant with end-to-end encryption and role-based access." },
-  { icon: BarChart3, title: "Advanced Analytics", desc: "Interactive dashboards and reporting built right into the platform." },
+  { icon: Database, title: "Unified Data Layer", desc: "Consolidate APIs, databases, and cloud storage into a single source of truth.", span: "md:col-span-2 md:row-span-1" },
+  { icon: Cloud, title: "Cloud-Native", desc: "Built for modern cloud infrastructure with auto-scaling and high availability.", span: "md:col-span-1 md:row-span-2" },
+  { icon: Cpu, title: "AI-Powered Insights", desc: "DataVerGAI uses machine learning to surface patterns and predict trends.", span: "md:col-span-1 md:row-span-1" },
+  { icon: Zap, title: "Real-Time Sync", desc: "Sub-second data synchronization across all connected sources.", span: "md:col-span-1 md:row-span-1" },
+  { icon: Shield, title: "Enterprise Security", desc: "SOC 2 compliant with end-to-end encryption and role-based access.", span: "md:col-span-1 md:row-span-1" },
+  { icon: BarChart3, title: "Advanced Analytics", desc: "Interactive dashboards and reporting built right into the platform.", span: "md:col-span-2 md:row-span-1" },
 ];
 
 const stats = [
@@ -87,45 +87,45 @@ const Index = () => (
           </Button>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <div className="h-10 w-6 rounded-full border-2 border-muted-foreground/30 p-1">
-            <motion.div
-              className="h-2 w-full rounded-full bg-accent"
-              animate={{ y: [0, 16, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            <motion.div className="h-2 w-full rounded-full bg-accent" animate={{ y: [0, 16, 0] }} transition={{ duration: 2, repeat: Infinity }} />
           </div>
         </motion.div>
       </div>
     </section>
 
-    {/* Trusted By Marquee */}
     <TrustedBy />
 
-    {/* Stats */}
+    {/* Stats — asymmetric scattered cards instead of grid */}
     <section className="bg-background py-20">
       <div className="container">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+        <div className="flex flex-wrap items-center justify-center gap-6">
           {stats.map((s, i) => (
             <AnimatedSection key={s.label} delay={i * 0.1}>
-              <div className="text-center">
-                <div className="text-4xl font-extrabold text-foreground md:text-5xl">
+              <motion.div
+                whileHover={{ y: -6, rotate: i % 2 === 0 ? 1 : -1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className={`card-elevated border-glow flex flex-col items-center justify-center p-8 ${
+                  i === 0 ? "w-52 h-44" : i === 1 ? "w-44 h-52 mt-8" : i === 2 ? "w-56 h-40 -mt-4" : "w-48 h-48 mt-6"
+                }`}
+              >
+                <div className="text-3xl font-extrabold text-foreground md:text-4xl">
                   <AnimatedCounter end={s.value} suffix={s.suffix} prefix={s.prefix} />
                 </div>
-                <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
-              </div>
+                <div className="mt-2 text-center text-xs text-muted-foreground">{s.label}</div>
+              </motion.div>
             </AnimatedSection>
           ))}
         </div>
       </div>
     </section>
 
-    {/* Features */}
+    {/* Features — Bento Grid */}
     <section className="bg-background py-24">
       <div className="container">
         <AnimatedSection>
@@ -137,18 +137,22 @@ const Index = () => (
             <p className="mt-4 text-lg text-muted-foreground">One platform, infinite possibilities.</p>
           </div>
         </AnimatedSection>
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+        {/* Bento layout */}
+        <div className="mx-auto mt-16 grid max-w-5xl auto-rows-[180px] gap-4 md:grid-cols-3">
           {features.map((f, i) => (
             <AnimatedSection key={f.title} delay={i * 0.08}>
               <motion.div
-                whileHover={{ y: -6, scale: 1.02 }}
+                whileHover={{ y: -4, scale: 1.01 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="card-elevated border-glow group p-6"
+                className={`card-elevated border-glow group flex h-full flex-col justify-between p-6 ${f.span}`}
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
-                  <f.icon size={24} className="text-accent-foreground" />
+                <div>
+                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
+                    <f.icon size={20} className="text-accent-foreground" />
+                  </div>
+                  <h3 className="text-base font-bold">{f.title}</h3>
                 </div>
-                <h3 className="text-lg font-bold">{f.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
               </motion.div>
             </AnimatedSection>
@@ -157,10 +161,9 @@ const Index = () => (
       </div>
     </section>
 
-    {/* How It Works */}
     <HowItWorks />
 
-    {/* Data Flow Visualization */}
+    {/* Data Flow Visualization — asymmetric converging layout */}
     <section className="relative overflow-hidden bg-foreground py-24">
       <div className="absolute inset-0 opacity-10" style={{
         backgroundImage: "radial-gradient(circle at 2px 2px, hsl(var(--brand-yellow)) 1px, transparent 0)",
@@ -170,66 +173,78 @@ const Index = () => (
         <AnimatedSection>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-extrabold text-primary-foreground md:text-5xl">
-              Watch your data come{" "}
-              <span className="text-accent">alive</span>
+              Watch your data come <span className="text-accent">alive</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-primary-foreground/60">
-              See how DataVerGAI transforms fragmented data streams into actionable intelligence in real time.
+              See how DataVerGAI transforms fragmented data streams into actionable intelligence.
             </p>
           </div>
         </AnimatedSection>
 
-        {/* Animated data flow */}
         <AnimatedSection delay={0.2}>
           <div className="mx-auto mt-16 max-w-4xl">
-            <div className="grid gap-4 md:grid-cols-5">
-              {["REST APIs", "Cloud (AWS)", "PostgreSQL", "DataVerGAI", "Insights"].map((node, i) => (
-                <motion.div
-                  key={node}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  className={`relative flex flex-col items-center gap-2 rounded-2xl p-4 text-center ${
-                    node === "DataVerGAI"
-                      ? "bg-accent text-accent-foreground shadow-lg shadow-accent/20"
-                      : "bg-primary-foreground/10 text-primary-foreground"
-                  }`}
-                >
-                  {node === "DataVerGAI" && (
-                    <motion.div
-                      className="absolute inset-0 rounded-2xl bg-accent"
-                      animate={{ boxShadow: ["0 0 0px hsl(var(--brand-yellow))", "0 0 30px hsl(var(--brand-yellow) / 0.4)", "0 0 0px hsl(var(--brand-yellow))"] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  )}
-                  <span className="relative z-10 text-sm font-bold">{node}</span>
-                  {i < 4 && (
-                    <motion.div
-                      className="absolute -right-4 top-1/2 hidden h-0.5 w-4 bg-accent/50 md:block"
-                      animate={{ opacity: [0.3, 1, 0.3] }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
-                    />
-                  )}
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Streaming data particles */}
-            <div className="relative mt-8 h-16 overflow-hidden rounded-xl bg-primary-foreground/5">
-              <motion.div
-                className="absolute inset-y-0 flex items-center gap-4 px-4"
-                animate={{ x: ["-100%", "100%"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              >
-                {Array.from({ length: 8 }).map((_, i) => (
-                  <div key={i} className="h-3 rounded-full bg-accent/60" style={{ width: `${20 + Math.random() * 60}px` }} />
+            {/* Converging funnel layout */}
+            <div className="flex flex-col items-center gap-6">
+              {/* Source row — spread wide */}
+              <div className="flex w-full flex-wrap justify-center gap-3">
+                {["REST APIs", "Cloud (AWS)", "PostgreSQL", "MongoDB", "Kafka"].map((node, i) => (
+                  <motion.div
+                    key={node}
+                    initial={{ opacity: 0, y: -20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.08 }}
+                    className="rounded-xl bg-primary-foreground/8 border border-primary-foreground/10 px-5 py-3 text-xs font-semibold text-primary-foreground/70"
+                  >
+                    {node}
+                  </motion.div>
                 ))}
+              </div>
+
+              {/* Converging lines */}
+              <div className="flex h-12 w-full items-center justify-center">
+                <motion.div
+                  className="h-full w-px bg-gradient-to-b from-primary-foreground/20 to-accent/60"
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+              </div>
+
+              {/* Central engine — large card */}
+              <motion.div
+                className="relative rounded-2xl bg-accent px-10 py-6 text-center shadow-lg glow-accent"
+                animate={{ boxShadow: ["0 0 0px hsl(var(--brand-yellow))", "0 0 40px hsl(var(--brand-yellow) / 0.3)", "0 0 0px hsl(var(--brand-yellow))"] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Cpu size={28} className="mx-auto mb-2 text-accent-foreground" />
+                <span className="text-lg font-extrabold text-accent-foreground">DataVerGAI</span>
+                <div className="mt-1 text-xs text-accent-foreground/70">Processing 10M+ records/day</div>
               </motion.div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="relative z-10 rounded-full bg-foreground px-4 py-1 text-xs font-medium text-primary-foreground">
-                  Processing 10M+ records/day
-                </span>
+
+              <div className="flex h-12 w-full items-center justify-center">
+                <motion.div
+                  className="h-full w-px bg-gradient-to-b from-accent/60 to-primary-foreground/20"
+                  animate={{ opacity: [0.3, 1, 0.3] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                />
+              </div>
+
+              {/* Output row — narrower */}
+              <div className="flex flex-wrap justify-center gap-3">
+                {["Dashboards", "Alerts", "Predictions"].map((node, i) => (
+                  <motion.div
+                    key={node}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 + i * 0.1 }}
+                    whileHover={{ scale: 1.08 }}
+                    className="rounded-xl bg-accent/20 border border-accent/30 px-5 py-3 text-xs font-semibold text-accent"
+                  >
+                    {node}
+                  </motion.div>
+                ))}
               </div>
             </div>
           </div>
@@ -237,10 +252,7 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Testimonials */}
     <Testimonials />
-
-    {/* FAQ */}
     <FAQ />
 
     {/* Final CTA */}
@@ -248,18 +260,9 @@ const Index = () => (
       <div className="absolute inset-0 mesh-gradient" />
       <div className="container relative text-center">
         <AnimatedSection>
-          <motion.div
-            initial={{ scale: 0.9 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="mx-auto max-w-3xl text-4xl font-extrabold md:text-6xl">
-              Ready to unify your data?
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-              Join hundreds of enterprises already using DataVerge to make smarter decisions faster.
-            </p>
+          <motion.div initial={{ scale: 0.9 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <h2 className="mx-auto max-w-3xl text-4xl font-extrabold md:text-6xl">Ready to unify your data?</h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Join hundreds of enterprises already using DataVerge to make smarter decisions faster.</p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button variant="accent" size="xl" className="glow-accent" asChild>
                 <Link to="/product">Start Free Trial <ArrowRight size={20} /></Link>

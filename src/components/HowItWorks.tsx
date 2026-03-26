@@ -1,6 +1,6 @@
 import AnimatedSection from "./AnimatedSection";
 import { motion } from "framer-motion";
-import { Database, Cpu, BarChart3 } from "lucide-react";
+import { Database, Cpu, BarChart3, ArrowDown } from "lucide-react";
 
 const steps = [
   {
@@ -8,27 +8,23 @@ const steps = [
     icon: Database,
     title: "Connect Your Sources",
     desc: "Plug in APIs, databases, cloud storage, and SaaS tools in minutes with 200+ pre-built connectors.",
-    color: "bg-accent/10",
   },
   {
     num: "02",
     icon: Cpu,
     title: "AI Maps & Merges",
     desc: "DataVerGAI automatically discovers schemas, maps relationships, and resolves conflicts across all sources.",
-    color: "bg-foreground/5",
   },
   {
     num: "03",
     icon: BarChart3,
     title: "Unified Insights",
     desc: "Access a single source of truth with real-time dashboards, predictive analytics, and automated alerts.",
-    color: "bg-accent/10",
   },
 ];
 
 const HowItWorks = () => (
-  <section className="relative bg-background py-24 overflow-hidden">
-    {/* Background decoration */}
+  <section className="relative bg-secondary py-24 overflow-hidden">
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
       <div className="h-[600px] w-[600px] rounded-full bg-accent/5 blur-3xl" />
     </div>
@@ -43,33 +39,42 @@ const HowItWorks = () => (
         </div>
       </AnimatedSection>
 
-      <div className="mx-auto mt-20 max-w-5xl">
-        <div className="relative grid gap-8 md:grid-cols-3">
-          {/* Connecting line */}
-          <div className="absolute left-0 right-0 top-16 hidden h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent md:block" />
-
-          {steps.map((step, i) => (
-            <AnimatedSection key={step.num} delay={i * 0.15}>
+      {/* Zigzag / alternating card layout */}
+      <div className="mx-auto mt-20 max-w-4xl space-y-8">
+        {steps.map((step, i) => (
+          <AnimatedSection key={step.num} delay={i * 0.15}>
+            <div className="flex flex-col items-center gap-6">
               <motion.div
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
                 transition={{ type: "spring", stiffness: 300 }}
-                className="relative text-center"
+                className={`card-elevated border-glow flex w-full max-w-2xl items-start gap-6 p-8 ${
+                  i % 2 === 0 ? "md:ml-0 md:mr-auto" : "md:ml-auto md:mr-0"
+                }`}
               >
-                {/* Step number bubble */}
-                <div className="mx-auto mb-6 flex h-32 w-32 items-center justify-center">
-                  <div className={`relative flex h-20 w-20 items-center justify-center rounded-2xl ${step.color}`}>
-                    <step.icon size={32} className="text-foreground" />
-                    <div className="absolute -right-2 -top-2 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-extrabold text-accent-foreground shadow-lg">
-                      {step.num}
-                    </div>
+                <div className="relative shrink-0">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+                    <step.icon size={28} className="text-foreground" />
+                  </div>
+                  <div className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-accent text-[10px] font-extrabold text-accent-foreground shadow-lg">
+                    {step.num}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold">{step.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <div>
+                  <h3 className="text-xl font-bold">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                </div>
               </motion.div>
-            </AnimatedSection>
-          ))}
-        </div>
+              {i < steps.length - 1 && (
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowDown size={20} className="text-accent/40" />
+                </motion.div>
+              )}
+            </div>
+          </AnimatedSection>
+        ))}
       </div>
     </div>
   </section>
