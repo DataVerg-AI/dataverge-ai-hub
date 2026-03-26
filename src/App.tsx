@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import ProductShowcase from "./pages/ProductShowcase";
 import Pricing from "./pages/Pricing";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
@@ -26,6 +27,7 @@ const AnimatedRoutes = () => {
         <Route path="/product" element={<PageTransition><ProductShowcase /></PageTransition>} />
         <Route path="/pricing" element={<PageTransition><Pricing /></PageTransition>} />
         <Route path="/blog" element={<PageTransition><Blog /></PageTransition>} />
+        <Route path="/blog/:slug" element={<PageTransition><BlogPost /></PageTransition>} />
         <Route path="/about" element={<PageTransition><About /></PageTransition>} />
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
