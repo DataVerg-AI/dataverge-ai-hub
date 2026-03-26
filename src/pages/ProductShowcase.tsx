@@ -77,7 +77,7 @@ const ProductShowcase = () => (
               <span className="ml-4 text-xs text-muted-foreground">DataVerGAI Dashboard — Live Demo</span>
               <div className="ml-auto flex items-center gap-1">
                 <motion.div
-                  className="h-2 w-2 rounded-full bg-green-500"
+                  className="h-2 w-2 rounded-full bg-accent"
                   animate={{ opacity: [1, 0.4, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
