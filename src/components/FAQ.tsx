@@ -34,8 +34,14 @@ const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-secondary py-24">
-      <div className="container">
+    <section className="relative bg-secondary py-24 overflow-hidden">
+      {/* Dot grid background */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: "radial-gradient(circle at 1px 1px, hsl(var(--foreground)) 1px, transparent 0)",
+        backgroundSize: "24px 24px",
+      }} />
+
+      <div className="container relative">
         <AnimatedSection>
           <div className="mx-auto max-w-2xl text-center">
             <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">
@@ -47,42 +53,66 @@ const FAQ = () => {
         </AnimatedSection>
 
         <div className="mx-auto mt-16 max-w-3xl space-y-3">
-          {faqs.map((faq, i) => (
-            <AnimatedSection key={i} delay={i * 0.05}>
-              <motion.div
-                className="overflow-hidden rounded-2xl border border-border bg-background"
-                layout
-              >
-                <button
-                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 p-6 text-left"
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <AnimatedSection key={i} delay={i * 0.05}>
+                <motion.div
+                  className={`overflow-hidden rounded-2xl border bg-background transition-colors duration-300 ${
+                    isOpen ? "border-accent/30" : "border-border"
+                  }`}
+                  layout
                 >
-                  <span className="text-sm font-semibold md:text-base">{faq.q}</span>
-                  <motion.div
-                    animate={{ rotate: openIndex === i ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="shrink-0"
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : i)}
+                    className="flex w-full items-center justify-between gap-4 p-6 text-left"
                   >
-                    <ChevronDown size={20} className="text-muted-foreground" />
-                  </motion.div>
-                </button>
-                <AnimatePresence>
-                  {openIndex === i && (
+                    <div className="flex items-center gap-3">
+                      {/* Animated accent dot */}
+                      <motion.div
+                        className="h-2 w-2 shrink-0 rounded-full"
+                        animate={{
+                          backgroundColor: isOpen ? "hsl(var(--accent))" : "hsl(var(--border))",
+                          scale: isOpen ? [1, 1.3, 1] : 1,
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="text-sm font-semibold md:text-base">{faq.q}</span>
+                    </div>
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="shrink-0"
                     >
-                      <div className="border-t border-border px-6 pb-6 pt-4 text-sm leading-relaxed text-muted-foreground">
-                        {faq.a}
-                      </div>
+                      <ChevronDown size={20} className={`transition-colors duration-300 ${isOpen ? "text-accent" : "text-muted-foreground"}`} />
                     </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            </AnimatedSection>
-          ))}
+                  </button>
+
+                  {/* Active left accent border */}
+                  <motion.div
+                    className="absolute left-0 top-0 bottom-0 w-0.5 bg-accent rounded-l-full"
+                    animate={{ opacity: isOpen ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      >
+                        <div className="border-t border-border px-6 pb-6 pt-4 text-sm leading-relaxed text-muted-foreground">
+                          {faq.a}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              </AnimatedSection>
+            );
+          })}
         </div>
       </div>
     </section>

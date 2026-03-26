@@ -2,18 +2,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Layers, Brain, LineChart, Workflow, RefreshCw, Lock, Sparkles } from "lucide-react";
+import { ArrowRight, Layers, Brain, LineChart, Workflow, RefreshCw, Lock, Sparkles, Database, DatabaseZap } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import FAQ from "@/components/FAQ";
-
-const capabilities = [
-  { icon: Layers, title: "Real-Time Data Synthesis", desc: "Automatically combine and reconcile data from hundreds of sources in real time.", span: "md:col-span-2" },
-  { icon: Brain, title: "AI-Powered Mapping", desc: "Machine learning models that understand your data schema and auto-map fields.", span: "md:col-span-1 md:row-span-2" },
-  { icon: LineChart, title: "Predictive Insights", desc: "Surface trends and anomalies before they impact your business.", span: "md:col-span-1" },
-  { icon: Workflow, title: "Visual Pipeline Builder", desc: "Drag-and-drop interface to design complex data workflows without code.", span: "md:col-span-1" },
-  { icon: RefreshCw, title: "Continuous Sync", desc: "Always-on synchronization with conflict resolution and versioning.", span: "md:col-span-1" },
-  { icon: Lock, title: "Zero-Trust Security", desc: "Every data transaction is encrypted, audited, and compliant.", span: "md:col-span-2" },
-];
+import DataStreamBg from "@/components/DataStreamBg";
 
 const integrations = ["PostgreSQL", "MongoDB", "AWS S3", "Snowflake", "Salesforce", "HubSpot", "Stripe", "BigQuery", "Redis", "Kafka", "GraphQL", "REST API"];
 
@@ -21,6 +13,7 @@ const ProductShowcase = () => (
   <Layout>
     {/* Hero */}
     <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+      <DataStreamBg density="medium" />
       <div className="absolute inset-0 mesh-gradient" />
       <div className="container relative">
         <div className="mx-auto max-w-3xl text-center">
@@ -45,123 +38,245 @@ const ProductShowcase = () => (
       </div>
     </section>
 
-    {/* Dashboard Mockup */}
-    <section className="bg-secondary py-16">
-      <div className="container">
+    {/* Dashboard Mockup - Redesigned to be darker and more dramatic */}
+    <section className="bg-background py-16">
+      <div className="container relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-64 bg-accent/20 blur-[100px] rounded-full" />
         <AnimatedSection>
-          <motion.div whileHover={{ y: -4 }} transition={{ type: "spring", stiffness: 200 }}
-            className="mx-auto max-w-5xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl">
-            <div className="flex items-center gap-2 border-b border-border px-6 py-3">
-              <div className="h-3 w-3 rounded-full bg-destructive/60" />
-              <div className="h-3 w-3 rounded-full bg-accent/60" />
-              <div className="h-3 w-3 rounded-full bg-muted-foreground/30" />
-              <span className="ml-4 text-xs text-muted-foreground">DataVerGAI Dashboard — Live Demo</span>
-              <div className="ml-auto flex items-center gap-1">
+          <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ type: "spring", stiffness: 200 }}
+            className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#01030e] text-white shadow-[0_0_50px_rgba(255,255,44,0.1)]">
+            
+            {/* Window controls */}
+            <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4 bg-white/5">
+              <div className="h-3 w-3 rounded-full bg-red-500/80" />
+              <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+              <div className="h-3 w-3 rounded-full bg-green-500/80" />
+              <span className="ml-4 text-xs font-medium text-white/50 tracking-wider uppercase">DataVerGAI Command Center</span>
+              <div className="ml-auto flex items-center gap-1.5">
                 <motion.div className="h-2 w-2 rounded-full bg-accent" animate={{ opacity: [1, 0.4, 1] }} transition={{ duration: 2, repeat: Infinity }} />
-                <span className="text-xs text-muted-foreground">Live</span>
+                <span className="text-xs font-bold text-accent">LIVE</span>
               </div>
             </div>
-            {/* Bento dashboard cards */}
-            <div className="grid auto-rows-[120px] gap-3 p-5 md:grid-cols-4">
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }}
-                className="col-span-2 row-span-2 rounded-xl bg-secondary p-5 flex flex-col justify-between">
-                <div>
-                  <div className="text-xs text-muted-foreground">Sources Connected</div>
-                  <div className="mt-1 text-3xl font-bold">247</div>
+
+            {/* Dash Grid */}
+            <div className="grid auto-rows-[140px] gap-4 p-6 md:grid-cols-4">
+              {/* Primary Stat */}
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+                className="col-span-2 row-span-2 rounded-2xl bg-gradient-to-br from-white/10 to-transparent p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden">
+                <div className="absolute -right-10 -top-10 text-white/5 rotate-12"><Layers size={180} /></div>
+                <div className="relative z-10">
+                  <div className="text-sm font-medium text-white/60">Global Pipeline Throughput</div>
+                  <div className="mt-2 text-5xl font-black text-white">4.2TB<span className="text-xl text-white/40">/hr</span></div>
                 </div>
-                <div className="h-2 overflow-hidden rounded-full bg-accent/20">
-                  <motion.div className="h-2 rounded-full bg-accent" initial={{ width: 0 }} whileInView={{ width: "80%" }} viewport={{ once: true }} transition={{ duration: 1, ease: "easeOut" }} />
-                </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                className="col-span-2 rounded-xl bg-secondary p-5">
-                <div className="text-xs text-muted-foreground">Data Processed</div>
-                <div className="mt-1 text-2xl font-bold">1.2M</div>
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-accent/20">
-                  <motion.div className="h-2 rounded-full bg-accent" initial={{ width: 0 }} whileInView={{ width: "60%" }} viewport={{ once: true }} transition={{ duration: 1, delay: 0.1, ease: "easeOut" }} />
-                </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                className="col-span-1 rounded-xl bg-accent/10 p-5 flex flex-col items-center justify-center text-center">
-                <div className="text-2xl font-bold">98.7%</div>
-                <div className="text-[10px] text-muted-foreground">AI Accuracy</div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-                className="col-span-1 rounded-xl bg-background border border-border shadow-sm p-5 flex flex-col items-center justify-center text-center">
-                <div className="text-2xl font-bold text-foreground">Live</div>
-                <div className="text-[10px] text-muted-foreground">Streaming</div>
-              </motion.div>
-            </div>
-            <div className="px-5 pb-5">
-              <div className="rounded-xl border border-border p-5">
-                <div className="mb-3 text-sm font-semibold">Real-Time Data Flow</div>
-                <div className="flex flex-wrap items-center justify-between gap-3">
-                  {["APIs", "Cloud", "DB", "DataVerGAI", "Insights"].map((step, i) => (
-                    <motion.div key={step} className="flex items-center gap-3" initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}>
-                      <div className={`flex h-10 items-center justify-center rounded-lg px-4 text-xs font-semibold ${step === "DataVerGAI" ? "bg-accent text-accent-foreground shadow-md shadow-accent/20" : "bg-secondary text-foreground"}`}>{step}</div>
-                      {i < 4 && <motion.span className="text-muted-foreground" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}>→</motion.span>}
-                    </motion.div>
+                {/* Waveform graphic */}
+                <div className="relative z-10 flex h-20 items-end gap-1 mt-4">
+                  {Array.from({ length: 30 }).map((_, i) => (
+                    <motion.div key={i} className="flex-1 rounded-sm bg-accent"
+                      initial={{ height: "10%" }}
+                      animate={{ height: `${20 + Math.random() * 80}%` }}
+                      transition={{ duration: 0.5 + Math.random(), repeat: Infinity, repeatType: "reverse" }}
+                    />
                   ))}
                 </div>
-              </div>
+              </motion.div>
+
+              {/* Stat 2 */}
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+                className="col-span-1 rounded-2xl bg-white/5 p-5 border border-white/5 flex flex-col justify-between">
+                <div className="text-xs text-white/50 uppercase tracking-wider">Active Nodes</div>
+                <div>
+                  <div className="text-3xl font-bold">2,184</div>
+                  <div className="mt-1 flex gap-1">
+                    {[1, 2, 3].map(i => <motion.div key={i} className="h-1 w-full rounded-full bg-green-500" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }} />)}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Stat 3 */}
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
+                className="col-span-1 rounded-2xl bg-accent/20 p-5 border border-accent/20 flex flex-col items-center justify-center text-center">
+                <Brain className="text-accent mb-2" size={24} />
+                <div className="text-3xl font-bold text-accent">99.8%</div>
+                <div className="text-xs text-accent/70 mt-1">Schema Accuracy</div>
+              </motion.div>
+
+              {/* Connection visualizer */}
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+                className="col-span-2 rounded-2xl bg-white/5 p-5 border border-white/5 flex items-center justify-between">
+                <div className="flex -space-x-3">
+                  {["S3", "PG", "BQ", "SF"].map((l, i) => (
+                    <div key={l} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#01030e] border border-white/20 text-xs font-bold z-10 relative">
+                      {l}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex-1 px-4 relative flex items-center">
+                  <div className="w-full h-px bg-white/10" />
+                  <motion.div className="absolute h-1.5 w-1.5 rounded-full bg-accent blur-[1px]" animate={{ left: ["10%", "90%"] }} transition={{ duration: 1.5, repeat: Infinity }} />
+                </div>
+                <div className="rounded-xl bg-accent px-4 py-2 font-bold text-[#01030e]">Engine</div>
+              </motion.div>
             </div>
           </motion.div>
         </AnimatedSection>
       </div>
     </section>
 
-    {/* Capabilities — Bento grid */}
-    <section className="bg-background py-24">
+    {/* Custom Bento Capabilities */}
+    <section className="bg-secondary py-24">
       <div className="container">
         <AnimatedSection>
           <div className="mx-auto max-w-2xl text-center">
-            <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">Capabilities</span>
-            <h2 className="text-3xl font-extrabold md:text-5xl">Core Capabilities</h2>
+            <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">Platform Power</span>
+            <h2 className="text-3xl font-extrabold md:text-5xl">Capabilities that scale</h2>
           </div>
         </AnimatedSection>
-        <div className="mx-auto mt-16 grid max-w-5xl auto-rows-[180px] gap-4 md:grid-cols-3">
-          {capabilities.map((c, i) => (
-            <AnimatedSection key={c.title} delay={i * 0.08}>
-              <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ type: "spring", stiffness: 300 }}
-                className={`card-elevated border-glow group flex h-full flex-col justify-between p-6 ${c.span}`}>
-                <div>
-                  <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
-                    <c.icon size={20} className="text-accent-foreground" />
-                  </div>
-                  <h3 className="text-base font-bold">{c.title}</h3>
+        
+        <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-12 auto-rows-[220px]">
+          
+          {/* Card 1: Data Synthesis (8 col hero) */}
+          <AnimatedSection delay={0} className="md:col-span-8 md:row-span-1">
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="group relative flex h-full overflow-hidden rounded-3xl bg-background border border-border shadow-lg"
+            >
+              <div className="flex flex-1 flex-col justify-center p-8 md:max-w-[55%] z-10">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10">
+                  <Layers size={22} className="text-rose-500" />
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
-              </motion.div>
-            </AnimatedSection>
-          ))}
+                <h3 className="text-2xl font-extrabold">Real-Time Data Synthesis</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Automatically combine and reconcile data from hundreds of sources instantly.</p>
+              </div>
+              <div className="hidden md:flex absolute right-0 inset-y-0 w-1/2 items-center justify-end pr-8 overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
+                <svg viewBox="0 0 200 200" className="w-[120%] h-[120%] opacity-20 text-rose-500">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <motion.rect key={i} x={50 - i*10} y={100 - i*15} width={100 + i*20} height={40} rx={8} fill="none" stroke="currentColor" strokeWidth={2}
+                      initial={{ y: 20, opacity: 0 }}
+                      animate={{ y: [0, -5, 0], opacity: 1 }}
+                      transition={{ delay: i * 0.1, duration: 4, repeat: Infinity }}
+                      style={{ transformOrigin: "center", transform: "rotateX(60deg) rotateZ(45deg)" }}
+                    />
+                  ))}
+                </svg>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+
+          {/* Card 2: AI Mapping (4 col tall) */}
+          <AnimatedSection delay={0.1} className="md:col-span-4 md:row-span-2">
+             <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-indigo-500/5 border border-indigo-200 shadow-lg text-center p-8"
+            >
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500/10 relative">
+                <Brain size={28} className="text-indigo-600 relative z-10" />
+                <motion.div className="absolute inset-0 rounded-2xl border-2 border-indigo-400" animate={{ rotate: 180, scale: [1, 1.1, 1] }} transition={{ duration: 4, repeat: Infinity }} />
+              </div>
+              <h3 className="text-2xl font-extrabold text-foreground">AI-Powered Mapping</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">Machine learning models that deeply understand your data schema and auto-map fields with human-level precision.</p>
+              
+              <div className="mt-6 rounded-xl bg-background border border-border p-4 text-xs font-mono text-left relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
+                <div className="text-muted-foreground">{"{"}</div>
+                <div className="pl-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-red-500">"usr_id"</span>
+                    <motion.span className="text-indigo-500" animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>→</motion.span>
+                    <span className="text-green-500">"user_id"</span>
+                  </div>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-red-500">"dt_c"</span>
+                    <motion.span className="text-indigo-500" animate={{ x: [0, 4, 0] }} transition={{ duration: 1, repeat: Infinity }}>→</motion.span>
+                    <span className="text-green-500">"created_at"</span>
+                  </div>
+                </div>
+                <div className="text-muted-foreground">{"}"}</div>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+
+          {/* Card 3: Predictive Insights (4 col dark) */}
+          <AnimatedSection delay={0.2} className="md:col-span-4">
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[#01030e] text-white p-8 shadow-2xl"
+            >
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-accent/20 blur-3xl rounded-full" />
+              <div>
+                <LineChart className="text-accent mb-3" size={24} />
+                <h3 className="text-lg font-extrabold">Predictive Insights</h3>
+                <p className="mt-1 text-sm text-white/50">Surface trends and anomalies instantly.</p>
+              </div>
+              {/* Mini sparkline */}
+              <svg className="w-full h-16 mt-4 opacity-80" viewBox="0 0 100 40">
+                <motion.path d="M0,35 Q10,35 20,25 T40,20 T60,30 T80,10 T100,5" fill="none" stroke="#ffff2c" strokeWidth="2.5" strokeLinecap="round"
+                  initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.5 }} />
+                <motion.circle cx="100" cy="5" r="3" fill="#01030e" stroke="#ffff2c" strokeWidth="2" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 1, repeat: Infinity }} />
+              </svg>
+            </motion.div>
+          </AnimatedSection>
+
+          {/* Card 4: Visual Pipeline Builder (4 col) */}
+          <AnimatedSection delay={0.3} className="md:col-span-4">
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-background border border-border p-8 shadow-lg"
+            >
+              <div>
+                <Workflow className="text-blue-500 mb-3" size={24} />
+                <h3 className="text-lg font-extrabold">Pipeline Builder</h3>
+                <p className="mt-1 text-sm text-muted-foreground">Drag and drop workflows without code.</p>
+              </div>
+              {/* Mini node visual */}
+              <div className="relative mt-4 h-16 w-full rounded-xl bg-secondary/50 border border-border/50 p-2 overflow-hidden flex items-center justify-center gap-2">
+                <DatabaseZap size={16} className="text-muted-foreground/40" />
+                <motion.div className="h-px w-8 bg-blue-500" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} />
+                <motion.div className="rounded-md bg-blue-500 px-2 py-1 text-[8px] font-bold text-white shadow-sm" whileHover={{ scale: 1.1 }}>Transform</motion.div>
+                <motion.div className="h-px w-8 bg-blue-500" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} />
+                <Database size={16} className="text-muted-foreground/40" />
+              </div>
+            </motion.div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
 
-    {/* Integrations — scattered bubble cloud */}
-    <section className="relative overflow-hidden bg-secondary/50 py-24 border-y border-border/50">
+    {/* Integrations — Bubble cloud (unchanged structurally, visually updated) */}
+    <section className="relative overflow-hidden bg-background py-24 border-y border-border/50">
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: "radial-gradient(circle at 10px 10px, hsl(var(--foreground)) 2px, transparent 0)",
+        backgroundSize: "40px 40px",
+      }} />
       <div className="container relative">
         <AnimatedSection>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-extrabold text-foreground md:text-5xl">
-              Connects to <span className="text-accent">everything</span>
+              Connects to <span className="text-accent underline underline-offset-8 decoration-accent/20">everything</span>
             </h2>
             <p className="mt-6 text-muted-foreground">200+ pre-built connectors and counting. New integrations added weekly.</p>
           </div>
         </AnimatedSection>
-        {/* Organic bubble cloud */}
         <div className="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-4">
           {integrations.map((name, i) => {
-            const sizes = ["px-5 py-3 text-xs", "px-6 py-4 text-sm", "px-5 py-3 text-xs", "px-7 py-4 text-sm"];
+            const sizes = ["px-5 py-3 text-xs", "px-6 py-4 text-sm font-bold", "px-5 py-3 text-xs", "px-8 py-5 text-base font-extrabold"];
             return (
               <motion.div
                 key={name}
                 initial={{ opacity: 0, scale: 0.6 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.06, type: "spring", stiffness: 200 }}
-                whileHover={{ scale: 1.1, y: -4 }}
-                className={`rounded-full bg-background border border-border font-semibold text-foreground/70 shadow-sm transition-all hover:bg-accent/10 hover:text-accent hover:border-accent/30 ${sizes[i % sizes.length]}`}
+                transition={{ delay: i * 0.05, type: "spring", stiffness: 200 }}
+                whileHover={{ scale: 1.1, y: -4, backgroundColor: "hsl(var(--brand-yellow) / 0.1)", color: "hsl(var(--foreground))", borderColor: "hsl(var(--brand-yellow))" }}
+                animate={{
+                  y: [0, -4 + Math.random() * 8, 0],
+                }}
+                transition={{ y: { duration: 3 + Math.random() * 2, repeat: Infinity, repeatType: "mirror" } }}
+                className={`rounded-full bg-secondary border border-border text-foreground/70 shadow-sm transition-all cursor-pointer ${sizes[i % sizes.length]}`}
               >
                 {name}
               </motion.div>
@@ -174,12 +289,12 @@ const ProductShowcase = () => (
     <FAQ />
 
     {/* CTA */}
-    <section className="relative overflow-hidden bg-background py-32">
-      <div className="absolute inset-0 mesh-gradient" />
+    <section className="relative overflow-hidden bg-secondary py-32">
+      <DataStreamBg density="low" />
       <div className="container relative text-center">
         <AnimatedSection>
           <h2 className="mx-auto max-w-3xl text-4xl font-extrabold md:text-6xl">
-            Experience the power of <span className="text-shine">DataVerGAI</span>
+            Experience the power of <span className="text-accent">DataVerGAI</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Start your free trial today. No credit card required.</p>
           <Button variant="accent" size="xl" className="mt-10 glow-accent" asChild>
