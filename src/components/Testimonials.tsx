@@ -44,14 +44,14 @@ const Testimonials = () => (
       </AnimatedSection>
 
       {/* Completely Custom Bento Layout for Testimonials */}
-      <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-12 auto-rows-[250px] md:auto-rows-[280px]">
+      <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-12 auto-rows-auto">
         
         {/* Card 1: Main Dark Review */}
         <AnimatedSection delay={0} className="md:col-span-8">
           <motion.div
             whileHover={{ y: -4, scale: 1.01 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[#01030e] text-white p-8 md:p-10 shadow-2xl"
+            className="group relative flex h-full min-h-[250px] md:min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl bg-[#01030e] text-white p-8 md:p-10 shadow-2xl"
           >
             {/* Background glowing quote */}
             <div className="absolute -right-8 -top-8 text-white/5 transition-transform duration-700 group-hover:rotate-6 group-hover:scale-110">
@@ -100,7 +100,7 @@ const Testimonials = () => (
           <motion.div
             whileHover={{ y: -4 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-border bg-background p-8 shadow-lg"
+            className="relative flex h-full min-h-[250px] md:min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-background p-8 shadow-lg"
           >
             <div className="absolute top-0 right-0 h-40 w-40 -translate-y-1/2 translate-x-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
             
@@ -137,7 +137,7 @@ const Testimonials = () => (
           <motion.div
             whileHover={{ y: -4 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="group relative flex h-full overflow-hidden rounded-3xl bg-secondary border border-border/50 shadow-md"
+            className="group relative flex h-full min-h-[250px] md:min-h-[280px] overflow-hidden rounded-3xl bg-secondary border border-border/50 shadow-md"
           >
             <div className="absolute top-0 left-0 h-full w-2 bg-gradient-to-b from-purple-500 to-indigo-500" />
             

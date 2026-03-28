@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Zap } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import FAQ from "@/components/FAQ";
 import DataStreamBg from "@/components/DataStreamBg";
 import { useState } from "react";
 
@@ -95,18 +94,19 @@ const Pricing = () => {
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border p-8 transition-shadow duration-300 hover:shadow-xl ${
+                    className={`group relative flex h-full flex-col rounded-2xl border p-8 transition-shadow duration-300 hover:shadow-xl ${
                       plan.popular
                         ? "border-accent bg-background shadow-2xl shadow-accent/15"
                         : "border-border bg-background hover:shadow-accent/5"
                     }`}
                   >
-                    {/* Gradient shimmer border effect */}
-                    <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                      style={{
-                        background: "linear-gradient(135deg, hsl(var(--brand-yellow) / 0.08), transparent 40%, transparent 60%, hsl(var(--brand-yellow) / 0.05))",
-                      }}
-                    />
+                    <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+                      {/* Gradient shimmer border effect */}
+                      <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                        style={{
+                          background: "linear-gradient(135deg, hsl(var(--brand-yellow) / 0.08), transparent 40%, transparent 60%, hsl(var(--brand-yellow) / 0.05))",
+                        }}
+                      />
 
                     {/* Top shimmer line */}
                     <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
@@ -156,6 +156,8 @@ const Pricing = () => {
                         </motion.div>
                       </>
                     )}
+
+                    </div> {/* End overflow bounds for shimmer effects */}
 
                     {plan.popular && (
                       <motion.div
@@ -245,8 +247,6 @@ const Pricing = () => {
           </AnimatedSection>
         </div>
       </section>
-
-      <FAQ />
     </Layout>
   );
 };

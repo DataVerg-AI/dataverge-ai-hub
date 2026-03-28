@@ -123,6 +123,12 @@ const Blog = () => (
                    <h3 className="text-2xl font-bold leading-snug group-hover:text-accent transition-colors">{posts[1].title}</h3>
                    <p className="mt-4 text-muted-foreground">{posts[1].excerpt}</p>
                 </div>
+                
+                {/* Image Placeholder */}
+                <div className="flex-1 w-full min-h-[200px] mt-6 bg-muted/50 border border-border rounded-xl flex items-center justify-center text-muted-foreground font-mono text-sm">
+                   Image Here
+                </div>
+
                 <div className="mt-8 flex items-center justify-between border-t border-border pt-6 text-xs font-semibold text-muted-foreground">
                    <span>{posts[1].date}</span>
                    <span className="flex items-center gap-1.5">

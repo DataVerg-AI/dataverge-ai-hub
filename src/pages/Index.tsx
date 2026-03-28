@@ -84,6 +84,19 @@ const Index = () => (
       </div>
     </section>
 
+    {/* Hero App Screenshot Placeholder */}
+    <section className="relative bg-background pb-20 pt-10 -mt-10">
+      <div className="container relative z-10">
+        <AnimatedSection>
+          <div className="mx-auto max-w-5xl rounded-2xl border border-border bg-card/50 p-2 shadow-2xl backdrop-blur-sm">
+            <div className="w-full min-h-[400px] md:min-h-[600px] rounded-xl border border-border bg-muted/30 flex items-center justify-center text-muted-foreground font-mono text-sm">
+              App Interface Screenshot Here
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+
     <TrustedBy />
 
     {/* ═══════════════ STATS — Completely Custom Design ═══════════════ */}
@@ -549,7 +562,7 @@ const Index = () => (
             </div>
 
             {/* Main pipeline */}
-            <div className="flex items-center gap-3 md:gap-4 overflow-x-auto pb-4">
+            <div className="flex items-center justify-between w-full overflow-x-auto pb-4">
               {/* Source pills */}
               <div className="flex flex-col gap-2 flex-shrink-0">
                 {["REST APIs", "AWS S3", "PostgreSQL", "MongoDB", "Kafka"].map((s, i) => (
@@ -567,21 +580,22 @@ const Index = () => (
               </div>
 
               {/* Converging arrows */}
-              <div className="relative flex-shrink-0 w-12 h-40">
-                <svg viewBox="0 0 48 160" className="w-full h-full">
+              <div className="relative flex-1 min-w-[40px] h-40">
+                <svg className="absolute inset-0 w-full h-full overflow-visible">
                   {[20, 50, 80, 110, 140].map((y, i) => (
-                    <motion.line key={i} x1="0" y1={y} x2="48" y2="80" stroke="rgba(255,255,44,0.25)" strokeWidth="1"
-                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }} />
+                    <motion.line key={i} x1="0%" y1={y} x2="100%" y2="80" stroke="rgba(255,255,44,0.3)" strokeWidth="1.5" strokeDasharray="4 4"
+                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 + i * 0.1, duration: 0.8 }} />
                   ))}
                   {/* Traveling dots */}
-                  {[0, 1, 2].map((i) => (
-                    <motion.circle key={`dot-${i}`} r="2" fill="#ffff2c"
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <motion.circle key={`dot-${i}`} r="3" fill="#ffff2c"
                       animate={{
-                        cx: [0, 48],
-                        cy: [20 + i * 60, 80],
+                        cx: ["0%", "100%"],
+                        cy: [20 + i * 30, 80],
                       }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
-                      opacity="0.6"
+                      transition={{ duration: 1.5 + Math.random(), repeat: Infinity, delay: Math.random(), ease: "linear" }}
+                      style={{ filter: "drop-shadow(0 0 4px rgba(255,255,44,0.8))" }}
+                      opacity="0.9"
                     />
                   ))}
                 </svg>
@@ -606,20 +620,21 @@ const Index = () => (
               </motion.div>
 
               {/* Diverging arrows */}
-              <div className="relative flex-shrink-0 w-12 h-24">
-                <svg viewBox="0 0 48 96" className="w-full h-full">
+              <div className="relative flex-1 min-w-[40px] h-24">
+                <svg className="absolute inset-0 w-full h-full overflow-visible">
                   {[20, 48, 76].map((y, i) => (
-                    <motion.line key={i} x1="0" y1="48" x2="48" y2={y} stroke="rgba(255,255,44,0.25)" strokeWidth="1"
-                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1 + i * 0.1, duration: 0.5 }} />
+                    <motion.line key={i} x1="0%" y1="48" x2="100%" y2={y} stroke="rgba(255,255,44,0.3)" strokeWidth="1.5" strokeDasharray="4 4"
+                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1 + i * 0.1, duration: 0.8 }} />
                   ))}
                   {[0, 1, 2].map((i) => (
-                    <motion.circle key={`dot2-${i}`} r="2" fill="#ffff2c"
+                    <motion.circle key={`dot2-${i}`} r="3" fill="#ffff2c"
                       animate={{
-                        cx: [0, 48],
+                        cx: ["0%", "100%"],
                         cy: [48, 20 + i * 28],
                       }}
-                      transition={{ duration: 1.5, repeat: Infinity, delay: 0.7 + i * 0.3, ease: "easeInOut" }}
-                      opacity="0.6"
+                      transition={{ duration: 1.5 + Math.random(), repeat: Infinity, delay: 0.7 + Math.random(), ease: "linear" }}
+                      style={{ filter: "drop-shadow(0 0 4px rgba(255,255,44,0.8))" }}
+                      opacity="0.9"
                     />
                   ))}
                 </svg>

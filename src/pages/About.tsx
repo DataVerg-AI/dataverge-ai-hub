@@ -78,21 +78,9 @@ const About = () => {
                       We exist to solve the universal problem of fragmented data. Every feature, every line of code, and every infrastructure decision is made to simplify the complex web of enterprise pipelines.
                     </p>
                   </div>
-                  {/* Decorative graphic */}
-                  <div className="mt-8 h-40 w-full rounded-xl border border-border/50 bg-background relative overflow-hidden flex items-center justify-center">
-                    <motion.div 
-                      className="absolute w-64 h-64 border border-accent/20 rounded-full"
-                      animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    />
-                    <motion.div 
-                      className="absolute w-40 h-40 border border-accent/40 rounded-full"
-                      animate={{ scale: [1, 1.3, 1], opacity: [0.8, 0, 0.8] }}
-                      transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: 0.5 }}
-                    />
-                    <div className="z-10 bg-accent w-12 h-12 rounded-full shadow-[0_0_30px_hsl(var(--brand-yellow))] flex items-center justify-center">
-                       <div className="w-4 h-4 bg-background rounded-full" />
-                    </div>
+                  {/* Image Placeholder replacing decorative graphic */}
+                  <div className="mt-8 flex-1 w-full min-h-[200px] rounded-xl border border-border bg-muted/50 flex items-center justify-center text-muted-foreground font-mono text-sm">
+                     Image Here
                   </div>
                 </div>
               </GlowCard>
@@ -208,7 +196,7 @@ const About = () => {
               whileInView={{ scaleY: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              transformOrigin="top"
+              style={{ transformOrigin: "top" }}
             >
               {/* Highlight sweep */}
               <motion.div 

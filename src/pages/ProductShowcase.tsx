@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Layers, Brain, LineChart, Workflow, RefreshCw, Lock, Sparkles, Database, DatabaseZap } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import FAQ from "@/components/FAQ";
 import DataStreamBg from "@/components/DataStreamBg";
 
 const integrations = ["PostgreSQL", "MongoDB", "AWS S3", "Snowflake", "Salesforce", "HubSpot", "Stripe", "BigQuery", "Redis", "Kafka", "GraphQL", "REST API"];
@@ -58,64 +57,11 @@ const ProductShowcase = () => (
               </div>
             </div>
 
-            {/* Dash Grid */}
-            <div className="grid auto-rows-[140px] gap-4 p-6 md:grid-cols-4">
-              {/* Primary Stat */}
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-                className="col-span-2 row-span-2 rounded-2xl bg-gradient-to-br from-white/10 to-transparent p-6 flex flex-col justify-between border border-white/5 relative overflow-hidden">
-                <div className="absolute -right-10 -top-10 text-white/5 rotate-12"><Layers size={180} /></div>
-                <div className="relative z-10">
-                  <div className="text-sm font-medium text-white/60">Global Pipeline Throughput</div>
-                  <div className="mt-2 text-5xl font-black text-white">4.2TB<span className="text-xl text-white/40">/hr</span></div>
-                </div>
-                {/* Waveform graphic */}
-                <div className="relative z-10 flex h-20 items-end gap-1 mt-4">
-                  {Array.from({ length: 30 }).map((_, i) => (
-                    <motion.div key={i} className="flex-1 rounded-sm bg-accent"
-                      initial={{ height: "10%" }}
-                      animate={{ height: `${20 + Math.random() * 80}%` }}
-                      transition={{ duration: 0.5 + Math.random(), repeat: Infinity, repeatType: "reverse" }}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Stat 2 */}
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-                className="col-span-1 rounded-2xl bg-white/5 p-5 border border-white/5 flex flex-col justify-between">
-                <div className="text-xs text-white/50 uppercase tracking-wider">Active Nodes</div>
-                <div>
-                  <div className="text-3xl font-bold">2,184</div>
-                  <div className="mt-1 flex gap-1">
-                    {[1, 2, 3].map(i => <motion.div key={i} className="h-1 w-full rounded-full bg-green-500" animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, delay: i * 0.3, repeat: Infinity }} />)}
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Stat 3 */}
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 }}
-                className="col-span-1 rounded-2xl bg-accent/20 p-5 border border-accent/20 flex flex-col items-center justify-center text-center">
-                <Brain className="text-accent mb-2" size={24} />
-                <div className="text-3xl font-bold text-accent">99.8%</div>
-                <div className="text-xs text-accent/70 mt-1">Schema Accuracy</div>
-              </motion.div>
-
-              {/* Connection visualizer */}
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
-                className="col-span-2 rounded-2xl bg-white/5 p-5 border border-white/5 flex items-center justify-between">
-                <div className="flex -space-x-3">
-                  {["S3", "PG", "BQ", "SF"].map((l, i) => (
-                    <div key={l} className="flex h-10 w-10 items-center justify-center rounded-full bg-[#01030e] border border-white/20 text-xs font-bold z-10 relative">
-                      {l}
-                    </div>
-                  ))}
-                </div>
-                <div className="flex-1 px-4 relative flex items-center">
-                  <div className="w-full h-px bg-white/10" />
-                  <motion.div className="absolute h-1.5 w-1.5 rounded-full bg-accent blur-[1px]" animate={{ left: ["10%", "90%"] }} transition={{ duration: 1.5, repeat: Infinity }} />
-                </div>
-                <div className="rounded-xl bg-accent px-4 py-2 font-bold text-[#01030e]">Engine</div>
-              </motion.div>
+            {/* Dash Grid Mockup - Replaced with Image Placeholder */}
+            <div className="p-6">
+              <div className="w-full min-h-[400px] rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-white/40 font-mono text-sm">
+                 Dashboard Image Here
+              </div>
             </div>
           </motion.div>
         </AnimatedSection>
@@ -270,12 +216,11 @@ const ProductShowcase = () => (
                 initial={{ opacity: 0, scale: 0.6 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.05, type: "spring", stiffness: 200 }}
                 whileHover={{ scale: 1.1, y: -4, backgroundColor: "hsl(var(--brand-yellow) / 0.1)", color: "hsl(var(--foreground))", borderColor: "hsl(var(--brand-yellow))" }}
                 animate={{
                   y: [0, -4 + Math.random() * 8, 0],
                 }}
-                transition={{ y: { duration: 3 + Math.random() * 2, repeat: Infinity, repeatType: "mirror" } }}
+                transition={{ delay: i * 0.05, type: "spring", stiffness: 200, y: { duration: 3 + Math.random() * 2, repeat: Infinity, repeatType: "mirror" } }}
                 className={`rounded-full bg-secondary border border-border text-foreground/70 shadow-sm transition-all cursor-pointer ${sizes[i % sizes.length]}`}
               >
                 {name}
@@ -285,8 +230,6 @@ const ProductShowcase = () => (
         </div>
       </div>
     </section>
-
-    <FAQ />
 
     {/* CTA */}
     <section className="relative overflow-hidden bg-secondary py-32">
