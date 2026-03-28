@@ -101,9 +101,9 @@ const Contact = () => {
                          <MapPin className="text-accent" size={24} />
                        </div>
                        <h3 className="text-2xl font-bold uppercase tracking-wide">Global HQ</h3>
-                       <p className="mt-2 text-muted-foreground text-lg">340 Pine St.<br/>San Francisco, CA 94104</p>
+                       <p className="mt-2 text-muted-foreground text-lg">1290 S Olive Street, Suite 520,<br/>Skyline Workspace, Los Angeles,<br/>CA 90015, USA</p>
                      </div>
-                     <a href="https://maps.google.com/?q=340+Pine+St,+San+Francisco,+CA+94104" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-foreground transition-colors mt-8 w-fit">
+                     <a href="https://maps.google.com/?q=1290+S+Olive+Street,+Suite+520,+Skyline+Workspace,+Los+Angeles,+CA+90015" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-foreground transition-colors mt-8 w-fit">
                        View Coordinates <ExternalLink size={14} />
                      </a>
                    </div>
@@ -118,7 +118,7 @@ const Contact = () => {
                      </div>
                      <div>
                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Direct Line</div>
-                       <a href="mailto:hello@dataverge.ai" className="text-xl font-bold hover:text-accent transition-colors">hello@dataverge.ai</a>
+                       <a href="mailto:help@dataverg.com" className="text-xl font-bold hover:text-accent transition-colors">help@dataverg.com</a>
                      </div>
                  </GlowCard>
                </AnimatedSection>
@@ -128,7 +128,7 @@ const Contact = () => {
                  <GlowCard className="h-full bg-card flex flex-col justify-center p-6 border-border group" hoverScale={1.03}>
                     <Phone className="text-muted-foreground mb-4 group-hover:text-accent transition-colors" size={24} />
                     <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">Support Desk</div>
-                    <a href="tel:+18883282837" className="font-bold text-sm tracking-tight">+1 (888) 328-2837</a>
+                    <a href="tel:+15642618250" className="font-bold text-sm tracking-tight">+15642618250</a>
                  </GlowCard>
                </AnimatedSection>
                

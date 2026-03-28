@@ -47,7 +47,7 @@ const About = () => {
                 We believe data should <span className="text-shine">converge</span>.
               </h1>
               <p className="mt-8 text-xl leading-relaxed text-muted-foreground">
-                Founded in 2024, DataVerge was born from a simple observation: enterprises waste millions wrestling with fragmented data silos. We built the definitive AI-native platform to stop the wrestling.
+                Founded on July 05, 2023, DataVerge was born from a simple observation: enterprises waste millions wrestling with fragmented data silos. We built the definitive AI-native platform to stop the wrestling.
               </p>
             </div>
           </AnimatedSection>

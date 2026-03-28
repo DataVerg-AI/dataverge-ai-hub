@@ -92,7 +92,7 @@ const Terms = () => {
                  <h3 className="text-lg font-bold text-foreground mb-2">Have questions?</h3>
                  <p className="text-sm text-muted-foreground">Our legal team is available to help clarify any of these terms.</p>
                </div>
-               <a href="mailto:legal@dataverge.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:bg-accent hover:text-accent-foreground transition-colors group">
+               <a href="mailto:help@dataverg.com" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold hover:bg-accent hover:text-accent-foreground transition-colors group">
                  <Mail size={18} className="group-hover:scale-110 transition-transform" /> Contact Legal
                </a>
             </div>
