@@ -84,20 +84,8 @@ const Index = () => (
       </div>
     </section>
 
-    {/* Hero App Screenshot Placeholder */}
-    <section className="relative bg-background pb-20 pt-10 -mt-10">
-      <div className="container relative z-10">
-        <AnimatedSection>
-          <div className="mx-auto max-w-5xl rounded-2xl border border-border bg-card/50 p-2 shadow-2xl backdrop-blur-sm">
-            <div className="w-full min-h-[400px] md:min-h-[600px] rounded-xl border border-border bg-muted/30 flex items-center justify-center text-muted-foreground font-mono text-sm">
-              App Interface Screenshot Here
-            </div>
-          </div>
-        </AnimatedSection>
-      </div>
-    </section>
+    
 
-    <TrustedBy />
 
     {/* ═══════════════ STATS — Completely Custom Design ═══════════════ */}
     <section className="relative overflow-hidden bg-background py-24">

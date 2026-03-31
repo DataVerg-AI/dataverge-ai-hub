@@ -11,6 +11,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import GlowCard from "@/components/GlowCard";
 import DataStreamBg from "@/components/DataStreamBg";
 import { Mail, Phone, Clock, MapPin, ArrowRight, MessageSquare, ExternalLink, Globe2 } from "lucide-react";
+import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } from "react-icons/fa6";
+import { SiCrunchbase } from "react-icons/si";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -149,6 +151,39 @@ const Contact = () => {
                     <div className="font-bold text-sm relative z-10">9AM - 6PM EST<br/><span className="text-accent text-xs">Mon - Fri</span></div>
                  </GlowCard>
                </AnimatedSection>
+
+                {/* Digital Presence - Wide card */}
+                <AnimatedSection className="col-span-2 row-span-1" delay={0.5}>
+                  <GlowCard className="h-full bg-card p-6 border-border group" hoverScale={1.02}>
+                    <div className="flex flex-col h-full justify-between">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-3">Digital Presence</div>
+                      <div className="flex flex-wrap gap-3">
+                        {[
+                          { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
+                          { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
+                          { icon: FaYoutube, href: "https://www.youtube.com/@DataVergTech", label: "YouTube" },
+                          { icon: FaFacebook, href: "https://www.facebook.com/dataVerg/", label: "Facebook" },
+                          { icon: FaPinterest, href: "https://www.pinterest.com/Dataverg/", label: "Pinterest" },
+                          { icon: SiCrunchbase, href: "https://www.crunchbase.com/organization/dataverg-tech", label: "Crunchbase" },
+                          { icon: FaRocket, href: "https://www.f6s.com/dataverg-tech", label: "F6S" },
+                        ].map((s) => (
+                          <motion.a
+                            key={s.label}
+                            href={s.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                            whileHover={{ scale: 1.1, rotate: 5 }}
+                            whileTap={{ scale: 0.9 }}
+                            title={s.label}
+                          >
+                            <s.icon size={20} />
+                          </motion.a>
+                        ))}
+                      </div>
+                    </div>
+                  </GlowCard>
+                </AnimatedSection>
             </div>
 
             {/* Right: Immersive Contact Form Terminal */}

@@ -1,0 +1,7 @@
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 relative z-10">Uptime</div>
+                    <div className="font-bold text-sm relative z-10">9AM - 6PM EST<br/><span className="text-accent text-xs">Mon - Fri</span></div>
+                 </GlowCard>
+                {/* Digital Presence - Wide card */}
+                <AnimatedSection className="col-span-2 row-span-1" delay={0.5}>
+                  <GlowCard className="h-full bg-card p-6 border-border group" hoverScale={1.02}>
+                    <div className="flex flex-col h-full justify-between">

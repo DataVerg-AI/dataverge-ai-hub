@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } from "react-icons/fa6";
+import { SiCrunchbase } from "react-icons/si";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -107,16 +109,28 @@ const Footer = () => {
               </div>
               <Button variant="accent" size="default" type="submit">Join</Button>
             </form>
-            <div className="flex gap-4 pt-2">
-              {["Twitter", "LinkedIn", "GitHub"].map((s) => (
+            <div className="flex flex-wrap gap-4 pt-2">
+              {[
+                { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
+                { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
+                { icon: FaYoutube, href: "https://www.youtube.com/@DataVergTech", label: "YouTube" },
+                { icon: FaFacebook, href: "https://www.facebook.com/dataVerg/", label: "Facebook" },
+                { icon: FaPinterest, href: "https://www.pinterest.com/Dataverg/", label: "Pinterest" },
+                { icon: SiCrunchbase, href: "https://www.crunchbase.com/organization/dataverg-tech", label: "Crunchbase" },
+                { icon: FaRocket, href: "https://www.f6s.com/dataverg-tech", label: "F6S" },
+              ].map((s) => (
                 <motion.a
-                  key={s}
-                  href="#"
-                  className="text-xs text-foreground/50 transition-colors hover:text-accent"
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
                   whileHover={{ scale: 1.1, y: -2 }}
-                  transition={{ type: "spring", stiffness: 300 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  title={s.label}
                 >
-                  {s}
+                  <s.icon size={18} />
                 </motion.a>
               ))}
             </div>

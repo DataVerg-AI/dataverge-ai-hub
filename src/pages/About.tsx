@@ -6,6 +6,8 @@ import GlowCard from "@/components/GlowCard";
 import DataStreamBg from "@/components/DataStreamBg";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { useRef } from "react";
+import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } from "react-icons/fa6";
+import { SiCrunchbase } from "react-icons/si";
 
 const milestones = [
   { year: "2024", title: "The Convergence Engine", desc: "DataVerge started by completely rethinking data pipelines. 3 engineers built the first unified mapping engine in 6 weeks." },
@@ -234,6 +236,57 @@ const About = () => {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Connect with our Community */}
+      <section className="bg-background py-24 sm:py-32">
+        <div className="container">
+          <AnimatedSection>
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12 rounded-3xl border border-accent/20 bg-accent/5 p-12 lg:p-16 overflow-hidden relative">
+              {/* Decorative data stream in background */}
+              <div 
+                className="absolute inset-0 opacity-10 pointer-events-none" 
+                style={{ backgroundImage: 'radial-gradient(circle at 10% 10%, hsl(var(--brand-yellow)) 0%, transparent 50%)'}}
+              />
+              
+              <div className="max-w-xl relative z-10 text-center md:text-left">
+                <h2 className="text-3xl font-extrabold md:text-5xl">Connect with our <span className="text-shine">Community</span></h2>
+                <p className="mt-6 text-lg text-muted-foreground">
+                  Stay synchronized with our latest engineering breakthroughs, enterprise integrations, and industry insights across our digital presence.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-4 sm:grid-cols-7 gap-4 relative z-10">
+                {[
+                  { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
+                  { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
+                  { icon: FaYoutube, href: "https://www.youtube.com/@DataVergTech", label: "YouTube" },
+                  { icon: FaFacebook, href: "https://www.facebook.com/dataVerg/", label: "Facebook" },
+                  { icon: FaPinterest, href: "https://www.pinterest.com/Dataverg/", label: "Pinterest" },
+                  { icon: SiCrunchbase, href: "https://www.crunchbase.com/organization/dataverg-tech", label: "Crunchbase" },
+                  { icon: FaRocket, href: "https://www.f6s.com/dataverg-tech", label: "F6S" },
+                ].map((s, i) => (
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-background border border-border text-accent shadow-sm transition-all hover:bg-accent hover:text-accent-foreground hover:shadow-xl hover:shadow-accent/20"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    whileHover={{ y: -5, rotate: [0, -5, 5, 0] }}
+                    whileTap={{ scale: 0.9 }}
+                    title={s.label}
+                  >
+                    <s.icon size={24} />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
