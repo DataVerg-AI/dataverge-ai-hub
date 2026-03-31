@@ -2,16 +2,53 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { motion } from "framer-motion";
+import { EmailAPI } from "@/lib/api";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { useToast } from "@/hooks/use-toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } from "react-icons/fa6";
 import { SiCrunchbase } from "react-icons/si";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const { toast } = useToast();
 
-  const handleNewsletter = (e: React.FormEvent) => {
+  const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEmail("");
+    if (!email.trim() || status === "loading") return;
+    
+    if (!turnstileToken) {
+      toast({
+        title: "Captcha Required",
+        description: "Please complete the CAPTCHA to join.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setStatus("loading");
+    try {
+      await EmailAPI.newsletter(email, turnstileToken);
+      setStatus("success");
+      setEmail("");
+      toast({
+        title: "Welcome aboard!",
+        description: "You've successfully joined our newsletter.",
+      });
+      // Reset after 3 seconds
+      setTimeout(() => setStatus("idle"), 3000);
+    } catch (err: any) {
+      setStatus("error");
+      toast({
+        title: "Subscription failed",
+        description: err.message || "Something went wrong. Please try again.",
+        variant: "destructive"
+      });
+      setTimeout(() => setStatus("idle"), 3000);
+    }
   };
 
   return (
@@ -97,17 +134,40 @@ const Footer = () => {
           <div className="space-y-4">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground/40">Stay Updated</h4>
             <p className="text-sm text-foreground/60">Get the latest on data convergence.</p>
-            <form onSubmit={handleNewsletter} className="flex gap-2">
-              <div className="flex-1 glow-input rounded-md">
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="h-10 border-foreground/20 bg-background text-foreground placeholder:text-foreground/40"
+            <form onSubmit={handleNewsletter} className="space-y-3">
+              <div className="flex gap-2">
+                <div className="flex-1 glow-input rounded-md">
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={status === "loading" || status === "success"}
+                    className="h-10 border-foreground/20 bg-background text-foreground placeholder:text-foreground/40"
+                  />
+                </div>
+                <Button 
+                  variant="accent" 
+                  size="default" 
+                  type="submit" 
+                  disabled={status === "loading" || status === "success"}
+                >
+                  {status === "loading" ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : status === "success" ? (
+                    <CheckCircle2 className="h-4 w-4" />
+                  ) : (
+                    "Join"
+                  )}
+                </Button>
+              </div>
+              <div className="flex justify-start transform scale-75 origin-left -mt-1 opacity-80 hover:opacity-100 transition-opacity">
+                <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  options={{ size: "compact", theme: "dark" }}
                 />
               </div>
-              <Button variant="accent" size="default" type="submit">Join</Button>
             </form>
             <div className="flex flex-wrap gap-4 pt-2">
               {[

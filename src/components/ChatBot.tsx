@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { MessageCircle, X, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { AIAPI } from "@/lib/api";
 
 const ChatBot = () => {
   const [open, setOpen] = useState(false);
@@ -9,16 +10,36 @@ const ChatBot = () => {
     { role: "bot", text: "Hi! I'm the DataVerge assistant. How can I help you today?" },
   ]);
   const [input, setInput] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  const send = (e: React.FormEvent) => {
+  const send = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
-    setMessages((m) => [
-      ...m,
-      { role: "user" as const, text: input },
-      { role: "bot" as const, text: "Thanks for your message! Our team will get back to you shortly." },
-    ]);
+    if (!input.trim() || isGenerating) return;
+
+    const userMessage = input.trim();
+    setMessages((m) => [...m, { role: "user", text: userMessage }]);
     setInput("");
+    setIsGenerating(true);
+
+    try {
+      const res: any = await AIAPI.generate(userMessage, {
+        history: messages.slice(-5) // Send some context
+      });
+      
+      const botResponse = res?.data?.text || res?.message || "I'm having trouble connecting to the neural link. Please try again.";
+      
+      setMessages((m) => [
+        ...m,
+        { role: "bot", text: botResponse },
+      ]);
+    } catch (err) {
+      setMessages((m) => [
+        ...m,
+        { role: "bot", text: "Connection error. Please check your signal and try again." },
+      ]);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
   return (
@@ -51,6 +72,14 @@ const ChatBot = () => {
                 </div>
               </div>
             ))}
+            {isGenerating && (
+              <div className="flex justify-start">
+                <div className="flex items-center gap-2 rounded-xl bg-secondary px-3 py-2 text-sm text-secondary-foreground italic">
+                  <Loader2 size={12} className="animate-spin" />
+                  Thinking...
+                </div>
+              </div>
+            )}
           </div>
           <form onSubmit={send} className="flex gap-2 border-t border-border p-3">
             <Input
@@ -59,8 +88,8 @@ const ChatBot = () => {
               placeholder="Type a message..."
               className="h-9 text-sm"
             />
-            <Button variant="accent" size="icon" type="submit" className="h-9 w-9 shrink-0">
-              <Send size={16} />
+             <Button variant="accent" size="icon" type="submit" className="h-9 w-9 shrink-0" disabled={isGenerating}>
+              {isGenerating ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
             </Button>
           </form>
         </div>

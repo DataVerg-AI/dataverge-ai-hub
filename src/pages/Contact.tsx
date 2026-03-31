@@ -2,8 +2,10 @@ import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import React from "react";
+import { EmailAPI, MapsAPI } from "@/lib/api";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { motion } from "framer-motion";
@@ -26,8 +28,26 @@ const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sending, setSending] = useState(false);
+  const [mapEmbedUrl, setMapEmbedUrl] = useState<string>("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const HQ_ADDRESS = "1290 S Olive Street, Suite 520, Skyline Workspace, Los Angeles, CA 90015, USA";
+
+  useEffect(() => {
+    const fetchMapPin = async () => {
+      try {
+        const res: any = await MapsAPI.createPin(HQ_ADDRESS);
+        if (res?.data?.embed_url) {
+          setMapEmbedUrl(res.data.embed_url);
+        }
+      } catch (err) {
+        console.error("Failed to fetch map pin:", err);
+      }
+    };
+    fetchMapPin();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -38,13 +58,40 @@ const Contact = () => {
       setErrors(fieldErrors);
       return;
     }
+
+    if (!turnstileToken) {
+      toast({ 
+        title: "Security Check Required", 
+        description: "Please complete the CAPTCHA before sending.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setErrors({});
     setSending(true);
-    setTimeout(() => {
-      setSending(false);
-      toast({ title: "Message received.", description: "Secure channel established. We'll be in touch." });
+    
+    try {
+      await EmailAPI.contact({
+        ...form,
+        turnstile_token: turnstileToken
+      });
+      
+      toast({ 
+        title: "Message received.", 
+        description: "Secure channel established. We'll be in touch." 
+      });
       setForm({ name: "", email: "", company: "", message: "" });
-    }, 800);
+      setTurnstileToken(""); // Reset for next submission
+    } catch (err: any) {
+      toast({ 
+        title: "Transmission failed.", 
+        description: err.message || "Could not established secure connection.",
+        variant: "destructive"
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   const update = (field: string, value: string) => {
@@ -89,13 +136,27 @@ const Contact = () => {
             {/* Left: Asymmetric Info Bento Grid */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-4 auto-rows-[160px]">
                {/* Global HQ - Tall card */}
-               <AnimatedSection className="col-span-2 row-span-2" delay={0.1}>
-                 <GlowCard className="h-full bg-card group border-border relative overflow-hidden" hoverScale={1.01}>
-                   {/* Background map graphic */}
-                   <div className="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-105"
-                        style={{ backgroundImage: 'radial-gradient(circle at 70% 50%, hsl(var(--brand-yellow)/0.3) 0%, transparent 40%)'}}>
-                      <Globe2 className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/20" strokeWidth={0.5} />
-                   </div>
+                <AnimatedSection className="col-span-2 row-span-2" delay={0.1}>
+                  <GlowCard className="h-full bg-card group border-border relative overflow-hidden" hoverScale={1.01}>
+                    {/* Dynamic Map Background */}
+                    <div className="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-105">
+                      {mapEmbedUrl ? (
+                         <iframe 
+                           src={mapEmbedUrl}
+                           width="100%" 
+                           height="100%" 
+                           style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(1.2)" }} 
+                           allowFullScreen={false} 
+                           loading="lazy" 
+                           referrerPolicy="no-referrer-when-downgrade"
+                           className="absolute inset-0"
+                         />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 p-4">
+                          <Globe2 className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/20" strokeWidth={0.5} />
+                        </div>
+                      )}
+                    </div>
                    
                    <div className="relative z-10 p-8 flex flex-col h-full justify-between">
                      <div>
@@ -251,6 +312,13 @@ const Contact = () => {
                         />
                       </div>
                       {errors.message && <p className="text-[10px] text-destructive ml-1">{errors.message}</p>}
+                    </div>
+
+                    <div className="flex justify-center">
+                      <Turnstile
+                        siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                        onSuccess={(token) => setTurnstileToken(token)}
+                      />
                     </div>
 
                     <div className="pt-2">

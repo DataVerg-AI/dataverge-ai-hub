@@ -21,6 +21,8 @@ import DashboardOverview from "./pages/DashboardOverview";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
 import DashboardProjects from "./pages/DashboardProjects";
 import DashboardSettings from "./pages/DashboardSettings";
+import Checkout from "./pages/Checkout";
+import Fallback from "./pages/Fallback";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,8 @@ const AnimatedRoutes = () => {
         <Route path="/dashboard/analytics" element={<PageTransition><DashboardAnalytics /></PageTransition>} />
         <Route path="/dashboard/projects" element={<PageTransition><DashboardProjects /></PageTransition>} />
         <Route path="/dashboard/settings" element={<PageTransition><DashboardSettings /></PageTransition>} />
+        <Route path="/checkout" element={<PageTransition><Checkout /></PageTransition>} />
+        <Route path="/fallback" element={<PageTransition><Fallback /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>

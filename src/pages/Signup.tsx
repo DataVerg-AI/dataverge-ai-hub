@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthAPI, hashSHA256 } from "@/lib/api";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,14 +12,50 @@ export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSignup = (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      setError("Please complete the CAPTCHA");
+      return;
+    }
+    
     setIsLoading(true);
-    // Simulate signup API call
-    setTimeout(() => {
+    setError(null);
+    try {
+      const passwordHash = await hashSHA256(password);
+      
+      const nameParts = name.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
+      const username = name.toLowerCase().replace(/[^a-z0-9]/g, "") + Math.floor(Math.random() * 1000);
+
+      const res: any = await AuthAPI.register({
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        password_hash: passwordHash,
+        password_hash_confirmation: passwordHash,
+        turnstile_token: turnstileToken
+      });
+      
+      if (res?.data?.token) {
+        localStorage.setItem("token", res.data.token);
+        navigate("/dashboard");
+      } else {
+        setError(res?.message || "Signup failed");
+      }
+    } catch (err: any) {
+      setError(err.message || "Signup failed");
+    } finally {
       setIsLoading(false);
-      navigate("/dashboard");
-    }, 1500);
+    }
   };
 
   const GoogleIcon = () => (
@@ -74,6 +112,11 @@ export default function Signup() {
         </div>
 
         <form onSubmit={handleSignup} className="grid gap-4">
+          {error && (
+            <div className="p-3 text-sm text-red-500 bg-red-100 dark:bg-red-900/30 rounded-md">
+              {error}
+            </div>
+          )}
           <div className="grid gap-2">
             <Label htmlFor="name">Full Name</Label>
             <Input
@@ -82,6 +125,8 @@ export default function Signup() {
               type="text"
               autoCapitalize="words"
               autoComplete="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
@@ -94,6 +139,8 @@ export default function Signup() {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -104,7 +151,15 @@ export default function Signup() {
               placeholder="••••••••"
               type="password"
               autoComplete="new-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
+            />
+          </div>
+          <div className="flex justify-center mt-2">
+            <Turnstile
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+              onSuccess={(token) => setTurnstileToken(token)}
             />
           </div>
           <Button className="w-full mt-2" type="submit" disabled={isLoading}>

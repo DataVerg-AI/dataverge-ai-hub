@@ -228,7 +228,7 @@ const Pricing = () => {
                         className={`mt-8 w-full ${plan.popular ? "glow-accent" : ""}`}
                         asChild
                       >
-                        <Link to="/contact">
+                        <Link to={price == null ? "/contact" : `/checkout?plan=${plan.name.toLowerCase() === "starter" ? "basic" : "pro"}&billing=${yearly ? "yearly" : "monthly"}`}>
                           {price == null ? "Contact Sales" : "Get Started"}
                           <ArrowRight size={16} />
                         </Link>
