@@ -15,6 +15,12 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import DashboardOverview from "./pages/DashboardOverview";
+import DashboardAnalytics from "./pages/DashboardAnalytics";
+import DashboardProjects from "./pages/DashboardProjects";
+import DashboardSettings from "./pages/DashboardSettings";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +38,12 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
+        <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
+        <Route path="/signup" element={<PageTransition><Signup /></PageTransition>} />
+        <Route path="/dashboard" element={<PageTransition><DashboardOverview /></PageTransition>} />
+        <Route path="/dashboard/analytics" element={<PageTransition><DashboardAnalytics /></PageTransition>} />
+        <Route path="/dashboard/projects" element={<PageTransition><DashboardProjects /></PageTransition>} />
+        <Route path="/dashboard/settings" element={<PageTransition><DashboardSettings /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
