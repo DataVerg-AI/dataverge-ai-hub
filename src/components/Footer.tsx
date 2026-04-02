@@ -19,7 +19,7 @@ const Footer = () => {
   const handleNewsletter = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim() || status === "loading") return;
-    
+
     if (!turnstileToken) {
       toast({
         title: "Captcha Required",
@@ -78,7 +78,7 @@ const Footer = () => {
               <span className="text-lg font-bold">DataVerge</span>
             </div>
             <p className="text-sm text-foreground/60">
-              Merging fragmented data into one intelligent, unified system.
+              Merging fragmented data into one unified, intelligent system.
             </p>
             {/* Decorative data dots */}
             <div className="flex gap-2 pt-2">
@@ -146,10 +146,10 @@ const Footer = () => {
                     className="h-10 border-foreground/20 bg-background text-foreground placeholder:text-foreground/40"
                   />
                 </div>
-                <Button 
-                  variant="accent" 
-                  size="default" 
-                  type="submit" 
+                <Button
+                  variant="accent"
+                  size="default"
+                  type="submit"
                   disabled={status === "loading" || status === "success"}
                 >
                   {status === "loading" ? (

@@ -9,12 +9,12 @@ const faqs = [
     a: "DataVerge uses AI-native convergence, not just extraction and loading. Our DataVerGAI engine understands your data schemas, automatically maps fields across sources, and provides predictive insights — all in real time without batch processing.",
   },
   {
-    q: "What data sources can DataVerge connect to?",
+    q: "What data sources does DataVerge connect to?",
     a: "We support 200+ connectors out of the box: REST/GraphQL APIs, cloud platforms (AWS, GCP, Azure), databases (PostgreSQL, MySQL, MongoDB, Snowflake), SaaS tools (Salesforce, HubSpot, Stripe), and custom sources via our SDK.",
   },
   {
     q: "Is my data secure with DataVerge?",
-    a: "Absolutely. We're SOC 2 Type II certified, with end-to-end AES-256 encryption, zero-trust architecture, and full audit logging. Your data never leaves your designated region, and we offer on-premise deployment for Enterprise clients.",
+    a: "Absolutely. We're SOC 2 Type II certified, with end-to-end AES-256 encryption, zero-trust architecture, and full audit logging. Your data never leaves your designated region, and we offer on-premises deployment for Enterprise clients.",
   },
   {
     q: "How long does it take to set up?",
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Can I try DataVerge before committing?",
-    a: "Yes! We offer a 14-day free trial on all plans with full feature access. No credit card required. We also offer guided onboarding calls for Enterprise prospects.",
+    a: "Yes. We offer a 14-day free trial on all plans with full feature access. No credit card required. We also offer guided onboarding calls for Enterprise prospects.",
   },
   {
     q: "What kind of support do you offer?",
@@ -48,7 +48,7 @@ const FAQ = () => {
               FAQ
             </span>
             <h2 className="text-3xl font-extrabold md:text-5xl">Frequently asked questions</h2>
-            <p className="mt-4 text-muted-foreground">Everything you need to know about DataVerge.</p>
+            <p className="mt-4 text-muted-foreground">Common questions about the DataVerg platform.</p>
           </div>
         </AnimatedSection>
 
@@ -58,9 +58,8 @@ const FAQ = () => {
             return (
               <AnimatedSection key={i} delay={i * 0.05}>
                 <motion.div
-                  className={`overflow-hidden rounded-2xl border bg-background transition-colors duration-300 ${
-                    isOpen ? "border-accent/30" : "border-border"
-                  }`}
+                  className={`overflow-hidden rounded-2xl border bg-background transition-colors duration-300 ${isOpen ? "border-accent/30" : "border-border"
+                    }`}
                   layout
                 >
                   <button

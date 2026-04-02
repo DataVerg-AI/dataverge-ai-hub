@@ -22,7 +22,7 @@ const ProductShowcase = () => (
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
             className="text-4xl font-extrabold md:text-6xl lg:text-7xl">
-            AI-Powered Data <span className="text-shine">Convergence</span>
+            Intelligent Data <span className="text-shine">Convergence</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 text-lg text-muted-foreground">
@@ -44,7 +44,7 @@ const ProductShowcase = () => (
         <AnimatedSection>
           <motion.div whileHover={{ y: -4, scale: 1.01 }} transition={{ type: "spring", stiffness: 200 }}
             className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-[#01030e] text-white shadow-[0_0_50px_rgba(255,255,44,0.1)]">
-            
+
             {/* Window controls */}
             <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4 bg-white/5">
               <div className="h-3 w-3 rounded-full bg-red-500/80" />
@@ -60,7 +60,7 @@ const ProductShowcase = () => (
             {/* Dash Grid Mockup - Replaced with Image Placeholder */}
             <div className="p-6">
               <div className="w-full min-h-[400px] rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-white/40 font-mono text-sm">
-                 Dashboard Image Here
+                Dashboard Image Here
               </div>
             </div>
           </motion.div>
@@ -74,12 +74,12 @@ const ProductShowcase = () => (
         <AnimatedSection>
           <div className="mx-auto max-w-2xl text-center">
             <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">Platform Power</span>
-            <h2 className="text-3xl font-extrabold md:text-5xl">Capabilities that scale</h2>
+            <h2 className="text-3xl font-extrabold md:text-5xl">Advanced capabilities that empower your unified data platform.</h2>
           </div>
         </AnimatedSection>
-        
+
         <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-12 auto-rows-[220px]">
-          
+
           {/* Card 1: Data Synthesis (8 col hero) */}
           <AnimatedSection delay={0} className="md:col-span-8 md:row-span-1">
             <motion.div
@@ -92,13 +92,13 @@ const ProductShowcase = () => (
                   <Layers size={22} className="text-rose-500" />
                 </div>
                 <h3 className="text-2xl font-extrabold">Real-Time Data Synthesis</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Automatically combine and reconcile data from hundreds of sources instantly.</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Automatically combine and reconcile data from hundreds of sources in sub-second time, creating a unified and consistent data layer.</p>
               </div>
               <div className="hidden md:flex absolute right-0 inset-y-0 w-1/2 items-center justify-end pr-8 overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
                 <svg viewBox="0 0 200 200" className="w-[120%] h-[120%] opacity-20 text-rose-500">
                   {[1, 2, 3, 4, 5].map(i => (
-                    <motion.rect key={i} x={50 - i*10} y={100 - i*15} width={100 + i*20} height={40} rx={8} fill="none" stroke="currentColor" strokeWidth={2}
+                    <motion.rect key={i} x={50 - i * 10} y={100 - i * 15} width={100 + i * 20} height={40} rx={8} fill="none" stroke="currentColor" strokeWidth={2}
                       initial={{ y: 20, opacity: 0 }}
                       animate={{ y: [0, -5, 0], opacity: 1 }}
                       transition={{ delay: i * 0.1, duration: 4, repeat: Infinity }}
@@ -112,7 +112,7 @@ const ProductShowcase = () => (
 
           {/* Card 2: AI Mapping (4 col tall) */}
           <AnimatedSection delay={0.1} className="md:col-span-4 md:row-span-2">
-             <motion.div
+            <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
               className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-indigo-500/5 border border-indigo-200 shadow-lg text-center p-8"
@@ -121,9 +121,9 @@ const ProductShowcase = () => (
                 <Brain size={28} className="text-indigo-600 relative z-10" />
                 <motion.div className="absolute inset-0 rounded-2xl border-2 border-indigo-400" animate={{ rotate: 180, scale: [1, 1.1, 1] }} transition={{ duration: 4, repeat: Infinity }} />
               </div>
-              <h3 className="text-2xl font-extrabold text-foreground">AI-Powered Mapping</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">Machine learning models that deeply understand your data schema and auto-map fields with human-level precision.</p>
-              
+              <h3 className="text-2xl font-extrabold text-foreground">Intelligent Mapping</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">Machine learning models intelligently understand your data schema, auto-mapping fields with human-level precision.</p>
+
               <div className="mt-6 rounded-xl bg-background border border-border p-4 text-xs font-mono text-left relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
                 <div className="text-muted-foreground">{"{"}</div>
@@ -155,7 +155,7 @@ const ProductShowcase = () => (
               <div>
                 <LineChart className="text-accent mb-3" size={24} />
                 <h3 className="text-lg font-extrabold">Predictive Insights</h3>
-                <p className="mt-1 text-sm text-white/50">Surface trends and anomalies instantly.</p>
+                <p className="mt-1 text-sm text-white/50">Instantly surface trends, anomalies, and patterns across all your data.</p>
               </div>
               {/* Mini sparkline */}
               <svg className="w-full h-16 mt-4 opacity-80" viewBox="0 0 100 40">
@@ -176,7 +176,7 @@ const ProductShowcase = () => (
               <div>
                 <Workflow className="text-blue-500 mb-3" size={24} />
                 <h3 className="text-lg font-extrabold">Pipeline Builder</h3>
-                <p className="mt-1 text-sm text-muted-foreground">Drag and drop workflows without code.</p>
+                <p className="mt-1 text-sm text-muted-foreground">Drag-and-drop workflows to automate data processes without writing a single line of code.</p>
               </div>
               {/* Mini node visual */}
               <div className="relative mt-4 h-16 w-full rounded-xl bg-secondary/50 border border-border/50 p-2 overflow-hidden flex items-center justify-center gap-2">

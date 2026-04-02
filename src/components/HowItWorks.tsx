@@ -20,7 +20,7 @@ const steps = [
     num: "03",
     icon: BarChart3,
     title: "Unified Insights",
-    desc: "Access a single source of truth with real-time dashboards, predictive analytics, and automated alerts.",
+    desc: "Access your unified data layer with real-time dashboards, predictive analytics, and automated alerts.",
   },
 ];
 
@@ -46,9 +46,8 @@ const HowItWorks = () => (
           <AnimatedSection key={step.num} delay={i * 0.15}>
             <div className="flex flex-col items-center gap-4">
               <GlowCard
-                className={`w-full max-w-2xl ${
-                  i % 2 === 0 ? "md:ml-0 md:mr-auto" : "md:ml-auto md:mr-0"
-                }`}
+                className={`w-full max-w-2xl ${i % 2 === 0 ? "md:ml-0 md:mr-auto" : "md:ml-auto md:mr-0"
+                  }`}
                 hoverY={-6}
               >
                 <div className="flex items-start gap-6 p-8">

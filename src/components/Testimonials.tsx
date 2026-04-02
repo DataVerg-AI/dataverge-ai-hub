@@ -37,15 +37,15 @@ const Testimonials = () => (
       <AnimatedSection>
         <div className="mx-auto max-w-2xl text-center">
           <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">
-            Trusted by Industry Leaders
+            Trusted by Data Teams Today
           </span>
-          <h2 className="text-3xl font-extrabold md:text-5xl">Engineers <span className="text-accent underline underline-offset-8 decoration-accent/20">love</span> us</h2>
+          <h2 className="text-3xl font-extrabold md:text-5xl">Teams that <span className="text-accent underline underline-offset-8 decoration-accent/20">unify</span></h2>
         </div>
       </AnimatedSection>
 
       {/* Completely Custom Bento Layout for Testimonials */}
       <div className="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-12 auto-rows-auto">
-        
+
         {/* Card 1: Main Dark Review */}
         <AnimatedSection delay={0} className="md:col-span-8">
           <motion.div
@@ -81,7 +81,7 @@ const Testimonials = () => (
                   <div className="text-sm text-white/50">{testimonials[0].role}</div>
                 </div>
               </div>
-              
+
               {/* Highlight Metric Badge */}
               <div className="hidden md:flex flex-col items-end">
                 <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold text-accent">
@@ -103,9 +103,9 @@ const Testimonials = () => (
             className="relative flex h-full min-h-[250px] md:min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-background p-8 shadow-lg"
           >
             <div className="absolute top-0 right-0 h-40 w-40 -translate-y-1/2 translate-x-1/2 rounded-full bg-emerald-500/5 blur-3xl" />
-            
+
             <Quote size={32} className="text-emerald-500/20" />
-            
+
             <p className="mt-4 text-lg font-semibold leading-snug">
               "{testimonials[1].quote}"
             </p>
@@ -140,7 +140,7 @@ const Testimonials = () => (
             className="group relative flex h-full min-h-[250px] md:min-h-[280px] overflow-hidden rounded-3xl bg-secondary border border-border/50 shadow-md"
           >
             <div className="absolute top-0 left-0 h-full w-2 bg-gradient-to-b from-purple-500 to-indigo-500" />
-            
+
             <div className="flex flex-1 flex-col justify-between p-8 md:p-10">
               <div className="flex max-w-3xl items-start gap-6">
                 <div className="hidden md:flex">

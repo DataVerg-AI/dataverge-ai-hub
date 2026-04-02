@@ -14,7 +14,7 @@ const plans = [
     yearlyPrice: 39,
     desc: "For small teams getting started with data convergence.",
     popular: false,
-    features: ["Up to 5 data sources", "10K records/month", "Basic analytics", "Email support", "1 user seat"],
+    features: ["Up to 5 data sources", "10K records/month", "Core analytics", "Email support", "1 user seat"],
   },
   {
     name: "Professional",
@@ -22,7 +22,7 @@ const plans = [
     yearlyPrice: 119,
     desc: "For growing businesses with complex data needs.",
     popular: true,
-    features: ["Unlimited data sources", "1M records/month", "Advanced analytics & AI", "Priority support", "10 user seats", "Custom dashboards"],
+    features: ["Unlimited data sources", "1M records/month", "Advanced analytics & ML", "Priority support", "10 user seats", "Custom dashboards"],
   },
   {
     name: "Enterprise",
@@ -30,7 +30,7 @@ const plans = [
     yearlyPrice: null,
     desc: "For large organizations requiring full control.",
     popular: false,
-    features: ["Unlimited everything", "Dedicated infrastructure", "SSO & SAML", "24/7 phone support", "Unlimited seats", "Custom SLAs", "On-premise option"],
+    features: ["Unlimited everything", "Dedicated infrastructure", "SSO & SAML", "24/7 phone support", "Unlimited seats", "Custom SLAs", "On-premises option"],
   },
 ];
 
@@ -49,16 +49,15 @@ const Pricing = () => {
                 Pricing
               </span>
               <h1 className="text-4xl font-extrabold md:text-6xl">Simple, transparent pricing</h1>
-              <p className="mt-4 text-lg text-muted-foreground">Start free. Scale as you grow. No hidden fees.</p>
+              <p className="mt-4 text-lg text-muted-foreground">Start free. Pay as you scale. No hidden fees</p>
 
               {/* Billing Toggle */}
               <div className="mt-10 flex items-center justify-center gap-4">
                 <span className={`text-sm font-medium transition-colors ${!yearly ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
                 <button
                   onClick={() => setYearly((v) => !v)}
-                  className={`relative h-7 w-14 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                    yearly ? "bg-accent" : "bg-muted"
-                  }`}
+                  className={`relative h-7 w-14 rounded-full transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${yearly ? "bg-accent" : "bg-muted"
+                    }`}
                   aria-label="Toggle billing period"
                 >
                   <motion.div
@@ -94,11 +93,10 @@ const Pricing = () => {
                   <motion.div
                     whileHover={{ y: -8, scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className={`group relative flex h-full flex-col rounded-2xl border p-8 transition-shadow duration-300 hover:shadow-xl ${
-                      plan.popular
-                        ? "border-accent bg-background shadow-2xl shadow-accent/15"
-                        : "border-border bg-background hover:shadow-accent/5"
-                    }`}
+                    className={`group relative flex h-full flex-col rounded-2xl border p-8 transition-shadow duration-300 hover:shadow-xl ${plan.popular
+                      ? "border-accent bg-background shadow-2xl shadow-accent/15"
+                      : "border-border bg-background hover:shadow-accent/5"
+                      }`}
                   >
                     <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
                       {/* Gradient shimmer border effect */}
@@ -108,54 +106,54 @@ const Pricing = () => {
                         }}
                       />
 
-                    {/* Top shimmer line */}
-                    <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
-                      <motion.div
-                        className="h-full w-1/3 bg-gradient-to-r from-transparent via-accent/40 to-transparent"
-                        animate={{ x: ["-100%", "400%"] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
-                      />
-                    </div>
+                      {/* Top shimmer line */}
+                      <div className="absolute inset-x-0 top-0 h-px overflow-hidden">
+                        <motion.div
+                          className="h-full w-1/3 bg-gradient-to-r from-transparent via-accent/40 to-transparent"
+                          animate={{ x: ["-100%", "400%"] }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", repeatDelay: 2 }}
+                        />
+                      </div>
 
-                    {/* Animated corner decorations for popular plan */}
-                    {plan.popular && (
-                      <>
-                        <motion.div
-                          className="absolute top-0 right-0 h-16 w-16"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 0.15 }}
-                        >
-                          <svg viewBox="0 0 64 64" className="h-full w-full">
-                            <motion.path
-                              d="M64,0 Q64,32 32,64"
-                              fill="none"
-                              stroke="hsl(var(--brand-yellow))"
-                              strokeWidth="2"
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: [0, 1, 0] }}
-                              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                            />
-                          </svg>
-                        </motion.div>
-                        <motion.div
-                          className="absolute bottom-0 left-0 h-16 w-16 rotate-180"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 0.15 }}
-                        >
-                          <svg viewBox="0 0 64 64" className="h-full w-full">
-                            <motion.path
-                              d="M64,0 Q64,32 32,64"
-                              fill="none"
-                              stroke="hsl(var(--brand-yellow))"
-                              strokeWidth="2"
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: [0, 1, 0] }}
-                              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-                            />
-                          </svg>
-                        </motion.div>
-                      </>
-                    )}
+                      {/* Animated corner decorations for popular plan */}
+                      {plan.popular && (
+                        <>
+                          <motion.div
+                            className="absolute top-0 right-0 h-16 w-16"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.15 }}
+                          >
+                            <svg viewBox="0 0 64 64" className="h-full w-full">
+                              <motion.path
+                                d="M64,0 Q64,32 32,64"
+                                fill="none"
+                                stroke="hsl(var(--brand-yellow))"
+                                strokeWidth="2"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: [0, 1, 0] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                              />
+                            </svg>
+                          </motion.div>
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-16 w-16 rotate-180"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.15 }}
+                          >
+                            <svg viewBox="0 0 64 64" className="h-full w-full">
+                              <motion.path
+                                d="M64,0 Q64,32 32,64"
+                                fill="none"
+                                stroke="hsl(var(--brand-yellow))"
+                                strokeWidth="2"
+                                initial={{ pathLength: 0 }}
+                                animate={{ pathLength: [0, 1, 0] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+                              />
+                            </svg>
+                          </motion.div>
+                        </>
+                      )}
 
                     </div> {/* End overflow bounds for shimmer effects */}
 

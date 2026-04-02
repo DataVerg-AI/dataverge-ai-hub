@@ -7,46 +7,227 @@ import GlowCard from "@/components/GlowCard";
 import { ArrowLeft, Clock, Calendar, Share2, Twitter, Linkedin, Github } from "lucide-react";
 import { useEffect } from "react";
 
-// Mock database fetching based on slug
-const getPostData = (slug: string) => ({
-  title: slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
-  category: "Engineering",
-  date: "March 26, 2026",
-  readTime: "8 min",
-  author: {
-    name: "Dr. Sarah Chen",
-    role: "Lead Convergence Engineer",
-    avatar: "SC"
+const POSTS_DATA: Record<string, any> = {
+  "why-data-silos-costing-more": {
+    title: "Why Data Silos Are Costing You More Than You Think",
+    subtitle: "The Hidden Cost of Fragmented Data",
+    category: "Industry",
+    date: "Nov 12, 2025",
+    readTime: "8 min",
+    author: { name: "Alex Rivera", role: "Strategic Data Analyst", avatar: "AR" },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Hidden Cost of Fragmented Data</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          The vast majority of businesses run on data; CRM records go in Salesforce, financials exist in a warehouse, and behavioral data exists in a variety of analytics tools, with each set of data not connected to the others without significant engineering work.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          The overall cost is not just technical. Incomplete data leads to strategies that become eroded by decisions made based on incomplete information; time is spent wrangling data (to gain insight) instead of analyzing it (providing insight); and trust in numbers by the team diminishes over time. Therefore, the cumulative burden of disconnected data creates a hidden tax on all businesses.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          The overall cost of the disconnected data fragmentation problem typically does not show up as a single line-item but, rather, is visible in all areas; an example includes having five pipelines for a single report, having to export all of your CSVs each time because the connection has been broken with the source of the data, and using dated (old) data for leadership decision making from 48 hours before. Each separate issue associated with disconnected data is small in its impact but collectively creates a drag on how every decision can be made out of this pool of available data.
+        </p>
+        
+        <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
+          "Fragmented data doesn't slow teams. It corrupts decisions quietly."
+        </blockquote>
+
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Time will reveal the effect of fragmentation. Silos grow as the size of the team increases. Each new tool creates another isolated data source and bridging the gaps between all these systems becomes more challenging as the number of integrations increases over time until eventually you have dozens of broken systems with no single point of accountability, and teams lose faith in the reports they receive. When that happens they create shadow reports.
+        </p>
+
+        <ul className="space-y-4 mb-8 text-muted-foreground">
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">1</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Year 1</strong>: Multiple systems with a few integrations (2 systems = 1 integration), manageable.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">2</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Year 3</strong>: Multiple systems with multiple integrations (7 systems = 11 integrations), every week you have a broken integration that is not assigned to anyone to fix.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">3</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Year 5</strong>: Multiple systems with many integrations (14 systems = 30+ integrations) and whole teams are created just to keep the integrations operational.</span>
+          </li>
+        </ul>
+
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">What Convergence Means</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Convergence is NOT integration. Integration is simply moving data from one silo to another. Convergence dissolves them: one layer, every source, one coherent picture updating in real-time with <Link to="/" className="text-accent hover:underline">DataVerg</Link>.
+        </p>
+      </>
+    )
   },
-  content: `
-## The Convergence Paradigm
+  "raw-data-to-unified-intelligence": {
+    title: "From Raw Data to Unified Intelligence in 4 Stages",
+    subtitle: "The Convergence Pipeline Explained",
+    category: "Technical",
+    date: "Jan 24, 2026",
+    readTime: "7 min",
+    author: { name: "Dr. Sarah Chen", role: "Lead Convergence Engineer", avatar: "SC" },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Convergence Pipeline Explained</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Connecting your data sources is a relatively easy thing to do. What's much more difficult is fixing the problems between the data you merged, such as conflicting schemas, dirty records, and producing output your users can trust.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-8">
+          The converging pipeline solves those hard problems, providing you with not only connectivity, but full convergence. Below are the four phases of convergence, from the initial connection to analysis ready data.
+        </p>
 
-For decades, enterprises have relied on rigid ETL pipelines that inevitably break when schemas evolve. DataVerge was built on a simple premise: data mapping shouldn't require manual regex hacking. It should be semantic, fluid, and AI-native.
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">Stage 1: Connecting Your Data Universe</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Nowadays, modern convergence platforms will have connection support across REST and GraphQL APIs including support for the cloud, relational databases, and NoSQL databases, as well as SaaS solutions. A quality layer can monitor the health of the connections made, check for schema drift, and keep track of the configuration of each connection so it can reconnect without any issues.
+        </p>
+        
+        <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
+          "Most pipelines break at the merge step, not the connect step."
+        </blockquote>
 
-In this deep dive, we explore the core architecture that allows the DataVerGAI engine to understand data contextually, virtually eliminating the need for rigid schema maintenance.
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">Stage 2: Merging Without Losing Meaning</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6 text-sm italic mb-4">
+          Merging from multiple sources creates a translation challenge. A customer who uses a CRM and one who uses a product DB may have the same identity but be referred to in different ways. A semantic engine can resolve this; it can map between field names and values based on their meaning rather than the textual representation of those values. No record will lose fidelity or be duplicated, because all source records will maintain their integrity through each merge that is performed.
+        </p>
 
-### The Problem with Traditional Pipelines
+        <ul className="space-y-4 mb-8 text-muted-foreground">
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">1</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Connect</strong>: Sources authenticate and stream in.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">2</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Merge</strong>: The engine maps fields across all sources, resolving schema conflicts automatically.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">3</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Clean</strong>: Duplicates, nulls, and format inconsistencies are resolved before reaching your unified schema.</span>
+          </li>
+        </ul>
 
-If you've spent any time working as a data engineer, you know the pain of maintaining brittle extraction pipelines. A single upstream column name change—say, changing \`customer_id\` to \`cust_uuid\`—can bring a multi-million row pipeline to a grinding halt.
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">Stage Three: Unified and Ready</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Data is organized into consistent and structured formats that can be queried in real-time after being cleaned and merged into a single schema. Real-time dashboards automatically update. One single version of the truth unifies all of the teams’ efforts. There will be no exports or delays when working from the single version of truth.
+        </p>
 
-> "A pipeline is only as resilient as its most brittle regex parser."
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">Stage Four: Activate and Analyze</h3>
+        <p className="text-muted-foreground leading-relaxed mb-8">
+          Unified data feeds dashboards, models, and alerts all from one consistent, real-time source.
+        </p>
 
-### How Semantic Mapping Changes Everything
+        <p className="text-muted-foreground leading-relaxed italic border-t border-border pt-6 mt-8">
+          The four stages are interdependent, meaning there is no functionality of any one of them without the parallel function of all previous stages. Once the entire pipeline from connection to activation runs smoothly, the issue of fragmented data becomes not a problem, but rather the basis on which good decision-making is made.
+        </p>
+      </>
+    )
+  },
+  "batch-processing-liability-data-teams": {
+    title: "Why Batch Processing Is a Liability for Data Teams",
+    subtitle: "The Case for Sub-Second Data Sync",
+    category: "Insights",
+    date: "Feb 15, 2026",
+    readTime: "6 min",
+    author: { name: "Marcus Thorne", role: "Infrastructure Lead", avatar: "MT" },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Case for Sub-Second Data Sync</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          In the past, batch processing made sense because the costs of storage were high and compute was limited. You submitted your work overnight so analysts had access to the results first thing the next morning. Today this trade off doesn’t exist. The cost of having data that is stale exceeds the costs of having real-time infrastructure.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          However, the majority of enterprise systems are still on batch cycles either every hour, every day, or every week. This goes beyond just being an IT lag, it is a risk to decision-making as the cost continues to accumulate each cycle.
+        </p>
 
-Instead of relying on rigid string matching, our engine transforms all incoming structured and semi-structured data into a high-dimensional vector space. By clustering field meanings, the engine can instantly infer that \`cust_uuid\` and \`customer_id\` resolve to the same semantic entity.
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">The Batch Problem</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Batch jobs create blind spots in the system, or windows where the system operates on stale data context. A customer that is leaving between the two time cycles has no record of that performance. An inventory can be oversold due to relying on a past cycle of data. Fraud can go undetected for more than six hours even though a fraud incident is happening every second of the day. Each of these issues is a direct cost of an infrastructure designed for another time period.
+        </p>
+        
+        <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
+          "A six-hour-old insight isn't an insight. It's a post-mortem.”
+        </blockquote>
 
-1. **Ingestion**: Raw data hits the convergence layer.
-2. **Tokenization**: Fields are tokenized and semantically embedded using our proprietary LLM.
-3. **Resolution**: The engine maps these embeddings against your unified target schema with 99.9% confidence.
-4. **Action**: Data flows seamlessly into your warehouse without human intervention.
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">What Sub-Second Sync Truly Needs</h3>
+        <p className="text-muted-foreground leading-relaxed mb-8">
+          Real time sync is not just fast, it is also continuously flowing event based ingestion of new records, and a convergence level to help with reconciling schema changes in the middle of the process without losing any records. Most platforms have added a real time capability on top of their existing batch capabilities calling it streaming.
+        </p>
 
-### Scaling the Convergence Engine
+        <ul className="space-y-4 mb-8 text-muted-foreground">
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">1</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Ingest</strong>: Change events stream into the layer.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">2</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Reconcile</strong>: The engine detects schema drift and resolves it mid-flight, without halting flow.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">3</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Deliver</strong>: Unified, reconciled data reaches your dashboards and models in under one second, at scale.</span>
+          </li>
+        </ul>
 
-We didn't just want this to work on a few megabytes. It had to work at line-rate speeds. Utilizing a custom Rust-based core, we optimized the vector search to return semantic matches in under 15ms. 
+        <p className="text-muted-foreground leading-relaxed mb-6 bg-accent/10 p-6 rounded-xl border border-accent/20">
+          This is how sub second sync works. Events of change are sent directly to the convergence level. If there are any schema conflicts, they are resolved while still being processed. Your unified data is always up to the minute, not just at the time of the last batch but at the time of processing.
+        </p>
+      </>
+    )
+  }
+};
 
-This isn't just an iteration on ETL. It's the end of manual data mapping as we know it.
-  `
-});
+const getPostData = (slug: string) => {
+  if (POSTS_DATA[slug]) {
+    return POSTS_DATA[slug];
+  }
+
+  // Fallback for demo
+  return {
+    title: slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
+    category: "Engineering",
+    date: "March 26, 2026",
+    readTime: "8 min",
+    author: {
+      name: "Dr. Sarah Chen",
+      role: "Lead Convergence Engineer",
+      avatar: "SC"
+    },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Convergence Paradigm</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          For decades, enterprises have relied on rigid ETL pipelines that inevitably break when schemas evolve. DataVerge was built on a simple premise: data mapping shouldn't require manual regex hacking. It should be semantic, fluid, and AI-native.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-8">
+          In this deep dive, we explore the core architecture that allows the DataVerGAI engine to understand data contextually, virtually eliminating the need for rigid schema maintenance.
+        </p>
+
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">The Problem with Traditional Pipelines</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          If you've spent any time working as a data engineer, you know the pain of maintaining brittle extraction pipelines. A single upstream column name change can bring a multi-million row pipeline to a grinding halt.
+        </p>
+        
+        <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
+          "A pipeline is only as resilient as its most brittle regex parser."
+        </blockquote>
+
+        <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">How Semantic Mapping Changes Everything</h3>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Instead of relying on rigid string matching, our engine transforms all incoming structured and semi-structured data into a high-dimensional vector space. By clustering field meanings, the engine can instantly infer relationships.
+        </p>
+
+        <ul className="space-y-4 mb-8 text-muted-foreground">
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">1</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Ingestion</strong>: Raw data hits the convergence layer.</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">2</div>
+            <span className="leading-relaxed"><strong className="text-foreground">Tokenization</strong>: Fields are tokenized and semantically embedded.</span>
+          </li>
+        </ul>
+      </>
+    )
+  };
+};
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -122,48 +303,7 @@ const BlogPost = () => {
             <AnimatedSection delay={0.2}>
               <GlowCard className="bg-card/80 backdrop-blur-sm border-border">
                 <div className="p-8 md:p-14 prose prose-neutral prose-invert md:prose-lg max-w-none">
-                  {/* Since we don't have a real markdown parser, we will simulate the styled output of the markdown content */}
-                  <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Convergence Paradigm</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    For decades, enterprises have relied on rigid ETL pipelines that inevitably break when schemas evolve. DataVerge was built on a simple premise: data mapping shouldn't require manual regex hacking. It should be semantic, fluid, and AI-native.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    In this deep dive, we explore the core architecture that allows the DataVerGAI engine to understand data contextually, virtually eliminating the need for rigid schema maintenance.
-                  </p>
-
-                  <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">The Problem with Traditional Pipelines</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    If you've spent any time working as a data engineer, you know the pain of maintaining brittle extraction pipelines. A single upstream column name change—say, changing <code className="bg-secondary px-1.5 py-0.5 rounded text-accent-foreground text-sm font-mono border border-border">customer_id</code> to <code className="bg-secondary px-1.5 py-0.5 rounded text-accent-foreground text-sm font-mono border border-border">cust_uuid</code>—can bring a multi-million row pipeline to a grinding halt.
-                  </p>
-                  
-                  <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
-                    "A pipeline is only as resilient as its most brittle regex parser."
-                  </blockquote>
-
-                  <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">How Semantic Mapping Changes Everything</h3>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Instead of relying on rigid string matching, our engine transforms all incoming structured and semi-structured data into a high-dimensional vector space. By clustering field meanings, the engine can instantly infer that <code className="bg-secondary px-1.5 py-0.5 rounded text-accent-foreground text-sm border border-border">cust_uuid</code> and <code className="bg-secondary px-1.5 py-0.5 rounded text-accent-foreground text-sm border border-border">customer_id</code> resolve to the same semantic entity.
-                  </p>
-
-                  <ul className="space-y-4 mb-8 text-muted-foreground">
-                    <li className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">1</div>
-                      <span className="leading-relaxed"><strong className="text-foreground">Ingestion</strong>: Raw data hits the convergence layer.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">2</div>
-                      <span className="leading-relaxed"><strong className="text-foreground">Tokenization</strong>: Fields are tokenized and semantically embedded using our proprietary LLM.</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-accent/20 text-accent flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold border border-accent/30">3</div>
-                      <span className="leading-relaxed"><strong className="text-foreground">Resolution</strong>: The engine maps these embeddings against your unified target schema with 99.9% confidence.</span>
-                    </li>
-                  </ul>
-
-                  <h3 className="text-2xl font-bold text-foreground mt-12 mb-4">Scaling the Convergence Engine</h3>
-                  <p className="text-muted-foreground leading-relaxed border-l-2 border-border pl-4">
-                    We didn't just want this to work on a few megabytes. It had to work at line-rate speeds. Utilizing a custom Rust-based core, we optimized the vector search to return semantic matches in under 15ms. 
-                  </p>
+                  {post.content}
                 </div>
               </GlowCard>
             </AnimatedSection>

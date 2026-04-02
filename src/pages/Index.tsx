@@ -6,7 +6,6 @@ import { ArrowRight, Database, Cloud, Cpu, Zap, Shield, BarChart3, Sparkles, Tre
 import AnimatedSection from "@/components/AnimatedSection";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import HeroOrb from "@/components/HeroOrb";
-import TrustedBy from "@/components/TrustedBy";
 import HowItWorks from "@/components/HowItWorks";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
@@ -34,7 +33,7 @@ const Index = () => (
           transition={{ duration: 0.7, delay: 0.1 }}
           className="max-w-5xl text-5xl font-extrabold leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
         >
-          The Future of Data{" "}
+          The Intelligent Data{" "}
           <span className="relative inline-block">
             <span className="text-shine">Convergence</span>
             <motion.span
@@ -45,6 +44,7 @@ const Index = () => (
               style={{ transformOrigin: "left" }}
             />
           </span>
+          Platform
         </motion.h1>
 
         <motion.p
@@ -53,7 +53,7 @@ const Index = () => (
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-8 max-w-2xl text-lg text-muted-foreground md:text-xl"
         >
-          Merge fragmented data from APIs, cloud platforms, and databases into one intelligent, unified system powered by AI.
+          Merge fragmented data from APIs, cloud platforms, and databases - converged, structured, and unified into one centralized system.
         </motion.p>
 
         <motion.div
@@ -64,7 +64,7 @@ const Index = () => (
         >
           <Button variant="accent" size="xl" className="glow-accent" asChild>
             <Link to="/product">
-              Explore DataVerGAI <ArrowRight size={20} />
+              Access the Platform <ArrowRight size={20} />
             </Link>
           </Button>
           <Button variant="outline" size="xl" asChild>
@@ -84,7 +84,7 @@ const Index = () => (
       </div>
     </section>
 
-    
+
 
 
     {/* ═══════════════ STATS — Completely Custom Design ═══════════════ */}
@@ -92,7 +92,7 @@ const Index = () => (
       <div className="container">
         <AnimatedSection>
           <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">
-            The numbers speak
+            Data at Scale. Proven in Systems.
           </p>
           <h2 className="text-center text-3xl font-extrabold md:text-5xl">
             Trusted by data teams <span className="text-accent">worldwide</span>
@@ -262,7 +262,7 @@ const Index = () => (
               Platform Features
             </span>
             <h2 className="text-3xl font-extrabold md:text-5xl">Everything you need to converge your data</h2>
-            <p className="mt-4 text-lg text-muted-foreground">One platform, infinite possibilities.</p>
+            <p className="mt-4 text-lg text-muted-foreground">One platform. Total data control.</p>
           </div>
         </AnimatedSection>
 
@@ -279,7 +279,7 @@ const Index = () => (
                   <Database size={22} className="text-violet-500" />
                 </div>
                 <h3 className="text-xl font-extrabold">Unified Data Layer</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Consolidate APIs, databases, and cloud storage into a single source of truth.</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Converge APIs, databases, and cloud storage into one intelligent data layer.</p>
               </div>
               {/* Right: Animated schema lines visual */}
               <div className="hidden md:flex flex-1 items-center justify-center relative overflow-hidden">
@@ -363,26 +363,26 @@ const Index = () => (
                   <Cpu size={18} className="text-purple-500" />
                 </div>
                 <h3 className="text-base font-extrabold">AI-Powered Insights</h3>
-                <p className="mt-1 text-xs text-muted-foreground">ML models that surface patterns and predict trends.</p>
+                <p className="mt-1 text-xs text-muted-foreground">ML models that converge patterns and predict trends.</p>
               </div>
               {/* Mini neural net */}
               <svg viewBox="0 0 80 80" className="h-20 w-20 flex-shrink-0">
-                {[{x:10,y:15},{x:10,y:40},{x:10,y:65}].map((n,i)=>(
+                {[{ x: 10, y: 15 }, { x: 10, y: 40 }, { x: 10, y: 65 }].map((n, i) => (
                   <g key={`l-${i}`}>
-                    {[{x:45,y:25},{x:45,y:55}].map((m,j)=>(
-                      <motion.line key={`c-${i}-${j}`} x1={n.x+5} y1={n.y} x2={m.x} y2={m.y} stroke="hsl(var(--brand-yellow))" strokeWidth="0.5" opacity="0.3"
-                        initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 + (i*2+j)*0.08 }} />
+                    {[{ x: 45, y: 25 }, { x: 45, y: 55 }].map((m, j) => (
+                      <motion.line key={`c-${i}-${j}`} x1={n.x + 5} y1={n.y} x2={m.x} y2={m.y} stroke="hsl(var(--brand-yellow))" strokeWidth="0.5" opacity="0.3"
+                        initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 + (i * 2 + j) * 0.08 }} />
                     ))}
-                    <motion.circle cx={n.x+5} cy={n.y} r="4" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.4)" strokeWidth="0.8"
-                      initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i*0.1 }} />
+                    <motion.circle cx={n.x + 5} cy={n.y} r="4" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.4)" strokeWidth="0.8"
+                      initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} />
                   </g>
                 ))}
-                {[{x:45,y:25},{x:45,y:55}].map((n,i)=>(
+                {[{ x: 45, y: 25 }, { x: 45, y: 55 }].map((n, i) => (
                   <g key={`m-${i}`}>
-                    <motion.line x1={n.x+5} y1={n.y} x2={75} y2={40} stroke="hsl(var(--brand-yellow))" strokeWidth="0.5" opacity="0.3"
-                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5+i*0.1 }} />
-                    <motion.circle cx={n.x+5} cy={n.y} r="4" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.4)" strokeWidth="0.8"
-                      initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3+i*0.1 }} />
+                    <motion.line x1={n.x + 5} y1={n.y} x2={75} y2={40} stroke="hsl(var(--brand-yellow))" strokeWidth="0.5" opacity="0.3"
+                      initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 + i * 0.1 }} />
+                    <motion.circle cx={n.x + 5} cy={n.y} r="4" fill="rgba(168,85,247,0.15)" stroke="rgba(168,85,247,0.4)" strokeWidth="0.8"
+                      initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.1 }} />
                   </g>
                 ))}
                 <motion.circle cx="75" cy="40" r="6" fill="rgba(255,255,44,0.2)" stroke="rgba(255,255,44,0.6)" strokeWidth="1"
@@ -438,7 +438,7 @@ const Index = () => (
                   <Shield size={22} className="text-amber-500" />
                 </div>
                 <h3 className="text-lg font-extrabold">Enterprise Security</h3>
-                <p className="mt-2 text-sm text-muted-foreground">SOC 2 compliant with end-to-end encryption and role-based access.</p>
+                <p className="mt-2 text-sm text-muted-foreground">SOC 2 certified. End-to-end AES-256 encryption with RBAC and SSO.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {["SOC 2", "AES-256", "RBAC", "SSO"].map((badge) => (
                     <span key={badge} className="rounded-full bg-amber-500/8 border border-amber-200 px-2.5 py-1 text-[10px] font-bold text-amber-700">{badge}</span>
@@ -467,7 +467,7 @@ const Index = () => (
                   <BarChart3 size={22} className="text-accent" />
                 </div>
                 <h3 className="text-lg font-extrabold">Advanced Analytics</h3>
-                <p className="mt-2 text-sm text-white/50">Interactive dashboards and reporting built right into the platform.</p>
+                <p className="mt-2 text-sm text-white/50">Interactive dashboards and smart reporting built into the platform.</p>
               </div>
               {/* Animated line chart */}
               <div className="hidden md:flex flex-1 items-center justify-center relative">
@@ -531,10 +531,10 @@ const Index = () => (
         <AnimatedSection>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-extrabold text-foreground md:text-5xl">
-              Watch your data come <span className="text-accent">alive</span>
+              Watch your data unify <span className="text-accent">live</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              See how DataVerGAI transforms fragmented data streams into actionable intelligence in real-time.
+              See how DataVerg AI turns fragmented data streams into unified, decision-ready intelligence now.
             </p>
           </div>
         </AnimatedSection>
@@ -630,7 +630,7 @@ const Index = () => (
 
               {/* Output cards */}
               <div className="flex flex-col gap-2 flex-shrink-0">
-                {[{label: "Dashboards", icon: BarChart3}, {label: "Alerts", icon: Activity}, {label: "Predictions", icon: TrendingUp}].map((o, i) => (
+                {[{ label: "Dashboards", icon: BarChart3 }, { label: "Alerts", icon: Activity }, { label: "Predictions", icon: TrendingUp }].map((o, i) => (
                   <motion.div
                     key={o.label}
                     initial={{ opacity: 0, x: 20 }}
@@ -648,7 +648,7 @@ const Index = () => (
 
             {/* Bottom stats bar */}
             <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-xl bg-white/5 px-6 py-3">
-              {[{label: "Throughput", val: "10M/day"}, {label: "Latency", val: "<50ms"}, {label: "Accuracy", val: "98.7%"}, {label: "Sources", val: "200+"}].map((s, i) => (
+              {[{ label: "Throughput", val: "10M/day" }, { label: "Latency", val: "<50ms" }, { label: "Accuracy", val: "98.7%" }, { label: "Sources", val: "200+" }].map((s, i) => (
                 <motion.div key={s.label} className="text-center" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 + i * 0.1 }}>
                   <div className="text-sm font-bold text-accent">{s.val}</div>
                   <div className="text-[10px] text-white/30">{s.label}</div>
@@ -671,7 +671,7 @@ const Index = () => (
         <AnimatedSection>
           <motion.div initial={{ scale: 0.9 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
             <h2 className="mx-auto max-w-3xl text-4xl font-extrabold md:text-6xl">Ready to unify your data?</h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Join hundreds of enterprises already using DataVerge to make smarter decisions faster.</p>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Join leading enterprises already using DataVerg to turn converged data into decisions.</p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button variant="accent" size="xl" className="glow-accent" asChild>
                 <Link to="/product">Start Free Trial <ArrowRight size={20} /></Link>
