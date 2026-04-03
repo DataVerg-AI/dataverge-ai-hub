@@ -1,4 +1,4 @@
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://api.databerg.com/api";
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://api.dataverg.com/api";
 
 /**
  * Perform a secure SHA-256 hash using the native Web Crypto API
@@ -74,16 +74,52 @@ export const AuthAPI = {
 };
 
 /**
- * Chat/AI API
+ * User API
  */
-export const AIAPI = {
-  generate: async (prompt: string, context?: any) => {
-    return apiRequest('/ai/generate', {
-      method: 'POST',
-      body: JSON.stringify({ prompt, context })
+export const UserAPI = {
+  getProfile: async () => {
+    return apiRequest('/user');
+  },
+  updateProfile: async (data: any) => {
+    return apiRequest('/user', {
+      method: 'PUT',
+      body: JSON.stringify(data)
     });
   }
 };
+
+/**
+ * Chat/AI API
+ * Supports:
+ *   - Simple prompt: AIAPI.generate("hello")
+ *   - Full messages array: AIAPI.generate({ messages: [...], system: "..." })
+ */
+export const AIAPI = {
+  generate: async (
+    promptOrOptions: string | { messages: { role: string; content: string }[]; system?: string; maxTokens?: number },
+    _deprecated?: any
+  ) => {
+    let body: Record<string, any>;
+
+    if (typeof promptOrOptions === "string") {
+      // Simple prompt path
+      body = { prompt: promptOrOptions, async: false };
+    } else {
+      // Messages path — preferred for chat with history
+      const { messages, system, maxTokens } = promptOrOptions;
+      const fullMessages = system
+        ? [{ role: "system", content: system }, ...messages]
+        : messages;
+      body = { messages: fullMessages, max_tokens: maxTokens ?? 512, async: false };
+    }
+
+    return apiRequest('/ai/generate', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  }
+};
+
 
 /**
  * Subscriptions API
@@ -132,6 +168,7 @@ export const MapsAPI = {
 
 export default {
   AuthAPI,
+  UserAPI,
   AIAPI,
   SubscriptionAPI,
   EmailAPI,

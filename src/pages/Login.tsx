@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthAPI, hashSHA256 } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,8 @@ import { Github, Mail, Loader2 } from "lucide-react";
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +27,7 @@ export default function Login() {
       const res: any = await AuthAPI.login(email, passwordHash);
       if (res?.data?.token) {
         localStorage.setItem("token", res.data.token);
-        navigate("/dashboard");
+        navigate(from, { replace: true });
       } else {
         setError("Invalid credentials");
       }

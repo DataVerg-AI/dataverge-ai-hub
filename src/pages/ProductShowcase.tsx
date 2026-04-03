@@ -30,7 +30,7 @@ const ProductShowcase = () => (
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
             <Button variant="accent" size="xl" className="mt-8 glow-accent" asChild>
-              <Link to="/pricing">Start Free Trial <ArrowRight size={20} /></Link>
+              <Link to="/dashboard" target="_blank" rel="noopener noreferrer">Start Free Trial <ArrowRight size={20} /></Link>
             </Button>
           </motion.div>
         </div>
@@ -250,7 +250,7 @@ const ProductShowcase = () => (
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Start your free trial today. No credit card required.</p>
           <Button variant="accent" size="xl" className="mt-10 glow-accent" asChild>
-            <Link to="/pricing">Get Started Free <ArrowRight size={20} /></Link>
+            <Link to="/dashboard" target="_blank" rel="noopener noreferrer">Get Started Free <ArrowRight size={20} /></Link>
           </Button>
         </AnimatedSection>
       </div>

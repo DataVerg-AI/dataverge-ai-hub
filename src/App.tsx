@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,6 +23,9 @@ import DashboardOverview from "./pages/DashboardOverview";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
 import DashboardProjects from "./pages/DashboardProjects";
 import DashboardSettings from "./pages/DashboardSettings";
+import DashboardIntegrations from "./pages/DashboardIntegrations";
+import DashboardModels from "./pages/DashboardModels";
+import DashboardChat from "./pages/DashboardChat";
 import Checkout from "./pages/Checkout";
 import Fallback from "./pages/Fallback";
 
@@ -48,10 +52,13 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
         <Route path="/signup" element={<PageTransition><Signup /></PageTransition>} />
-        <Route path="/dashboard" element={<PageTransition><DashboardOverview /></PageTransition>} />
-        <Route path="/dashboard/analytics" element={<PageTransition><DashboardAnalytics /></PageTransition>} />
-        <Route path="/dashboard/projects" element={<PageTransition><DashboardProjects /></PageTransition>} />
-        <Route path="/dashboard/settings" element={<PageTransition><DashboardSettings /></PageTransition>} />
+        <Route path="/dashboard" element={<ProtectedRoute><PageTransition><DashboardOverview /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/analytics" element={<ProtectedRoute><PageTransition><DashboardAnalytics /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/projects" element={<ProtectedRoute><PageTransition><DashboardProjects /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/integrations" element={<ProtectedRoute><PageTransition><DashboardIntegrations /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/models" element={<ProtectedRoute><PageTransition><DashboardModels /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/chat" element={<ProtectedRoute><PageTransition><DashboardChat /></PageTransition></ProtectedRoute>} />
+        <Route path="/dashboard/settings" element={<ProtectedRoute><PageTransition><DashboardSettings /></PageTransition></ProtectedRoute>} />
         <Route path="/checkout" element={<PageTransition><Checkout /></PageTransition>} />
         <Route path="/fallback" element={<PageTransition><Fallback /></PageTransition>} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />

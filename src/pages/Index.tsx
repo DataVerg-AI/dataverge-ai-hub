@@ -63,7 +63,7 @@ const Index = () => (
           className="mt-10 flex flex-col gap-4 sm:flex-row"
         >
           <Button variant="accent" size="xl" className="glow-accent" asChild>
-            <Link to="/product">
+            <Link to="/dashboard" target="_blank" rel="noopener noreferrer">
               Access the Platform <ArrowRight size={20} />
             </Link>
           </Button>
@@ -720,7 +720,7 @@ const Index = () => (
             <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">Join leading enterprises already using DataVerg to turn converged data into decisions.</p>
             <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button variant="accent" size="xl" className="glow-accent" asChild>
-                <Link to="/product">Start Free Trial <ArrowRight size={20} /></Link>
+                <Link to="/dashboard" target="_blank" rel="noopener noreferrer">Start Free Trial <ArrowRight size={20} /></Link>
               </Button>
               <Button variant="outline" size="xl" asChild>
                 <Link to="/contact">Talk to Sales</Link>

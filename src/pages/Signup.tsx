@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthAPI, hashSHA256 } from "@/lib/api";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import { Github, Loader2 } from "lucide-react";
 export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/dashboard";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +49,8 @@ export default function Signup() {
       
       if (res?.data?.token) {
         localStorage.setItem("token", res.data.token);
-        navigate("/dashboard");
+        toast.success("Account created successfully!");
+        navigate(from, { replace: true });
       } else {
         setError(res?.message || "Signup failed");
       }
