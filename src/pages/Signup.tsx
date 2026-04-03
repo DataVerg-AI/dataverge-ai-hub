@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AuthLayout from "@/layouts/AuthLayout";
 import { Github, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Signup() {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,12 +27,12 @@ export default function Signup() {
       setError("Please complete the CAPTCHA");
       return;
     }
-    
+
     setIsLoading(true);
     setError(null);
     try {
       const passwordHash = await hashSHA256(password);
-      
+
       const nameParts = name.trim().split(" ");
       const firstName = nameParts[0] || "";
       const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "";
@@ -46,7 +47,7 @@ export default function Signup() {
         password_hash_confirmation: passwordHash,
         turnstile_token: turnstileToken
       });
-      
+
       if (res?.data?.token) {
         localStorage.setItem("token", res.data.token);
         toast.success("Account created successfully!");
