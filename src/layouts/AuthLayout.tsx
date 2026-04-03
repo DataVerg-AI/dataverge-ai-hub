@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Database } from "lucide-react";
+import Logo from "@/components/ui/logo";
 
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
@@ -10,10 +11,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background opacity-50" />
         <div className="absolute top-0 right-0 p-32 bg-primary/20 blur-[100px] rounded-full" />
         <div className="absolute bottom-0 left-0 p-32 bg-purple-500/20 blur-[100px] rounded-full" />
-        
+
         <Link to="/" className="flex items-center gap-2 relative z-10 w-fit">
-          <Database className="h-6 w-6 text-primary" />
-          <span className="font-bold text-xl tracking-tight">DataVerge AI</span>
+          <Logo />
         </Link>
         <div className="relative z-10 max-w-md">
           <h2 className="text-4xl font-bold tracking-tight mb-4">

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { AuthAPI, hashSHA256 } from "@/lib/api";
+import { AuthAPI, hashSHA256, API_BASE_URL } from "@/lib/api";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -94,13 +94,17 @@ export default function Signup() {
 
       <div className="grid gap-6">
         <div className="grid grid-cols-2 gap-4">
-          <Button variant="outline" className="w-full" onClick={() => navigate("/dashboard")} type="button">
-            <GoogleIcon />
-            <span className="ml-2">Google</span>
+          <Button variant="outline" className="w-full" asChild>
+            <a href={`${API_BASE_URL}/auth/google/redirect`}>
+              <GoogleIcon />
+              <span className="ml-2">Google</span>
+            </a>
           </Button>
-          <Button variant="outline" className="w-full" onClick={() => navigate("/dashboard")} type="button">
-            <Github className="h-5 w-5" />
-            <span className="ml-2">GitHub</span>
+          <Button variant="outline" className="w-full" asChild>
+            <a href={`${API_BASE_URL}/auth/github/redirect`}>
+              <Github className="h-5 w-5" />
+              <span className="ml-2">GitHub</span>
+            </a>
           </Button>
         </div>
 
