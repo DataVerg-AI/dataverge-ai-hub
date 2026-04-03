@@ -14,7 +14,7 @@ import DataStreamBg from "@/components/DataStreamBg";
 const Index = () => (
   <Layout>
     {/* Hero — unchanged */}
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-background">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[url('/images/3.webp')] bg-cover bg-center">
       <HeroOrb />
       <div className="container relative flex flex-col items-center py-24 text-center lg:py-32">
         <motion.div
@@ -88,7 +88,7 @@ const Index = () => (
 
 
     {/* ═══════════════ STATS — Completely Custom Design ═══════════════ */}
-    <section className="relative overflow-hidden bg-background py-24">
+    <section className="relative overflow-hidden bg-background py-24 bg-[url('/images/4.webp')] bg-cover bg-center">
       <div className="container">
         <AnimatedSection>
           <p className="mb-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-foreground/30">
@@ -272,17 +272,25 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full overflow-hidden rounded-3xl bg-background border border-border shadow-lg"
+              className="group relative flex h-full overflow-hidden rounded-3xl bg-[url('/images/11.webp')] bg-cover bg-center border border-border shadow-lg"
             >
-              <div className="flex flex-1 flex-col justify-center p-8 md:max-w-[55%]">
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent pointer-events-none" />
+
+              <div className="relative z-10 flex flex-1 flex-col justify-center p-8 md:max-w-[55%]">
                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/10">
-                  <Database size={22} className="text-violet-500" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/5.webp" alt="Unified Data Layer" className="w-12 h-12 object-contain" />
                 </div>
                 <h3 className="text-xl font-extrabold">Unified Data Layer</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Converge APIs, databases, and cloud storage into one intelligent data layer.</p>
               </div>
               {/* Right: Animated schema lines visual */}
-              <div className="hidden md:flex flex-1 items-center justify-center relative overflow-hidden">
+              <div className="hidden md:flex flex-1 items-center justify-center relative z-10 overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-l from-secondary/60 to-transparent" />
                 <svg viewBox="0 0 200 160" className="w-full h-full p-4">
                   {/* Database nodes */}
@@ -314,18 +322,26 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-sky-500/5 border border-sky-200 shadow-lg"
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-[url('/images/12.webp')] bg-cover bg-center border border-sky-200 shadow-lg"
             >
-              <div className="flex-1 p-8">
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-background via-background/20 to-transparent pointer-events-none" />
+
+              <div className="relative z-10 flex-1 p-8">
                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-sky-500/10">
-                  <Cloud size={22} className="text-sky-500" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/6.webp" alt="Cloud-Native" className="w-12 h-12 object-contain" />
                 </div>
                 <h3 className="text-xl font-extrabold">Cloud-Native</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Built for modern cloud infrastructure with auto-scaling and high availability.</p>
               </div>
 
               {/* Cloud blob animation */}
-              <div className="relative h-32 overflow-hidden">
+              <div className="relative z-10 h-32 overflow-hidden">
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}
@@ -356,11 +372,19 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full items-center gap-5 overflow-hidden rounded-3xl bg-background border border-border p-7 shadow-lg"
+              className="group relative flex h-full items-center gap-5 overflow-hidden rounded-3xl bg-[url('/images/13.webp')] bg-cover bg-center border border-border p-7 shadow-lg"
             >
-              <div className="flex-1">
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent pointer-events-none" />
+
+              <div className="relative z-10 flex-1">
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-purple-500/10">
-                  <Cpu size={18} className="text-purple-500" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/7.webp" alt="AI-Powered Insights" className="w-12 h-12 object-contain" />
                 </div>
                 <h3 className="text-base font-extrabold">AI-Powered Insights</h3>
                 <p className="mt-1 text-xs text-muted-foreground">ML models that converge patterns and predict trends.</p>
@@ -396,11 +420,19 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-emerald-500/5 border border-emerald-200 p-7 shadow-lg"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[url('/images/14.webp')] bg-cover bg-center border border-emerald-200 p-7 shadow-lg"
             >
-              <div>
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent pointer-events-none" />
+
+              <div className="relative z-10">
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10">
-                  <Zap size={18} className="text-emerald-500" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/8.webp" alt="Real-Time Sync" className="w-12 h-12 object-contain" />
                 </div>
                 <h3 className="text-base font-extrabold">Real-Time Sync</h3>
                 <p className="mt-1 text-xs text-muted-foreground">Sub-second data synchronization across all sources.</p>
@@ -431,11 +463,18 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full items-center overflow-hidden rounded-3xl bg-background border border-border p-8 shadow-lg"
+              className="group relative flex h-full items-center overflow-hidden rounded-3xl bg-[url('/images/15.webp')] bg-cover bg-center border border-border p-8 shadow-lg"
             >
-              <div className="flex-1">
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent pointer-events-none" />
+              <div className="relative z-10">
                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10">
-                  <Shield size={22} className="text-amber-500" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/9.webp" alt="Enterprise Security" className="w-12 h-12 object-contain" />
                 </div>
                 <h3 className="text-lg font-extrabold">Enterprise Security</h3>
                 <p className="mt-2 text-sm text-muted-foreground">SOC 2 certified. End-to-end AES-256 encryption with RBAC and SSO.</p>
@@ -460,14 +499,21 @@ const Index = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full overflow-hidden rounded-3xl bg-[#01030e] text-white p-8 shadow-2xl"
+              className="group relative flex h-full overflow-hidden rounded-3xl bg-[url('/images/16.webp')] bg-cover bg-center text-white p-8 shadow-2xl"
             >
-              <div className="flex-1 flex flex-col justify-center md:max-w-[45%]">
+              {/* Fade Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent pointer-events-none" />
+              <div className="flex-1 flex flex-col justify-center md:max-w-[45%] relative z-10">
                 <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
-                  <BarChart3 size={22} className="text-accent" />
+                  <motion.img
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    src="/images/10.webp" alt="Advanced Analytics" className="w-12 h-12 object-contain" />
                 </div>
-                <h3 className="text-lg font-extrabold">Advanced Analytics</h3>
-                <p className="mt-2 text-sm text-white/50">Interactive dashboards and smart reporting built into the platform.</p>
+                <h3 className="text-lg font-extrabold text-foreground">Advanced Analytics</h3>
+                <p className="mt-2 text-sm text-foreground/60">Interactive dashboards and smart reporting built into the platform.</p>
               </div>
               {/* Animated line chart */}
               <div className="hidden md:flex flex-1 items-center justify-center relative">

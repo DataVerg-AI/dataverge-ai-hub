@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2 } from "lucide-react";
 import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } from "react-icons/fa6";
+import Logo from "@/components/ui/logo";
 import { SiCrunchbase } from "react-icons/si";
 
 const Footer = () => {
@@ -64,18 +65,11 @@ const Footer = () => {
       </div>
 
       <div className="container pt-20 pb-16">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <motion.div
-                className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent"
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.4 }}
-              >
-                <span className="text-sm font-extrabold text-accent-foreground">D</span>
-              </motion.div>
-              <span className="text-lg font-bold">DataVerge</span>
+              <Logo />
             </div>
             <p className="text-sm text-foreground/60">
               Merging fragmented data into one unified, intelligent system.
@@ -131,7 +125,7 @@ const Footer = () => {
           </div>
 
           {/* Newsletter */}
-          <div className="space-y-4">
+          <div className="space-y-4 col-span-2">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground/40">Stay Updated</h4>
             <p className="text-sm text-foreground/60">Get the latest on data convergence.</p>
             <form onSubmit={handleNewsletter} className="space-y-3">
@@ -165,7 +159,7 @@ const Footer = () => {
                 <Turnstile
                   siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
                   onSuccess={(token) => setTurnstileToken(token)}
-                  options={{ size: "compact", theme: "dark" }}
+                  options={{ size: "normal", theme: "auto" }}
                 />
               </div>
             </form>
@@ -184,7 +178,7 @@ const Footer = () => {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg hover:bg-accent-foreground hover:text-accent transition-colors bg-accent text-accent-foreground"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}

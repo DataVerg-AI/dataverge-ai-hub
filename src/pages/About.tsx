@@ -10,17 +10,17 @@ import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } 
 import { SiCrunchbase } from "react-icons/si";
 
 const milestones = [
-  { year: "2024", title: "The Convergence Engine", desc: "DataVerge started by completely rethinking data pipelines. 3 engineers built the first unified mapping engine in 6 weeks." },
-  { year: "2024", title: "Seed Funding", desc: "Raised $4M from tier-1 investors who saw the potential for an AI-native integration paradigm." },
-  { year: "2025", title: "DataVerGAI Goes Live", desc: "Launched our flagship engine. Reached 50+ enterprise-grade connectors in the first month." },
-  { year: "2025", title: "Enterprise Adoption", desc: "Crossed 500 active clients. Processing billions of rows daily with sub-50ms latency." },
-  { year: "2026", title: "Global Scale", desc: "Series A funding secured. Expanding the convergence engine to handle multi-cloud global infrastructure." },
+  { year: "2024", title: "The Convergence Engine", desc: "DataVerge started by completely rethinking data pipelines. 3 engineers built the first unified mapping engine in 6 weeks.", img: "/images/46.webp" },
+  { year: "2024", title: "Seed Funding", desc: "Raised $4M from tier-1 investors who saw the potential for an AI-native integration paradigm.", img: "/images/47.webp" },
+  { year: "2025", title: "DataVerGAI Goes Live", desc: "Launched our flagship engine. Reached 50+ enterprise-grade connectors in the first month.", img: "/images/48.webp" },
+  { year: "2025", title: "Enterprise Adoption", desc: "Crossed 500 active clients. Processing billions of rows daily with sub-50ms latency.", img: "/images/49.webp" },
+  { year: "2026", title: "Global Scale", desc: "Series A funding secured. Expanding the convergence engine to handle multi-cloud global infrastructure.", img: "/images/50.webp" },
 ];
 
 const teamStats = [
-  { icon: Globe, value: 12, label: "Global Regions Active", format: "" },
-  { icon: Network, value: 85, label: "Platform Engineers", format: "+" },
-  { icon: ShieldCheck, value: 99.9, label: "Uptime SLA", format: "%" },
+  { img: "/images/43.webp", value: 12, label: "Global Regions Active", format: "" },
+  { img: "/images/44.webp", value: 85, label: "Platform Engineers", format: "+" },
+  { img: "/images/45.webp", value: 99.9, label: "Uptime SLA", format: "%" },
 ];
 
 const About = () => {
@@ -29,7 +29,7 @@ const About = () => {
     target: containerRef,
     offset: ["start end", "end start"],
   });
-  
+
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
@@ -69,32 +69,29 @@ const About = () => {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:auto-rows-[400px]">
             {/* Mission-Driven: Tall Card */}
             <AnimatedSection className="md:col-span-1 md:row-span-2" delay={0.1}>
-              <GlowCard className="h-full group overflow-hidden bg-card" hoverScale={1.02}>
+              <GlowCard className="h-full group overflow-hidden bg-[url('/images/37.webp')] bg-cover bg-center" hoverScale={1.02}>
                 <div className="flex h-full flex-col justify-between p-8 relative z-10">
                   <div>
                     <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20">
-                      <Target size={28} className="text-accent-foreground" />
+                      <img src="/images/40.webp" className="w-full h-full object-cover" alt="" />
                     </div>
                     <h3 className="text-2xl font-bold">Mission-Driven</h3>
                     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                       We exist to solve the universal problem of fragmented data. Every feature, every line of code, and every infrastructure decision is made to simplify the complex web of enterprise pipelines.
                     </p>
                   </div>
-                  {/* Image Placeholder replacing decorative graphic */}
-                  <div className="mt-8 flex-1 w-full min-h-[200px] rounded-xl border border-border bg-muted/50 flex items-center justify-center text-muted-foreground font-mono text-sm">
-                     Image Here
-                  </div>
+
                 </div>
               </GlowCard>
             </AnimatedSection>
 
             {/* Customer-First: Wide Top Card */}
             <AnimatedSection className="md:col-span-2 md:row-span-1" delay={0.2}>
-              <GlowCard className="h-full group overflow-hidden bg-gradient-to-br from-card to-background border-border" hoverScale={1.02}>
+              <GlowCard className="h-full group overflow-hidden bg-[url('/images/38.webp')] bg-cover bg-center border-border" hoverScale={1.02}>
                 <div className="flex h-full flex-col md:flex-row p-8 relative z-10">
                   <div className="flex-1 shrink-0">
                     <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500/20">
-                      <Users size={28} className="text-blue-500" />
+                      <img src="/images/41.webp" className="w-full h-full object-cover" alt="" />
                     </div>
                     <h3 className="text-2xl font-bold">Customer-First Architecture</h3>
                     <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
@@ -102,24 +99,24 @@ const About = () => {
                     </p>
                   </div>
                   <div className="flex-1 mt-6 md:mt-0 relative flex items-center justify-end">
-                     {/* Floating feedback nodes */}
-                     <div className="relative w-full h-full min-h-[150px]">
-                        {[1, 2, 3].map((i) => (
-                           <motion.div
-                             key={i}
-                             className="absolute right-0 bg-background border border-border rounded-lg p-3 shadow-lg flex items-center gap-3 w-48"
-                             style={{ top: `${(i - 1) * 35}%`, zIndex: 10 - i }}
-                             animate={{ x: [0, -10, 0], y: [0, i % 2 === 0 ? 5 : -5, 0] }}
-                             transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut" }}
-                           >
-                             <div className="w-6 h-6 rounded-full bg-blue-500/20" />
-                             <div className="flex-1 space-y-1.5">
-                               <div className="h-1.5 w-full bg-border rounded-full" />
-                               <div className="h-1.5 w-2/3 bg-border rounded-full" />
-                             </div>
-                           </motion.div>
-                        ))}
-                     </div>
+                    {/* Floating feedback nodes */}
+                    <div className="relative w-full h-full min-h-[150px]">
+                      {[1, 2, 3].map((i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute right-0 bg-background border border-border rounded-lg p-3 shadow-lg flex items-center gap-3 w-48"
+                          style={{ top: `${(i - 1) * 35}%`, zIndex: 10 - i }}
+                          animate={{ x: [0, -10, 0], y: [0, i % 2 === 0 ? 5 : -5, 0] }}
+                          transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <div className="w-6 h-6 rounded-full bg-blue-500/20" />
+                          <div className="flex-1 space-y-1.5">
+                            <div className="h-1.5 w-full bg-border rounded-full" />
+                            <div className="h-1.5 w-2/3 bg-border rounded-full" />
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </GlowCard>
@@ -127,14 +124,14 @@ const About = () => {
 
             {/* Innovation: Wide Bottom Card */}
             <AnimatedSection className="md:col-span-2 md:row-span-1" delay={0.3}>
-              <GlowCard className="h-full group overflow-hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-card to-card border-border" hoverScale={1.02}>
+              <GlowCard className="h-full group overflow-hidden bg-[url('/images/39.webp')] bg-cover bg-center border-border" hoverScale={1.02}>
                 <div className="flex h-full flex-col justify-center p-8 relative z-10">
-                  <div className="absolute top-0 right-0 p-8 opacity-20 pointer-events-none">
-                     <Lightbulb size={120} className="text-accent" />
+                  <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+                    <img src="/images/42.webp" className="w-full h-full object-cover" alt="" />
                   </div>
                   <div className="max-w-xl">
                     <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20">
-                      <Code size={28} className="text-accent-foreground" />
+                      <img src="/images/42.webp" className="w-full h-full object-cover" alt="" />
                     </div>
                     <h3 className="text-2xl font-bold">Relentless Innovation</h3>
                     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
@@ -153,7 +150,7 @@ const About = () => {
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <AnimatedSection>
-              <h2 className="text-3xl font-extrabold md:text-5xl">Built for <br/><span className="text-shine">Global Scale</span></h2>
+              <h2 className="text-3xl font-extrabold md:text-5xl">Built for <br /><span className="text-shine">Global Scale</span></h2>
               <p className="mt-6 text-lg text-muted-foreground max-w-xl">
                 Our distributed team operates globally, managing infrastructure that spans continents. We maintain rigid SLAs because we know your data is the lifeblood of your business.
               </p>
@@ -162,18 +159,20 @@ const About = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {teamStats.map((stat, i) => (
                 <AnimatedSection key={stat.label} delay={i * 0.1} className={i === 2 ? "sm:col-span-2" : ""}>
-                   <GlowCard className="h-full bg-card" hoverY={-4}>
-                     <div className="p-8 flex flex-col justify-between h-full">
-                       <stat.icon size={24} className="text-accent mb-6" />
-                       <div>
-                         <div className="text-5xl font-extrabold text-foreground mb-2 flex items-baseline gap-1">
-                           <AnimatedCounter end={stat.value} />
-                           <span className="text-2xl text-accent">{stat.format}</span>
-                         </div>
-                         <div className="text-sm font-medium text-muted-foreground tracking-wide uppercase">{stat.label}</div>
-                       </div>
-                     </div>
-                   </GlowCard>
+                  <GlowCard className="h-full bg-card" hoverY={-4}>
+                    <div className="p-8 flex flex-col justify-between h-full">
+                      <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/20">
+                        <img src={stat.img} className="w-full h-full object-cover" alt="" />
+                      </div>
+                      <div>
+                        <div className="text-5xl font-extrabold text-foreground mb-2 flex items-baseline gap-1">
+                          <AnimatedCounter end={stat.value} />
+                          <span className="text-2xl text-accent">{stat.format}</span>
+                        </div>
+                        <div className="text-sm font-medium text-muted-foreground tracking-wide uppercase">{stat.label}</div>
+                      </div>
+                    </div>
+                  </GlowCard>
                 </AnimatedSection>
               ))}
             </div>
@@ -201,7 +200,7 @@ const About = () => {
               style={{ transformOrigin: "top" }}
             >
               {/* Highlight sweep */}
-              <motion.div 
+              <motion.div
                 className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-accent to-transparent"
                 style={{ y: y2 }}
               />
@@ -211,15 +210,15 @@ const About = () => {
               {milestones.map((m, i) => (
                 <AnimatedSection key={m.title} delay={0.1}>
                   <div className={`relative flex items-center ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}>
-                    
+
                     {/* Node on the line */}
-                    <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-background border-2 border-accent md:-translate-x-1/2 -translate-x-[6px] z-10 shadow-[0_0_15px_hsl(var(--brand-yellow))]"/>
+                    <div className="absolute left-8 md:left-1/2 w-4 h-4 rounded-full bg-background border-2 border-accent md:-translate-x-1/2 -translate-x-[6px] z-10 shadow-[0_0_15px_hsl(var(--brand-yellow))]" />
 
                     {/* Content Card */}
                     <div className={`ml-16 md:ml-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16 md:text-left"}`}>
                       <GlowCard hoverScale={1.03} className="bg-card">
                         <div className="p-6 md:p-8">
-                          <motion.span 
+                          <motion.span
                             className="inline-block px-3 py-1 mb-4 rounded-full bg-accent/10 border border-accent/20 text-xs font-black text-accent-foreground tracking-widest"
                             whileHover={{ scale: 1.05 }}
                           >
@@ -229,6 +228,17 @@ const About = () => {
                           <p className="text-sm md:text-base leading-relaxed text-muted-foreground">{m.desc}</p>
                         </div>
                       </GlowCard>
+                    </div>
+
+                    {/* Image Card on opposite side */}
+                    <div className={`hidden md:flex flex-col justify-center w-1/2 ${i % 2 === 0 ? "md:pl-16" : "md:pr-16"}`}>
+                      {m.img && (
+                        <div className={`w-full max-w-sm ${i % 2 === 0 ? "mr-auto" : "ml-auto"}`}>
+                          <div className="p-2 overflow-hidden">
+                            <img src={m.img} alt={m.title} className="w-full h-auto rounded-xl object-cover" />
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                   </div>
@@ -245,11 +255,11 @@ const About = () => {
           <AnimatedSection>
             <div className="flex flex-col md:flex-row items-center justify-between gap-12 rounded-3xl border border-accent/20 bg-accent/5 p-12 lg:p-16 overflow-hidden relative">
               {/* Decorative data stream in background */}
-              <div 
-                className="absolute inset-0 opacity-10 pointer-events-none" 
-                style={{ backgroundImage: 'radial-gradient(circle at 10% 10%, hsl(var(--brand-yellow)) 0%, transparent 50%)'}}
+              <div
+                className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{ backgroundImage: 'radial-gradient(circle at 10% 10%, hsl(var(--brand-yellow)) 0%, transparent 50%)' }}
               />
-              
+
               <div className="max-w-xl relative z-10 text-center md:text-left">
                 <h2 className="text-3xl font-extrabold md:text-5xl">Connect with our <span className="text-shine">Community</span></h2>
                 <p className="mt-6 text-lg text-muted-foreground">
@@ -257,7 +267,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-4 sm:grid-cols-7 gap-4 relative z-10">
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 relative z-10">
                 {[
                   { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
                   { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
@@ -272,7 +282,7 @@ const About = () => {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-background border border-border text-accent shadow-sm transition-all hover:bg-accent hover:text-accent-foreground hover:shadow-xl hover:shadow-accent/20"
+                    className="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-background hover:border-border hover:text-foreground shadow-sm transition-all bg-accent text-accent-foreground hover:shadow-xl hover:shadow-accent/20"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

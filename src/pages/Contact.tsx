@@ -60,8 +60,8 @@ const Contact = () => {
     }
 
     if (!turnstileToken) {
-      toast({ 
-        title: "Security Check Required", 
+      toast({
+        title: "Security Check Required",
         description: "Please complete the CAPTCHA before sending.",
         variant: "destructive"
       });
@@ -70,22 +70,22 @@ const Contact = () => {
 
     setErrors({});
     setSending(true);
-    
+
     try {
       await EmailAPI.contact({
         ...form,
         turnstile_token: turnstileToken
       });
-      
-      toast({ 
-        title: "Message received.", 
-        description: "Secure channel established. We'll be in touch." 
+
+      toast({
+        title: "Message received.",
+        description: "Secure channel established. We'll be in touch."
       });
       setForm({ name: "", email: "", company: "", message: "" });
       setTurnstileToken(""); // Reset for next submission
     } catch (err: any) {
-      toast({ 
-        title: "Transmission failed.", 
+      toast({
+        title: "Transmission failed.",
         description: err.message || "Could not established secure connection.",
         variant: "destructive"
       });
@@ -132,119 +132,119 @@ const Contact = () => {
       <section className="bg-background pb-32 relative z-20 -mt-8">
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start">
-            
+
             {/* Left: Asymmetric Info Bento Grid */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-4 auto-rows-[160px]">
-               {/* Global HQ - Tall card */}
-                <AnimatedSection className="col-span-2 row-span-2" delay={0.1}>
-                  <GlowCard className="h-full bg-card group border-border relative overflow-hidden" hoverScale={1.01}>
-                    {/* Dynamic Map Background */}
-                    <div className="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-105">
-                      {mapEmbedUrl ? (
-                         <iframe 
-                           src={mapEmbedUrl}
-                           width="100%" 
-                           height="100%" 
-                           style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(1.2)" }} 
-                           allowFullScreen={false} 
-                           loading="lazy" 
-                           referrerPolicy="no-referrer-when-downgrade"
-                           className="absolute inset-0"
-                         />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 p-4">
-                          <Globe2 className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/20" strokeWidth={0.5} />
-                        </div>
-                      )}
-                    </div>
-                   
-                   <div className="relative z-10 p-8 flex flex-col h-full justify-between">
-                     <div>
-                       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 mb-6">
-                         <MapPin className="text-accent" size={24} />
-                       </div>
-                       <h3 className="text-2xl font-bold uppercase tracking-wide">Global HQ</h3>
-                       <p className="mt-2 text-muted-foreground text-lg">1290 S Olive Street, Suite 520,<br/>Skyline Workspace, Los Angeles,<br/>CA 90015, USA</p>
-                     </div>
-                     <a href="https://maps.google.com/?q=1290+S+Olive+Street,+Suite+520,+Skyline+Workspace,+Los+Angeles,+CA+90015" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-foreground transition-colors mt-8 w-fit">
-                       View Coordinates <ExternalLink size={14} />
-                     </a>
-                   </div>
-                 </GlowCard>
-               </AnimatedSection>
-
-               {/* Email - Wide card */}
-               <AnimatedSection className="col-span-2 row-span-1" delay={0.2}>
-                 <GlowCard className="h-full bg-card group flex items-center p-6 border-border" hoverScale={1.02}>
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/10 mr-6">
-                       <Mail className="text-primary" size={24} />
-                     </div>
-                     <div>
-                       <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Direct Line</div>
-                       <a href="mailto:help@dataverg.com" className="text-xl font-bold hover:text-accent transition-colors">help@dataverg.com</a>
-                     </div>
-                 </GlowCard>
-               </AnimatedSection>
-
-               {/* Phone - Square card */}
-               <AnimatedSection className="col-span-1 row-span-1" delay={0.3}>
-                 <GlowCard className="h-full bg-card flex flex-col justify-center p-6 border-border group" hoverScale={1.03}>
-                    <Phone className="text-muted-foreground mb-4 group-hover:text-accent transition-colors" size={24} />
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">Support Desk</div>
-                    <a href="tel:+15642618250" className="font-bold text-sm tracking-tight">+15642618250</a>
-                 </GlowCard>
-               </AnimatedSection>
-               
-               {/* Hours - Square card */}
-               <AnimatedSection className="col-span-1 row-span-1" delay={0.4}>
-                 <GlowCard className="h-full bg-card flex flex-col justify-center p-6 border-border group overflow-hidden relative" hoverScale={1.03}>
-                    {/* Animated clock ring */}
-                    <motion.div 
-                      className="absolute right-0 top-0 w-24 h-24 border border-accent/10 rounded-full translate-x-1/2 -translate-y-1/2"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                    >
-                      <div className="w-2 h-2 rounded-full bg-accent absolute top-0 left-1/2 -ml-1 -mt-1" />
-                    </motion.div>
-                    
-                    <Clock className="text-muted-foreground mb-4 relative z-10" size={24} />
-                    <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 relative z-10">Uptime</div>
-                    <div className="font-bold text-sm relative z-10">9AM - 6PM EST<br/><span className="text-accent text-xs">Mon - Fri</span></div>
-                 </GlowCard>
-               </AnimatedSection>
-
-                {/* Digital Presence - Wide card */}
-                <AnimatedSection className="col-span-2 row-span-1" delay={0.5}>
-                  <GlowCard className="h-full bg-card p-6 border-border group" hoverScale={1.02}>
-                    <div className="flex flex-col h-full justify-between">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-3">Digital Presence</div>
-                      <div className="flex flex-wrap gap-3">
-                        {[
-                          { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
-                          { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
-                          { icon: FaYoutube, href: "https://www.youtube.com/@DataVergTech", label: "YouTube" },
-                          { icon: FaFacebook, href: "https://www.facebook.com/dataVerg/", label: "Facebook" },
-                          { icon: FaPinterest, href: "https://www.pinterest.com/Dataverg/", label: "Pinterest" },
-                          { icon: SiCrunchbase, href: "https://www.crunchbase.com/organization/dataverg-tech", label: "Crunchbase" },
-                          { icon: FaRocket, href: "https://www.f6s.com/dataverg-tech", label: "F6S" },
-                        ].map((s) => (
-                          <motion.a
-                            key={s.label}
-                            href={s.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors hover:bg-accent hover:text-accent-foreground"
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.9 }}
-                            title={s.label}
-                          >
-                            <s.icon size={20} />
-                          </motion.a>
-                        ))}
+              {/* Global HQ - Tall card */}
+              <AnimatedSection className="col-span-2 row-span-2" delay={0.1}>
+                <GlowCard className="h-full bg-card group border-border relative overflow-hidden" hoverScale={1.01}>
+                  {/* Dynamic Map Background */}
+                  <div className="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-105">
+                    {mapEmbedUrl ? (
+                      <iframe
+                        src={mapEmbedUrl}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(1.2)" }}
+                        allowFullScreen={false}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="absolute inset-0"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-primary/5 p-4">
+                        <Globe2 className="absolute -right-10 -bottom-10 w-64 h-64 text-accent/20" strokeWidth={0.5} />
                       </div>
+                    )}
+                  </div>
+
+                  <div className="relative z-10 p-8 flex flex-col h-full justify-between">
+                    <div>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 mb-6">
+                        <MapPin className="text-accent" size={24} />
+                      </div>
+                      <h3 className="text-2xl font-bold uppercase tracking-wide">Global HQ</h3>
+                      <p className="mt-2 text-muted-foreground text-lg">1290 S Olive Street, Suite 520,<br />Skyline Workspace, Los Angeles,<br />CA 90015, USA</p>
                     </div>
-                  </GlowCard>
-                </AnimatedSection>
+                    <a href="https://maps.google.com/?q=1290+S+Olive+Street,+Suite+520,+Skyline+Workspace,+Los+Angeles,+CA+90015" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-foreground transition-colors mt-8 w-fit">
+                      View Coordinates <ExternalLink size={14} />
+                    </a>
+                  </div>
+                </GlowCard>
+              </AnimatedSection>
+
+              {/* Email - Wide card */}
+              <AnimatedSection className="col-span-2 row-span-1" delay={0.2}>
+                <GlowCard className="h-full bg-card group flex items-center p-6 border-border" hoverScale={1.02}>
+                  <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/10 mr-6">
+                    <Mail className="text-primary" size={24} />
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1">Direct Line</div>
+                    <a href="mailto:help@dataverg.com" className="text-xl font-bold hover:text-accent transition-colors">help@dataverg.com</a>
+                  </div>
+                </GlowCard>
+              </AnimatedSection>
+
+              {/* Phone - Square card */}
+              <AnimatedSection className="col-span-1 row-span-1" delay={0.3}>
+                <GlowCard className="h-full bg-card flex flex-col justify-center p-6 border-border group" hoverScale={1.03}>
+                  <Phone className="text-muted-foreground mb-4 group-hover:text-accent transition-colors" size={24} />
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1">Support Desk</div>
+                  <a href="tel:+15642618250" className="font-bold text-sm tracking-tight">+15642618250</a>
+                </GlowCard>
+              </AnimatedSection>
+
+              {/* Hours - Square card */}
+              <AnimatedSection className="col-span-1 row-span-1" delay={0.4}>
+                <GlowCard className="h-full bg-card flex flex-col justify-center p-6 border-border group overflow-hidden relative" hoverScale={1.03}>
+                  {/* Animated clock ring */}
+                  <motion.div
+                    className="absolute right-0 top-0 w-24 h-24 border border-accent/10 rounded-full translate-x-1/2 -translate-y-1/2"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                  >
+                    <div className="w-2 h-2 rounded-full bg-accent absolute top-0 left-1/2 -ml-1 -mt-1" />
+                  </motion.div>
+
+                  <Clock className="text-muted-foreground mb-4 relative z-10" size={24} />
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-1 relative z-10">Uptime</div>
+                  <div className="font-bold text-sm relative z-10">9AM - 6PM EST<br /><span className="text-accent text-xs">Mon - Fri</span></div>
+                </GlowCard>
+              </AnimatedSection>
+
+              {/* Digital Presence - Wide card */}
+              <AnimatedSection className="col-span-2 row-span-1" delay={0.5}>
+                <GlowCard className="h-full bg-card p-6 border-border group" hoverScale={1.02}>
+                  <div className="flex flex-col h-full justify-between">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mb-3">Digital Presence</div>
+                    <div className="flex flex-wrap gap-3">
+                      {[
+                        { icon: FaLinkedin, href: "https://www.linkedin.com/company/dataverg-tech/", label: "LinkedIn" },
+                        { icon: FaXTwitter, href: "https://x.com/dataverg", label: "X" },
+                        { icon: FaYoutube, href: "https://www.youtube.com/@DataVergTech", label: "YouTube" },
+                        { icon: FaFacebook, href: "https://www.facebook.com/dataVerg/", label: "Facebook" },
+                        { icon: FaPinterest, href: "https://www.pinterest.com/Dataverg/", label: "Pinterest" },
+                        { icon: SiCrunchbase, href: "https://www.crunchbase.com/organization/dataverg-tech", label: "Crunchbase" },
+                        { icon: FaRocket, href: "https://www.f6s.com/dataverg-tech", label: "F6S" },
+                      ].map((s) => (
+                        <motion.a
+                          key={s.label}
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex h-10 w-10 items-center justify-center rounded-xl hover:bg-background hover:border-border hover:text-foreground shadow-sm transition-all bg-accent text-accent-foreground hover:shadow-xl hover:shadow-accent/20"
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          whileTap={{ scale: 0.9 }}
+                          title={s.label}
+                        >
+                          <s.icon size={20} />
+                        </motion.a>
+                      ))}
+                    </div>
+                  </div>
+                </GlowCard>
+              </AnimatedSection>
             </div>
 
             {/* Right: Immersive Contact Form Terminal */}
@@ -287,7 +287,7 @@ const Contact = () => {
                         {errors.email && <p className="text-[10px] text-destructive ml-1">{errors.email}</p>}
                       </div>
                     </div>
-                    
+
                     <div className="space-y-2">
                       <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground ml-1">Organization</label>
                       <div className="glow-input rounded-lg overflow-hidden border border-border bg-background/50">
@@ -349,7 +349,7 @@ const Contact = () => {
                 </div>
               </AnimatedSection>
             </div>
-            
+
           </div>
         </div>
       </section>

@@ -9,6 +9,16 @@ const testimonials = [
     quote: "DataVerge eliminated 80% of our data pipeline complexity overnight. The AI mapping is genuinely magical.",
     companyMetric: "Saved 30hrs/week",
     metricIcon: TrendingUp,
+    image: "/images/20.webp",
+  },
+
+  {
+    name: "Emily Nakamura",
+    role: "Head of Data, Nexus Corp",
+    quote: "The predictive insights caught a revenue anomaly that saved us $2M. DataVerGAI pays for itself in days.",
+    companyMetric: "10x ROI",
+    metricIcon: Zap,
+    image: "/images/21.webp",
   },
   {
     name: "Marcus Rodriguez",
@@ -16,13 +26,7 @@ const testimonials = [
     quote: "We went from 47 fragmented data sources to one unified view in under a week.",
     companyMetric: "100% Uptime",
     metricIcon: ShieldCheck,
-  },
-  {
-    name: "Emily Nakamura",
-    role: "Head of Data, Nexus Corp",
-    quote: "The predictive insights caught a revenue anomaly that saved us $2M. DataVerGAI pays for itself in days.",
-    companyMetric: "10x ROI",
-    metricIcon: Zap,
+    image: "/images/22.webp",
   },
 ];
 
@@ -74,7 +78,7 @@ const Testimonials = () => (
             <div className="relative z-10 flex items-center justify-between mt-8">
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-bold text-accent-foreground">
-                  {testimonials[0].name.charAt(0)}
+                  <img src={testimonials[0].image} alt="testimonial 1" className="w-12 h-12 object-contain" />
                 </div>
                 <div>
                   <div className="text-base font-bold text-white">{testimonials[0].name}</div>
@@ -114,7 +118,7 @@ const Testimonials = () => (
               <div className="flex items-center gap-3">
                 <div className="h-10 w-10 overflow-hidden rounded-full border border-border">
                   <div className="flex h-full w-full items-center justify-center bg-emerald-500/10 text-sm font-bold text-emerald-600">
-                    {testimonials[1].name.charAt(0)}
+                    <img src={testimonials[1].image} alt="testimonial 2" className="w-12 h-12 object-contain" />
                   </div>
                 </div>
                 <div>
@@ -162,7 +166,7 @@ const Testimonials = () => (
                 <div className="flex items-center gap-3">
                   <div className="h-12 w-12 overflow-hidden rounded-xl border border-border">
                     <div className="flex h-full w-full items-center justify-center bg-purple-500/10 text-lg font-bold text-purple-600">
-                      {testimonials[2].name.charAt(0)}
+                      <img src={testimonials[2].image} alt="testimonial 3" className="w-12 h-12 object-contain" />
                     </div>
                   </div>
                   <div>

@@ -3,8 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/components/ui/logo";
 
 const navItems = [
+  { label: "Home", href: "/" },
   { label: "Product", href: "/product" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
@@ -25,24 +27,14 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border bg-background/90 backdrop-blur-xl shadow-sm"
-          : "border-b border-transparent bg-background/80 backdrop-blur-xl"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled
+        ? "border-b border-border bg-background/90 backdrop-blur-xl shadow-sm"
+        : "border-b border-transparent bg-background/80 backdrop-blur-xl"
+        }`}
     >
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <motion.div
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: "spring", stiffness: 300, delay: 0.1 }}
-            whileHover={{ rotate: [0, -10, 10, 0], transition: { duration: 0.4 } }}
-          >
-            <span className="text-lg font-extrabold text-accent-foreground">D</span>
-          </motion.div>
-          <span className="text-xl font-bold text-foreground">DataVerge</span>
+          <Logo />
         </Link>
 
         {/* Desktop Nav */}
@@ -53,9 +45,8 @@ const Navbar = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary ${
-                  isActive ? "text-foreground" : "text-muted-foreground"
-                }`}
+                className={`relative rounded-lg px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary ${isActive ? "text-foreground" : "text-muted-foreground"
+                  }`}
               >
                 {item.label}
                 {isActive && (
@@ -128,9 +119,8 @@ const Navbar = () => {
                   <Link
                     to={item.href}
                     onClick={() => setMobileOpen(false)}
-                    className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-secondary ${
-                      location.pathname === item.href ? "text-foreground bg-secondary" : "text-foreground"
-                    }`}
+                    className={`flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-secondary ${location.pathname === item.href ? "text-foreground bg-secondary" : "text-foreground"
+                      }`}
                   >
                     {location.pathname === item.href && (
                       <div className="h-1.5 w-1.5 rounded-full bg-accent" />

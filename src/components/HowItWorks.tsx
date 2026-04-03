@@ -6,19 +6,19 @@ import GlowCard from "./GlowCard";
 const steps = [
   {
     num: "01",
-    icon: Database,
+    icon: <img src="/images/17.webp" alt="Advanced Analytics" className="w-12 h-12 object-contain" />,
     title: "Connect Your Sources",
     desc: "Plug in APIs, databases, cloud storage, and SaaS tools in minutes with 200+ pre-built connectors.",
   },
   {
     num: "02",
-    icon: Cpu,
+    icon: <img src="/images/18.webp" alt="Advanced Analytics" className="w-12 h-12 object-contain" />,
     title: "AI Maps & Merges",
     desc: "DataVerGAI automatically discovers schemas, maps relationships, and resolves conflicts across all sources.",
   },
   {
     num: "03",
-    icon: BarChart3,
+    icon: <img src="/images/19.webp" alt="Advanced Analytics" className="w-12 h-12 object-contain" />,
     title: "Unified Insights",
     desc: "Access your unified data layer with real-time dashboards, predictive analytics, and automated alerts.",
   },
@@ -74,7 +74,7 @@ const HowItWorks = () => (
                       whileHover={{ rotate: [0, -10, 10, 0] }}
                       transition={{ duration: 0.4 }}
                     >
-                      <step.icon size={28} className="text-foreground" />
+                      {step.icon}
                     </motion.div>
                     <motion.div
                       className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-full bg-accent text-[10px] font-extrabold text-accent-foreground shadow-lg"

@@ -10,6 +10,7 @@ import { useEffect } from "react";
 const POSTS_DATA: Record<string, any> = {
   "why-data-silos-costing-more": {
     title: "Why Data Silos Are Costing You More Than You Think",
+    img: "/images/32.webp",
     subtitle: "The Hidden Cost of Fragmented Data",
     category: "Industry",
     date: "Nov 12, 2025",
@@ -27,7 +28,7 @@ const POSTS_DATA: Record<string, any> = {
         <p className="text-muted-foreground leading-relaxed mb-6">
           The overall cost of the disconnected data fragmentation problem typically does not show up as a single line-item but, rather, is visible in all areas; an example includes having five pipelines for a single report, having to export all of your CSVs each time because the connection has been broken with the source of the data, and using dated (old) data for leadership decision making from 48 hours before. Each separate issue associated with disconnected data is small in its impact but collectively creates a drag on how every decision can be made out of this pool of available data.
         </p>
-        
+
         <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
           "Fragmented data doesn't slow teams. It corrupts decisions quietly."
         </blockquote>
@@ -60,6 +61,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   "raw-data-to-unified-intelligence": {
     title: "From Raw Data to Unified Intelligence in 4 Stages",
+    img: "/images/33.webp",
     subtitle: "The Convergence Pipeline Explained",
     category: "Technical",
     date: "Jan 24, 2026",
@@ -79,7 +81,7 @@ const POSTS_DATA: Record<string, any> = {
         <p className="text-muted-foreground leading-relaxed mb-6">
           Nowadays, modern convergence platforms will have connection support across REST and GraphQL APIs including support for the cloud, relational databases, and NoSQL databases, as well as SaaS solutions. A quality layer can monitor the health of the connections made, check for schema drift, and keep track of the configuration of each connection so it can reconnect without any issues.
         </p>
-        
+
         <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
           "Most pipelines break at the merge step, not the connect step."
         </blockquote>
@@ -122,6 +124,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   "batch-processing-liability-data-teams": {
     title: "Why Batch Processing Is a Liability for Data Teams",
+    img: "/images/34.webp",
     subtitle: "The Case for Sub-Second Data Sync",
     category: "Insights",
     date: "Feb 15, 2026",
@@ -141,7 +144,7 @@ const POSTS_DATA: Record<string, any> = {
         <p className="text-muted-foreground leading-relaxed mb-6">
           Batch jobs create blind spots in the system, or windows where the system operates on stale data context. A customer that is leaving between the two time cycles has no record of that performance. An inventory can be oversold due to relying on a past cycle of data. Fraud can go undetected for more than six hours even though a fraud incident is happening every second of the day. Each of these issues is a direct cost of an infrastructure designed for another time period.
         </p>
-        
+
         <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
           "A six-hour-old insight isn't an insight. It's a post-mortem.”
         </blockquote>
@@ -169,6 +172,49 @@ const POSTS_DATA: Record<string, any> = {
         <p className="text-muted-foreground leading-relaxed mb-6 bg-accent/10 p-6 rounded-xl border border-accent/20">
           This is how sub second sync works. Events of change are sent directly to the convergence level. If there are any schema conflicts, they are resolved while still being processed. Your unified data is always up to the minute, not just at the time of the last batch but at the time of processing.
         </p>
+      </>
+    )
+  },
+  "building-predictive-models": {
+    title: "Building Predictive Models with Unified Data",
+    img: "",
+    subtitle: "Leveraging DataVerGAI's ML pipeline for actionable predictions.",
+    category: "Technical",
+    date: "Mar 5, 2026",
+    readTime: "7 min",
+    author: { name: "Dr. Sarah Chen", role: "Lead Convergence Engineer", avatar: "SC" },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">Activating Data for Intelligence</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Predictive models are only as good as the data feeding them. In this article, we'll look at how DataVerGAI's seamless unification allows data science teams to focus on algorithm performance instead of data wrangling.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          With DataVerge's unified API, training datasets can be pulled dynamically directly from the converged layer, knowing that schema resolution has already occurred.
+        </p>
+      </>
+    )
+  },
+  "soc-2-compliance-journey": {
+    title: "SOC 2 Compliance: Our Journey",
+    img: "/images/36.webp",
+    subtitle: "How DataVerge achieved enterprise-grade security certification.",
+    category: "Security",
+    date: "Feb 28, 2026",
+    readTime: "5 min",
+    author: { name: "David Kim", role: "Head of Security", avatar: "DK" },
+    content: (
+      <>
+        <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">Reaching the Enterprise Standard</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          Security is the foundation of any data convergence platform. Today, we are proud to announce that DataVerge has officially achieved SOC 2 Type II compliance.
+        </p>
+        <p className="text-muted-foreground leading-relaxed mb-6">
+          The journey involved rigorous audits of our internal architecture, ensuring end-to-end encryption for data in-flight and at-rest, and extensive third-party penetration testing. 
+        </p>
+        <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
+          "Trust is not given by default in the data industry. It must be proven."
+        </blockquote>
       </>
     )
   }
@@ -204,7 +250,7 @@ const getPostData = (slug: string) => {
         <p className="text-muted-foreground leading-relaxed mb-6">
           If you've spent any time working as a data engineer, you know the pain of maintaining brittle extraction pipelines. A single upstream column name change can bring a multi-million row pipeline to a grinding halt.
         </p>
-        
+
         <blockquote className="border-l-4 border-accent pl-6 py-2 my-8 italic text-lg text-foreground/80 bg-accent/5 rounded-r-lg">
           "A pipeline is only as resilient as its most brittle regex parser."
         </blockquote>
@@ -232,7 +278,7 @@ const getPostData = (slug: string) => {
 const BlogPost = () => {
   const { slug } = useParams();
   const post = getPostData(slug || "default-post");
-  
+
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -261,13 +307,13 @@ const BlogPost = () => {
         <div className="container relative z-10">
           <div className="mx-auto max-w-4xl">
             {/* Back button */}
-            <motion.div 
-               initial={{ opacity: 0, x: -20 }}
-               animate={{ opacity: 1, x: 0 }}
-               className="mb-8"
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="mb-8"
             >
               <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-accent transition-colors">
-                 <ArrowLeft size={16} /> Back to Hub
+                <ArrowLeft size={16} /> Back to Hub
               </Link>
             </motion.div>
 
@@ -280,16 +326,16 @@ const BlogPost = () => {
                 <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl text-foreground mb-8 leading-tight">
                   {post.title}
                 </h1>
-                
+
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm font-semibold text-muted-foreground border-y border-border/50 py-4">
                   <div className="flex items-center gap-3">
-                     <div className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground cursor-default hover:border-accent transition-colors">
-                        {post.author.avatar}
-                     </div>
-                     <div className="flex flex-col text-left">
-                       <span className="text-foreground">{post.author.name}</span>
-                       <span className="text-xs font-normal">{post.author.role}</span>
-                     </div>
+                    <div className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-foreground cursor-default hover:border-accent transition-colors">
+                      {post.author.avatar}
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="text-foreground">{post.author.name}</span>
+                      <span className="text-xs font-normal">{post.author.role}</span>
+                    </div>
                   </div>
                   <div className="hidden md:block w-px h-8 bg-border/50" />
                   <span className="flex items-center gap-2"><Calendar size={16} className="text-accent" /> {post.date}</span>
@@ -298,6 +344,16 @@ const BlogPost = () => {
                 </div>
               </div>
             </AnimatedSection>
+
+            {/* Post Hero Image */}
+            {post.img && (
+              <AnimatedSection delay={0.15}>
+                <div className="w-full h-[350px] md:h-[450px] mb-12 rounded-3xl overflow-hidden border border-border shadow-2xl relative group">
+                  <img src={post.img} alt={post.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent pointer-events-none" />
+                </div>
+              </AnimatedSection>
+            )}
 
             {/* Main Content Body */}
             <AnimatedSection delay={0.2}>
@@ -310,26 +366,26 @@ const BlogPost = () => {
 
             {/* Share and Tags Footer */}
             <AnimatedSection delay={0.3}>
-               <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-border/50 pt-8">
-                 <div className="flex gap-2">
-                   {["Architecture", "AI", "Rust"].map(tag => (
-                      <span key={tag} className="px-3 py-1 bg-secondary border border-border rounded-md text-xs font-bold text-muted-foreground hover:text-foreground cursor-pointer transition-colors">#{tag}</span>
-                   ))}
-                 </div>
-                 <div className="flex items-center gap-4">
-                    <span className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
-                       <Share2 size={16} /> Share article
-                    </span>
-                    <div className="flex gap-2">
-                       <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
-                          <Twitter size={18} />
-                       </button>
-                       <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
-                          <Linkedin size={18} />
-                       </button>
-                    </div>
-                 </div>
-               </div>
+              <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-border/50 pt-8">
+                <div className="flex gap-2">
+                  {["Architecture", "AI", "Rust"].map(tag => (
+                    <span key={tag} className="px-3 py-1 bg-secondary border border-border rounded-md text-xs font-bold text-muted-foreground hover:text-foreground cursor-pointer transition-colors">#{tag}</span>
+                  ))}
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-semibold text-muted-foreground flex items-center gap-2">
+                    <Share2 size={16} /> Share article
+                  </span>
+                  <div className="flex gap-2">
+                    <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
+                      <Twitter size={18} />
+                    </button>
+                    <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
+                      <Linkedin size={18} />
+                    </button>
+                  </div>
+                </div>
+              </div>
             </AnimatedSection>
 
           </div>

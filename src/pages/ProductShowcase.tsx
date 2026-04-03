@@ -11,7 +11,7 @@ const integrations = ["PostgreSQL", "MongoDB", "AWS S3", "Snowflake", "Salesforc
 const ProductShowcase = () => (
   <Layout>
     {/* Hero */}
-    <section className="relative overflow-hidden bg-background py-24 lg:py-32">
+    <section className="relative overflow-hidden bg-[url('/images/23.webp')] bg-cover bg-center py-24 lg:py-32">
       <DataStreamBg density="medium" />
       <div className="absolute inset-0 mesh-gradient" />
       <div className="container relative">
@@ -85,11 +85,13 @@ const ProductShowcase = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full overflow-hidden rounded-3xl bg-background border border-border shadow-lg"
+              className="group relative flex h-full overflow-hidden rounded-3xl bg-[url('/images/28.webp')] bg-cover bg-center border border-border shadow-lg"
             >
+              {/* overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
               <div className="flex flex-1 flex-col justify-center p-8 md:max-w-[55%] z-10">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500/10">
-                  <Layers size={22} className="text-rose-500" />
+                  <img src="/images/24.webp" alt="Data Synthesis" className="w-12 h-12" />
                 </div>
                 <h3 className="text-2xl font-extrabold">Real-Time Data Synthesis</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Automatically combine and reconcile data from hundreds of sources in sub-second time, creating a unified and consistent data layer.</p>
@@ -115,14 +117,16 @@ const ProductShowcase = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-indigo-500/5 border border-indigo-200 shadow-lg text-center p-8"
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl bg-[url('/images/29.webp')] bg-cover bg-center border border-indigo-200 shadow-lg text-center p-8"
             >
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500/10 relative">
-                <Brain size={28} className="text-indigo-600 relative z-10" />
+              {/* overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-background to-transparent z-10" />
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500/10 relative z-10">
+                <img src="/images/25.webp" alt="Data Synthesis" className="w-12 h-12" />
                 <motion.div className="absolute inset-0 rounded-2xl border-2 border-indigo-400" animate={{ rotate: 180, scale: [1, 1.1, 1] }} transition={{ duration: 4, repeat: Infinity }} />
               </div>
-              <h3 className="text-2xl font-extrabold text-foreground">Intelligent Mapping</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1">Machine learning models intelligently understand your data schema, auto-mapping fields with human-level precision.</p>
+              <h3 className="text-2xl font-extrabold text-foreground relative z-10">Intelligent Mapping</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground flex-1 relative z-10">Machine learning models intelligently understand your data schema, auto-mapping fields with human-level precision.</p>
 
               <div className="mt-6 rounded-xl bg-background border border-border p-4 text-xs font-mono text-left relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-indigo-500" />
@@ -149,16 +153,18 @@ const ProductShowcase = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[#01030e] text-white p-8 shadow-2xl"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[url('/images/30.webp')] bg-cover bg-center border border-indigo-200 shadow-lg text-white p-8 shadow-2xl"
             >
-              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-accent/20 blur-3xl rounded-full" />
-              <div>
-                <LineChart className="text-accent mb-3" size={24} />
-                <h3 className="text-lg font-extrabold">Predictive Insights</h3>
-                <p className="mt-1 text-sm text-white/50">Instantly surface trends, anomalies, and patterns across all your data.</p>
+              {/* overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10" />
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-accent/20 blur-3xl rounded-full z-10" />
+              <div className="relative z-10">
+                <img src="/images/26.webp" alt="Data Synthesis" className="w-12 h-12 bg-white rounded-lg" />
+                <h3 className="text-lg font-extrabold text-foreground">Predictive Insights</h3>
+                <p className="mt-1 text-sm text-foreground/50">Instantly surface trends, anomalies, and patterns across all your data.</p>
               </div>
               {/* Mini sparkline */}
-              <svg className="w-full h-16 mt-4 opacity-80" viewBox="0 0 100 40">
+              <svg className="w-full h-16 mt-4 opacity-80 z-10" viewBox="0 0 100 40" >
                 <motion.path d="M0,35 Q10,35 20,25 T40,20 T60,30 T80,10 T100,5" fill="none" stroke="#ffff2c" strokeWidth="2.5" strokeLinecap="round"
                   initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.5 }} />
                 <motion.circle cx="100" cy="5" r="3" fill="#01030e" stroke="#ffff2c" strokeWidth="2" animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 1, repeat: Infinity }} />
@@ -171,15 +177,18 @@ const ProductShowcase = () => (
             <motion.div
               whileHover={{ y: -4 }}
               transition={{ type: "spring", stiffness: 300 }}
-              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-background border border-border p-8 shadow-lg"
+              className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl bg-[url('/images/31.webp')] bg-cover bg-center border border-border p-8 shadow-lg"
             >
-              <div>
-                <Workflow className="text-blue-500 mb-3" size={24} />
-                <h3 className="text-lg font-extrabold">Pipeline Builder</h3>
-                <p className="mt-1 text-sm text-muted-foreground">Drag-and-drop workflows to automate data processes without writing a single line of code.</p>
+              {/* overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 via-75% to-transparent z-10" />
+              <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-accent/20 blur-3xl rounded-full z-10" />
+              <div className="relative z-10">
+                <img src="/images/27.webp" alt="Data Synthesis" className="w-12 h-12" />
+                <h3 className="text-lg font-extrabold text-foreground">Pipeline Builder</h3>
+                <p className="mt-1 text-sm text-foreground/50">Drag-and-drop workflows to automate data processes without writing a single line of code.</p>
               </div>
               {/* Mini node visual */}
-              <div className="relative mt-4 h-16 w-full rounded-xl bg-secondary/50 border border-border/50 p-2 overflow-hidden flex items-center justify-center gap-2">
+              <div className="relative mt-4 h-16 w-full rounded-xl bg-secondary/50 border border-border/50 p-2 overflow-hidden flex items-center justify-center gap-2 z-10">
                 <DatabaseZap size={16} className="text-muted-foreground/40" />
                 <motion.div className="h-px w-8 bg-blue-500" initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} />
                 <motion.div className="rounded-md bg-blue-500 px-2 py-1 text-[8px] font-bold text-white shadow-sm" whileHover={{ scale: 1.1 }}>Transform</motion.div>
