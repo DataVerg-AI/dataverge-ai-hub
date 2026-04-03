@@ -59,9 +59,7 @@ const ProductShowcase = () => (
 
             {/* Dash Grid Mockup - Replaced with Image Placeholder */}
             <div className="p-6">
-              <div className="w-full min-h-[400px] rounded-2xl border border-white/10 bg-white/5 flex items-center justify-center text-white/40 font-mono text-sm">
-                Dashboard Image Here
-              </div>
+              <img src="/images/dashboard.webp" alt="Dashboard" className="w-full h-auto rounded-2xl" />
             </div>
           </motion.div>
         </AnimatedSection>
