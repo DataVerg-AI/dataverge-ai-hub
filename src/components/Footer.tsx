@@ -159,7 +159,7 @@ const Footer = () => {
                 <Turnstile
                   siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
                   onSuccess={(token) => setTurnstileToken(token)}
-                  options={{ size: "normal", theme: "auto" }}
+                  options={{ size: "normal", theme: "auto", action: "newsletter" }}
                 />
               </div>
             </form>
