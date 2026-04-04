@@ -177,7 +177,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   "building-predictive-models": {
     title: "Building Predictive Models with Unified Data",
-    img: "",
+    img: "/images/51.webp",
     subtitle: "Leveraging DataVerGAI's ML pipeline for actionable predictions.",
     category: "Technical",
     date: "Mar 5, 2026",
@@ -197,7 +197,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   "soc-2-compliance-journey": {
     title: "SOC 2 Compliance: Our Journey",
-    img: "",
+    img: "/images/52.webp",
     subtitle: "How DataVerge achieved enterprise-grade security certification.",
     category: "Security",
     date: "Feb 28, 2026",
