@@ -197,7 +197,7 @@ const POSTS_DATA: Record<string, any> = {
   },
   "soc-2-compliance-journey": {
     title: "SOC 2 Compliance: Our Journey",
-    img: "/images/36.webp",
+    img: "",
     subtitle: "How DataVerge achieved enterprise-grade security certification.",
     category: "Security",
     date: "Feb 28, 2026",

@@ -36,7 +36,7 @@ const About = () => {
   return (
     <Layout>
       {/* Hero section */}
-      <section className="relative overflow-hidden bg-background py-28 lg:py-40">
+      <section className="relative overflow-hidden bg-background py-28 lg:py-40 bg-[url('/images/36.webp')] bg-cover bg-center">
         <DataStreamBg density="low" />
         <div className="absolute inset-0 mesh-gradient opacity-60" />
         <div className="container relative z-10">

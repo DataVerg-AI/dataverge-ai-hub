@@ -710,7 +710,7 @@ const Index = () => (
     <FAQ />
 
     {/* Final CTA */}
-    <section className="relative overflow-hidden bg-background py-32">
+    <section className="relative overflow-hidden bg-background py-32 bg-[url('/images/23.webp')] bg-cover bg-center">
       <DataStreamBg density="low" />
       <div className="absolute inset-0 mesh-gradient" />
       <div className="container relative text-center">
