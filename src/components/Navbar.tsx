@@ -98,9 +98,6 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           {isAuthenticated ? (
             <>
-              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-                <Link to="/pricing">Pricing</Link>
-              </Button>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="sm" className="gap-2">
@@ -131,17 +128,9 @@ const Navbar = () => {
               </DropdownMenu>
             </>
           ) : (
-            <>
-              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
-                <Link to="/pricing">Pricing</Link>
-              </Button>
-              <Button variant="accent" size="sm" asChild className="hidden md:flex">
-                <Link to="/login">Sign In</Link>
-              </Button>
-              <Button variant="accent" size="sm" asChild className="md:hidden">
-                <Link to="/product">Get Started</Link>
-              </Button>
-            </>
+            <Button variant="accent" size="lg" asChild>
+              <Link to="/product">Try DataVerg AI</Link>
+            </Button>
           )}
         </div>
 
@@ -221,8 +210,8 @@ const Navbar = () => {
                   </Button>
                 ) : (
                   <Button variant="accent" size="lg" className="mt-2 w-full" asChild>
-                    <Link to="/login" onClick={() => setMobileOpen(false)}>
-                      Sign In
+                    <Link to="/product" onClick={() => setMobileOpen(false)}>
+                      Try DataVerg AI
                     </Link>
                   </Button>
                 )}
