@@ -246,17 +246,17 @@ const Checkout = () => {
                        Payment Parameters
                     </CardTitle>
                     <CardDescription>
-                      Use any 12-digit card for sandbox testing (e.g. 411111111111)
+                      Enter a valid 16-digit card number in the format shown below.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-8">
                     <form id="checkout-form" onSubmit={handleSubmit} className="space-y-6">
                       <div className="space-y-4">
                         <div className="grid gap-2">
-                          <Label htmlFor="card_holder">System Operator Name</Label>
+                          <Label htmlFor="card_holder">Cardholder Name</Label>
                           <Input 
                             id="card_holder" 
-                            placeholder="John Doe" 
+                            placeholder="Name on card" 
                             value={formData.card_holder}
                             onChange={handleInputChange}
                             required
@@ -269,10 +269,10 @@ const Checkout = () => {
                           <div className="relative">
                             <Input 
                               id="card_number" 
-                              placeholder="0000 0000 0000" 
+                              placeholder="0000 0000 0000 0000" 
                               value={formData.card_number}
                               onChange={handleInputChange}
-                              maxLength={15} // 12 digits + 2 spaces
+                              maxLength={19} // 16 digits + 3 spaces
                               required
                               className="bg-background/50 pr-12 font-mono text-lg tracking-wider border-2 border-border/50 focus:border-accent/50 transition-colors" 
                             />
@@ -283,7 +283,7 @@ const Checkout = () => {
                               <CreditCard className="h-4 w-4 text-muted-foreground/50" />
                             </div>
                           </div>
-                          <p className="text-xs text-muted-foreground">Enter 12-digit card number for secure processing</p>
+                          <p className="text-xs text-muted-foreground">Enter a 16-digit card number for secure processing</p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
