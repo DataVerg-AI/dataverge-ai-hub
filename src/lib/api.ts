@@ -76,6 +76,17 @@ export const AuthAPI = {
       method: 'POST',
       body: JSON.stringify({ email, turnstile_token })
     });
+  },
+  resetPassword: async (data: {
+    token: string;
+    email: string;
+    password_hash: string;
+    password_hash_confirmation: string;
+  }) => {
+    return apiRequest('/auth/password/reset', {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
   }
 };
 
