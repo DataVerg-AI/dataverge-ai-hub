@@ -82,7 +82,7 @@ function Bubble({ msg }: { msg: Message }) {
       </div>
 
       {/* Bubble */}
-      <div className={`group relative max-w-[78%] ${isBot ? "" : ""}`}>
+      <div className={`group relative max-w-[85vw] sm:max-w-[78%] ${isBot ? "" : ""}`}>
         <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
           isBot
             ? "bg-card border border-border rounded-bl-sm text-foreground"
@@ -219,9 +219,9 @@ export default function DashboardChat() {
         </div>
 
         {/* Chat window */}
-        <GlowCard className="bg-card/60">
+        <GlowCard className="bg-card/60 flex flex-col min-h-[60vh]">
           {/* Messages */}
-          <div className="h-[60vh] overflow-y-auto p-5 space-y-5">
+          <div className="flex-1 min-h-0 p-5 space-y-5 overflow-visible">
             <AnimatePresence>
               {messages.map(m => <Bubble key={m.id} msg={m} />)}
             </AnimatePresence>
@@ -249,7 +249,7 @@ export default function DashboardChat() {
           <div className="border-t border-border/50 p-4">
             <form
               onSubmit={e => { e.preventDefault(); send(input); }}
-              className="flex items-center gap-3"
+              className="flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <Input
                 ref={inputRef}
@@ -257,9 +257,9 @@ export default function DashboardChat() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask anything about your data convergence layer…"
                 disabled={loading}
-                className="flex-1 bg-background/50 border-border"
+                className="flex-1 min-w-0 bg-background/50 border-border"
               />
-              <Button type="submit" disabled={loading || !input.trim()} className="shrink-0">
+              <Button type="submit" disabled={loading || !input.trim()} className="w-full sm:w-auto shrink-0">
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </form>

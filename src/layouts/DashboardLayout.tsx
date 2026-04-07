@@ -130,7 +130,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </Sidebar>
 
       {/* ─────────────── MAIN CONTENT ─────────────── */}
-      <SidebarInset className="relative flex flex-col min-h-screen">
+      <SidebarInset className="relative flex flex-col min-h-screen overflow-hidden">
         {/* Topbar */}
         <header className="sticky top-0 z-30 flex h-16 items-center gap-4 bg-background/70 backdrop-blur-xl px-4 sm:px-6 border-b border-border/50">
           {/* Desktop sidebar trigger */}
@@ -144,8 +144,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0 bg-background border-border">
-              <SheetHeader className="h-16 flex items-center justify-center border-b border-border/50 px-4">
-                <SheetTitle className="font-bold text-lg text-foreground">DataVerge</SheetTitle>
+              <SheetHeader className="h-16 flex items-center gap-3 px-4 border-b border-border/50">
+                <img src="/images/logo.webp" alt="DataVerge Logo" className="h-8 w-auto object-contain" />
+                <SheetTitle className="font-bold text-lg text-foreground">Navigation</SheetTitle>
               </SheetHeader>
 
               {/* Mobile nav links */}
@@ -250,7 +251,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 sm:p-6 relative bg-background">
+        <main className="flex-1 min-h-0 overflow-auto p-4 sm:p-6 relative bg-background">
           <div className="pointer-events-none fixed inset-0 overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/4 blur-[120px] -translate-y-1/3 translate-x-1/4" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue-500/3 blur-[100px] translate-y-1/3 -translate-x-1/4" />

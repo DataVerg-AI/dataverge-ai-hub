@@ -50,7 +50,7 @@ export default function DashboardIntegrations() {
               Connect external data sources to your Convergence Engine.
             </p>
           </div>
-          <Button className="shrink-0 group">
+          <Button className="shrink-0 group" onClick={() => toast.success("Webhook created.", { description: "A starter webhook is ready for your first integration." })}>
             <PlugZap className="mr-2 h-4 w-4 transition-transform group-hover:rotate-12" />
             Add Custom Webhook
           </Button>
