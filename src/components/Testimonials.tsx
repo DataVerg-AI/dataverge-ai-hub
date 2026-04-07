@@ -6,7 +6,7 @@ const testimonials = [
   {
     name: "Sarah Chen",
     role: "CTO, TechFlow Inc.",
-    quote: "DataVerge eliminated 80% of our data pipeline complexity overnight. The AI mapping is genuinely magical.",
+    quote: "DataVerg eliminated 80% of our data pipeline complexity overnight. The AI mapping is genuinely magical.",
     companyMetric: "Saved 30hrs/week",
     metricIcon: TrendingUp,
     image: "/images/20.webp",

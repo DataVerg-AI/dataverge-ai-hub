@@ -9,12 +9,12 @@ const terms = [
   {
     icon: <UserCheck size={24} />,
     title: "1. Acceptance of Terms",
-    content: "By accessing or using DataVerge's services, you agree to be bound by these Terms of Service. If you do not agree, you may not use our services.",
+    content: "By accessing or using DataVerg's services, you agree to be bound by these Terms of Service. If you do not agree, you may not use our services.",
   },
   {
     icon: <FileText size={24} />,
     title: "2. Description of Service",
-    content: "DataVerge provides a data convergence platform that unifies data from multiple sources using AI-powered tools, including DataVerGAI.",
+    content: "DataVerg provides a data convergence platform that unifies data from multiple sources using AI-powered tools, including DataVerGAI.",
   },
   {
     icon: <Shield size={24} />,
@@ -29,7 +29,7 @@ const terms = [
   {
     icon: <AlertTriangle size={24} />,
     title: "5. Limitation of Liability",
-    content: "DataVerge shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services.",
+    content: "DataVerg shall not be liable for any indirect, incidental, or consequential damages arising from your use of our services.",
   },
   {
     icon: <Scale size={24} />,

@@ -5,7 +5,7 @@ const CookieConsent = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem("dataverge-cookie-consent");
+    const consent = localStorage.getItem("dataverg-cookie-consent");
     if (!consent) {
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
@@ -13,7 +13,7 @@ const CookieConsent = () => {
   }, []);
 
   const accept = () => {
-    localStorage.setItem("dataverge-cookie-consent", "accepted");
+    localStorage.setItem("dataverg-cookie-consent", "accepted");
     setVisible(false);
   };
 

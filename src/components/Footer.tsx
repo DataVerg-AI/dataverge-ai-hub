@@ -96,8 +96,8 @@ const Footer = () => {
                 { to: "/pricing", label: "Pricing" },
                 { to: "/blog", label: "Blog" },
               ].map((link) => (
-                <motion.div key={link.to} whileHover={{ x: 4, backgroundColor: "hsl(var(--accent)/0.1)" }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
-                  <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent">
+                <motion.div key={link.to} whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
+                  <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent hover:bg-black rounded-md px-2 py-1">
                     {link.label}
                   </Link>
                 </motion.div>
@@ -115,8 +115,8 @@ const Footer = () => {
                 { to: "/terms", label: "Terms" },
                 { to: "/privacy", label: "Privacy" },
               ].map((link) => (
-                <motion.div key={link.to} whileHover={{ x: 4, backgroundColor: "hsl(var(--accent)/0.1)" }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
-                  <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent">
+                <motion.div key={link.to} whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
+                  <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent hover:bg-black rounded-md px-2 py-1">
                     {link.label}
                   </Link>
                 </motion.div>
@@ -192,7 +192,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-foreground/10 pt-8 text-center text-xs text-foreground/40">
-          © {new Date().getFullYear()} DataVerge. All rights reserved.
+          © {new Date().getFullYear()} DataVerg.com. All rights reserved.
         </div>
       </div>
     </footer>

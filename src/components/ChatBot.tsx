@@ -12,7 +12,7 @@ interface Message {
 }
 
 const QUICK_REPLIES = [
-  "How does DataVerge work?",
+  "How does DataVerg work?",
   "What data sources do you support?",
   "Show me pricing plans",
   "Talk to sales",
@@ -22,7 +22,7 @@ const INITIAL_MESSAGES: Message[] = [
   {
     id: 0,
     role: "bot",
-    text: "Hi there! 👋 I'm the DataVerge AI assistant.\n\nI can help you explore our Data Convergence Platform, answer questions about features, pricing, and integrations. What would you like to know?",
+    text: "Hi there! 👋 I'm the DataVerg AI assistant.\n\nI can help you explore our Data Convergence Platform, answer questions about features, pricing, and integrations. What would you like to know?",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function ChatBot() {
 
     try {
       const res: any = await AIAPI.generate({
-        system: "You are the DataVerge AI assistant on the public website. DataVerge is a Data Convergence Platform — it merges and unifies data from multiple sources (APIs, databases, cloud platforms) into one intelligent system. Be helpful, friendly, and concise. Guide users toward DataVerge's features, pricing, and booking a demo. Keep responses under 3 sentences when possible.",
+        system: "You are the DataVerg AI assistant on the public website. DataVerg is a Data Convergence Platform — it merges and unifies data from multiple sources (APIs, databases, cloud platforms) into one intelligent system. Be helpful, friendly, and concise. Guide users toward DataVerg's features, pricing, and booking a demo. Keep responses under 3 sentences when possible.",
         messages: [
           ...messages.slice(-6).map(m => ({
             role: m.role === "bot" ? "assistant" : "user",
@@ -141,7 +141,7 @@ export default function ChatBot() {
                 <Sparkles className="h-4 w-4 text-accent-foreground" style={{ color: "hsl(61 100% 40%)" }} />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-foreground">DataVerge AI</p>
+                <p className="text-sm font-bold text-foreground">DataVerg AI</p>
                 <div className="flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
                   <p className="text-[10px] text-muted-foreground">Online · Convergence Intelligence</p>
@@ -231,7 +231,7 @@ export default function ChatBot() {
                       ref={inputRef}
                       value={input}
                       onChange={e => setInput(e.target.value)}
-                      placeholder="Ask about DataVerge…"
+                      placeholder="Ask about DataVerg…"
                       disabled={loading}
                       className="h-9 text-sm bg-card/60 border-border"
                     />
@@ -248,7 +248,7 @@ export default function ChatBot() {
 
                   {/* Footer */}
                   <div className="px-4 pb-3 text-center">
-                    <p className="text-[10px] text-muted-foreground">Powered by DataVerge Convergence Intelligence</p>
+                    <p className="text-[10px] text-muted-foreground">Powered by DataVerg Convergence Intelligence</p>
                   </div>
                 </motion.div>
               )}

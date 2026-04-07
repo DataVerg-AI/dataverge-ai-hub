@@ -32,7 +32,7 @@ const SUGGESTIONS = [
 const INITIAL_MSG: Message = {
   id: "0",
   role: "assistant",
-  text: "Hello! I'm DataVerge AI, your intelligent convergence assistant.\n\nI can help you analyze your data pipelines, detect anomalies, summarize model performance, and answer questions about your unified data layer. What would you like to explore today?",
+  text: "Hello! I'm DataVerg AI, your intelligent convergence assistant.\n\nI can help you analyze your data pipelines, detect anomalies, summarize model performance, and answer questions about your unified data layer. What would you like to explore today?",
   timestamp: new Date(),
 };
 
@@ -135,7 +135,7 @@ export default function DashboardChat() {
 
     try {
       const res: any = await AIAPI.generate({
-        system: "You are DataVerge AI, an intelligent assistant built into the DataVerge Data Convergence Platform. Help users analyze their data pipelines, detect anomalies, understand model performance, and manage integrations. Be concise, insightful, and technical when appropriate.",
+        system: "You are DataVerg AI, an intelligent assistant built into the DataVerg Data Convergence Platform. Help users analyze their data pipelines, detect anomalies, understand model performance, and manage integrations. Be concise, insightful, and technical when appropriate.",
         messages: [
           ...messages.slice(-8).map(m => ({
             role: m.role as "assistant" | "user",
@@ -189,7 +189,7 @@ export default function DashboardChat() {
                 <Sparkles className="h-5 w-5 text-accent-foreground" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-foreground">DataVerge AI</h2>
+                <h2 className="text-2xl font-bold text-foreground">DataVerg AI</h2>
                 <p className="text-xs text-muted-foreground">Powered by the Convergence Engine · Connected to your data layer</p>
               </div>
             </div>

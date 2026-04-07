@@ -5,15 +5,15 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "How does DataVerge differ from traditional ETL tools?",
-    a: "DataVerge uses AI-native convergence, not just extraction and loading. Our DataVerGAI engine understands your data schemas, automatically maps fields across sources, and provides predictive insights — all in real time without batch processing.",
+    q: "How does DataVerg differ from traditional ETL tools?",
+    a: "DataVerg uses AI-native convergence, not just extraction and loading. Our DataVerGAI engine understands your data schemas, automatically maps fields across sources, and provides predictive insights — all in real time without batch processing.",
   },
   {
-    q: "What data sources does DataVerge connect to?",
+    q: "What data sources does DataVerg connect to?",
     a: "We support 200+ connectors out of the box: REST/GraphQL APIs, cloud platforms (AWS, GCP, Azure), databases (PostgreSQL, MySQL, MongoDB, Snowflake), SaaS tools (Salesforce, HubSpot, Stripe), and custom sources via our SDK.",
   },
   {
-    q: "Is my data secure with DataVerge?",
+    q: "Is my data secure with DataVerg?",
     a: "Absolutely. We're SOC 2 Type II certified, with end-to-end AES-256 encryption, zero-trust architecture, and full audit logging. Your data never leaves your designated region, and we offer on-premises deployment for Enterprise clients.",
   },
   {
@@ -21,7 +21,7 @@ const faqs = [
     a: "Most teams are up and running in under an hour. Connect your first data source, and DataVerGAI automatically discovers schemas and suggests mappings. No complex configuration or coding required.",
   },
   {
-    q: "Can I try DataVerge before committing?",
+    q: "Can I try DataVerg before committing?",
     a: "Yes. We offer a 14-day free trial on all plans with full feature access. No credit card required. We also offer guided onboarding calls for Enterprise prospects.",
   },
   {

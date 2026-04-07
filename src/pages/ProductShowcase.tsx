@@ -26,7 +26,7 @@ const ProductShowcase = () => (
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
             className="mt-6 text-lg text-muted-foreground">
-            DataVerGAI is the intelligent engine at the heart of DataVerge — synthesizing, mapping, and predicting across all your data sources.
+            DataVerGAI is the intelligent engine at the heart of DataVerg — synthesizing, mapping, and predicting across all your data sources.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}>
             <Button variant="accent" size="xl" className="mt-8 glow-accent" asChild>

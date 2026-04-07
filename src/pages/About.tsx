@@ -10,7 +10,7 @@ import { FaLinkedin, FaYoutube, FaPinterest, FaXTwitter, FaFacebook, FaRocket } 
 import { SiCrunchbase } from "react-icons/si";
 
 const milestones = [
-  { year: "2024", title: "The Convergence Engine", desc: "DataVerge started by completely rethinking data pipelines. 3 engineers built the first unified mapping engine in 6 weeks.", img: "/images/46.webp" },
+  { year: "2024", title: "The Convergence Engine", desc: "DataVerg started by completely rethinking data pipelines. 3 engineers built the first unified mapping engine in 6 weeks.", img: "/images/46.webp" },
   { year: "2024", title: "Seed Funding", desc: "Raised $4M from tier-1 investors who saw the potential for an AI-native integration paradigm.", img: "/images/47.webp" },
   { year: "2025", title: "DataVerGAI Goes Live", desc: "Launched our flagship engine. Reached 50+ enterprise-grade connectors in the first month.", img: "/images/48.webp" },
   { year: "2025", title: "Enterprise Adoption", desc: "Crossed 500 active clients. Processing billions of rows daily with sub-50ms latency.", img: "/images/49.webp" },
@@ -50,7 +50,7 @@ const About = () => {
                 We believe data should <span className="text-shine">converge</span>.
               </h1>
               <p className="mt-8 text-xl leading-relaxed text-muted-foreground">
-                Founded on July 05, 2023, DataVerge was born from a simple observation: enterprises waste millions wrestling with fragmented data silos. We built the definitive AI-native platform to stop the wrestling.
+                Founded on July 05, 2023, DataVerg was born from a simple observation: enterprises waste millions wrestling with fragmented data silos. We built the definitive AI-native platform to stop the wrestling.
               </p>
             </div>
           </AnimatedSection>

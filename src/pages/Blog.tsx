@@ -12,7 +12,7 @@ const posts = [
   { title: "From Raw Data to Unified Intelligence in 4 Stages", img: "/images/33.webp", slug: "raw-data-to-unified-intelligence", category: "Technical", date: "Jan 24, 2026", excerpt: "The Convergence Pipeline Explained. Connecting your data sources is a relatively easy thing to do. What's much more difficult is fixing the problems between the data you merged.", featured: false, readTime: "7 min" },
   { title: "Why Batch Processing Is a Liability for Data Teams", img: "/images/35.webp", slug: "batch-processing-liability-data-teams", category: "Insights", date: "Feb 15, 2026", excerpt: "The Case for Sub-Second Data Sync. In the past, batch processing made sense because the costs of storage were high and compute was limited. Today this trade off doesn’t exist.", featured: false, readTime: "6 min" },
   { title: "Building Predictive Models with Unified Data", img: "/images/51.webp", slug: "building-predictive-models", category: "Technical", date: "Mar 5, 2026", excerpt: "Leveraging DataVerGAI's ML pipeline for actionable predictions.", featured: false, readTime: "7 min" },
-  { title: "SOC 2 Compliance: Our Journey", img: "/images/52.webp", slug: "soc-2-compliance-journey", category: "Security", date: "Feb 28, 2026", excerpt: "How DataVerge achieved enterprise-grade security certification.", featured: false, readTime: "5 min" },
+  { title: "SOC 2 Compliance: Our Journey", img: "/images/52.webp", slug: "soc-2-compliance-journey", category: "Security", date: "Feb 28, 2026", excerpt: "How DataVerg achieved enterprise-grade security certification.", featured: false, readTime: "5 min" },
 ];
 
 const categories = ["All", "Industry", "Product", "Insights", "Technical", "Security", "Case Study"];

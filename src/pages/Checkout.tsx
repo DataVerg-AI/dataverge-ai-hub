@@ -494,7 +494,7 @@ const Checkout = () => {
 
                   <div className="flex items-center gap-4 p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/10 text-emerald-600/80 text-xs">
                     <ShieldCheck className="h-5 w-5 shrink-0" />
-                    Secure payment processing powered by DataVerge Shield. Your sensitive data never touches our persistent storage.
+                    Secure payment processing powered by DataVerg Shield. Your sensitive data never touches our persistent storage.
                   </div>
                 </div>
               </AnimatedSection>

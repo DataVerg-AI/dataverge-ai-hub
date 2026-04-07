@@ -190,7 +190,7 @@ const POSTS_DATA: Record<string, any> = {
           Predictive models are only as good as the data feeding them. In this article, we'll look at how DataVerGAI's seamless unification allows data science teams to focus on algorithm performance instead of data wrangling.
         </p>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          With DataVerge's unified API, training datasets can be pulled dynamically directly from the converged layer, knowing that schema resolution has already occurred.
+          With DataVerg's unified API, training datasets can be pulled dynamically directly from the converged layer, knowing that schema resolution has already occurred.
         </p>
       </>
     )
@@ -198,7 +198,7 @@ const POSTS_DATA: Record<string, any> = {
   "soc-2-compliance-journey": {
     title: "SOC 2 Compliance: Our Journey",
     img: "/images/52.webp",
-    subtitle: "How DataVerge achieved enterprise-grade security certification.",
+    subtitle: "How DataVerg achieved enterprise-grade security certification.",
     category: "Security",
     date: "Feb 28, 2026",
     readTime: "5 min",
@@ -207,7 +207,7 @@ const POSTS_DATA: Record<string, any> = {
       <>
         <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">Reaching the Enterprise Standard</h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          Security is the foundation of any data convergence platform. Today, we are proud to announce that DataVerge has officially achieved SOC 2 Type II compliance.
+          Security is the foundation of any data convergence platform. Today, we are proud to announce that DataVerg has officially achieved SOC 2 Type II compliance.
         </p>
         <p className="text-muted-foreground leading-relaxed mb-6">
           The journey involved rigorous audits of our internal architecture, ensuring end-to-end encryption for data in-flight and at-rest, and extensive third-party penetration testing. 
@@ -240,7 +240,7 @@ const getPostData = (slug: string) => {
       <>
         <h2 className="text-3xl font-bold text-foreground mt-0 mb-6 border-b border-border/50 pb-4">The Convergence Paradigm</h2>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          For decades, enterprises have relied on rigid ETL pipelines that inevitably break when schemas evolve. DataVerge was built on a simple premise: data mapping shouldn't require manual regex hacking. It should be semantic, fluid, and AI-native.
+          For decades, enterprises have relied on rigid ETL pipelines that inevitably break when schemas evolve. DataVerg was built on a simple premise: data mapping shouldn't require manual regex hacking. It should be semantic, fluid, and AI-native.
         </p>
         <p className="text-muted-foreground leading-relaxed mb-8">
           In this deep dive, we explore the core architecture that allows the DataVerGAI engine to understand data contextually, virtually eliminating the need for rigid schema maintenance.

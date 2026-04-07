@@ -20,7 +20,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
             Accelerate your AI <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">infrastructure</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Join thousands of developers building scalable, high-performance AI applications with DataVerge AI Hub.
+            Join thousands of developers building scalable, high-performance AI applications with DataVerg AI Hub.
           </p>
         </div>
         <div className="relative z-10 flex items-center gap-4 text-sm text-muted-foreground">

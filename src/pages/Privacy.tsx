@@ -14,7 +14,7 @@ const policies = [
   {
     icon: <Settings size={24} />,
     title: "2. How We Use Your Information",
-    content: "We use your information to provide and improve our services, communicate with you, and ensure platform security across all DataVerge nodes.",
+    content: "We use your information to provide and improve our services, communicate with you, and ensure platform security across all DataVerg nodes.",
   },
   {
     icon: <ShieldCheck size={24} />,

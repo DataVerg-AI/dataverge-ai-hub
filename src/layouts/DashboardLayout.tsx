@@ -77,7 +77,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <Sidebar className="hidden md:flex border-r border-border/50 bg-background/50 backdrop-blur-xl">
         <SidebarHeader className="h-16 flex items-center justify-center border-b border-border/50">
           <Link to="/dashboard" className="flex items-center gap-2.5 px-2">
-            <img src="/images/logo.webp" alt="DataVerge Logo" className="w-auto h-8 object-contain" />
+            <img src="/images/logo.webp" alt="DataVerg Logo" className="w-auto h-8 object-contain" />
           </Link>
         </SidebarHeader>
         <SidebarContent>
@@ -144,7 +144,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0 bg-background border-border">
               <SheetHeader className="h-16 flex items-center gap-3 px-4 border-b border-border/50">
-                <img src="/images/logo.webp" alt="DataVerge Logo" className="h-8 w-auto object-contain" />
+                <img src="/images/logo.webp" alt="DataVerg Logo" className="h-8 w-auto object-contain" />
                 <SheetTitle className="font-bold text-lg text-foreground">Navigation</SheetTitle>
               </SheetHeader>
 
