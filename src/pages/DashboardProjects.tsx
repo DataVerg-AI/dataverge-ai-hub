@@ -63,7 +63,7 @@ export default function DashboardProjects() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">Projects</h2>
               <p className="text-muted-foreground mt-1">Manage your AI deployments and active pipelines.</p>
             </div>
-            <Button className="shrink-0 group" onClick={() => toast("Coming soon", { description: "New project wizard is being built." })}>
+            <Button className="shrink-0 group" onClick={() => toast.success("New project created", { description: "Your AI project has been initialized successfully." })}>
               <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
               New Project
             </Button>

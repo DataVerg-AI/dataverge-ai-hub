@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/");
+    navigate("/login");
   };
 
   const isActive = (url: string) =>
@@ -145,10 +145,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             </SheetTrigger>
             <SheetContent side="left" className="w-72 p-0 bg-background border-border">
               <SheetHeader className="h-16 flex items-center justify-center border-b border-border/50 px-4">
-                <Link to="/dashboard" onClick={() => setMobileOpen(false)} className="flex items-center gap-2.5">
-                  <img src="/images/logo.webp" alt="Logo" className="w-auto h-8 object-contain" />
-                  <SheetTitle className="font-bold text-lg text-foreground">DataVerge</SheetTitle>
-                </Link>
+                <SheetTitle className="font-bold text-lg text-foreground">DataVerge</SheetTitle>
               </SheetHeader>
 
               {/* Mobile nav links */}
@@ -253,7 +250,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-auto p-4 sm:p-6 relative bg-background">
+        <main className="flex-1 p-4 sm:p-6 relative bg-background">
           <div className="pointer-events-none fixed inset-0 overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/4 blur-[120px] -translate-y-1/3 translate-x-1/4" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue-500/3 blur-[100px] translate-y-1/3 -translate-x-1/4" />

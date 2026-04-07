@@ -57,8 +57,8 @@ const Checkout = () => {
     const { id, value } = e.target;
     
     if (id === "card_number") {
-      // Limit to 12 digits and format as XXXX XXXX XXXX
-      const digitsOnly = value.replace(/\s/g, "").replace(/\D/g, "").slice(0, 12);
+      // Limit to 16 digits and format as XXXX XXXX XXXX XXXX
+      const digitsOnly = value.replace(/\s/g, "").replace(/\D/g, "").slice(0, 16);
       const formatted = digitsOnly.replace(/(\d{4})(?=\d)/g, "$1 ");
       setFormData(prev => ({ ...prev, [id]: formatted }));
     } else {
@@ -71,10 +71,10 @@ const Checkout = () => {
     setIsLoading(true);
     
     // Simple validation
-    if (formData.card_number.replace(/\s/g, "").length !== 12) {
+    if (formData.card_number.replace(/\s/g, "").length !== 16) {
       toast({
         title: "Invalid Card",
-        description: "Please enter a valid 12-digit card number.",
+        description: "Please enter a valid 16-digit card number.",
         variant: "destructive"
       });
       setIsLoading(false);

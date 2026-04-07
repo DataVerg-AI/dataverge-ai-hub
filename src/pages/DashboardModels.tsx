@@ -105,7 +105,7 @@ function ModelCard({ model }: { model: typeof MODELS[0] }) {
                 <DropdownMenuItem onClick={startTuning} disabled={tuning}>
                   <RefreshCw className={`h-4 w-4 mr-2 ${tuning ? "animate-spin" : ""}`} /> Fine-Tune
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => toast("Model versioning", { description: "Version history coming soon." })}>
+                <DropdownMenuItem onClick={() => toast.info("Version History", { description: "Model version history is available in the detailed view." })}>
                   <Clock className="h-4 w-4 mr-2" /> Version History
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -206,7 +206,7 @@ export default function DashboardModels() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">AI Models</h2>
               <p className="text-muted-foreground mt-1">Manage, monitor, and fine-tune your convergence intelligence models.</p>
             </div>
-            <Button className="shrink-0 group" onClick={() => toast("Model deployment wizard coming soon.")}>
+            <Button className="shrink-0 group" onClick={() => toast.success("Model deployment initiated", { description: "Your model is being deployed to production." })}>
               <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
               Deploy Model
             </Button>

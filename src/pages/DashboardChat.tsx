@@ -180,7 +180,7 @@ export default function DashboardChat() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-[calc(100vh-88px)] max-w-4xl mx-auto gap-4">
+      <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <AnimatedSection>
           <div className="flex items-center justify-between">
@@ -200,7 +200,7 @@ export default function DashboardChat() {
         </AnimatedSection>
 
         {/* Stats strip */}
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
             { icon: Database, label: "Data Sources", value: "12 Active" },
             { icon: Zap,      label: "Queries Today", value: "4,821" },
@@ -219,9 +219,9 @@ export default function DashboardChat() {
         </div>
 
         {/* Chat window */}
-        <GlowCard className="flex-1 bg-card/60 overflow-hidden flex flex-col min-h-0">
+        <GlowCard className="bg-card/60">
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-5 space-y-5 min-h-0">
+          <div className="h-[60vh] overflow-y-auto p-5 space-y-5">
             <AnimatePresence>
               {messages.map(m => <Bubble key={m.id} msg={m} />)}
             </AnimatePresence>
@@ -257,9 +257,9 @@ export default function DashboardChat() {
                 onChange={e => setInput(e.target.value)}
                 placeholder="Ask anything about your data convergence layer…"
                 disabled={loading}
-                className="flex-1 bg-background/50 border-border h-11"
+                className="flex-1 bg-background/50 border-border"
               />
-              <Button type="submit" disabled={loading || !input.trim()} className="h-11 px-5 shrink-0">
+              <Button type="submit" disabled={loading || !input.trim()} className="shrink-0">
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
               </Button>
             </form>
