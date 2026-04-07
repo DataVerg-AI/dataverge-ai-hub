@@ -63,7 +63,7 @@ const Index = () => (
           className="mt-10 flex flex-col gap-4 sm:flex-row"
         >
           <Button variant="accent" size="xl" className="glow-accent" asChild>
-            <Link to="/dashboard" target="_blank" rel="noopener noreferrer">
+            <Link to="/product" target="_blank" rel="noopener noreferrer">
               Access the Platform <ArrowRight size={20} />
             </Link>
           </Button>
