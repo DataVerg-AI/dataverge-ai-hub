@@ -64,7 +64,7 @@ const Index = () => (
         >
           <Button variant="accent" size="xl" className="glow-accent" asChild>
             <Link to="/product">
-              Access the Platform <ArrowRight size={20} />
+              Access DataVerg-AI<ArrowRight size={20} />
             </Link>
           </Button>
           <Button variant="outline" size="xl" asChild>
