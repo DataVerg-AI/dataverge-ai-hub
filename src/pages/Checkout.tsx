@@ -8,8 +8,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { CreditCard, Lock, CheckCircle2, ShieldCheck, Loader2, ArrowLeft } from "lucide-react";
-import { SubscriptionAPI } from "@/lib/api";
+import { CreditCard, Lock, CheckCircle2, ShieldCheck, Loader2, ArrowLeft, User, Github } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { API_BASE_URL, AuthAPI, hashSHA256, SubscriptionAPI } from "@/lib/api";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSection from "@/components/AnimatedSection";
 import GlowCard from "@/components/GlowCard";
@@ -52,6 +53,96 @@ const Checkout = () => {
   };
 
   const currentPlan = planDetails[planSlug] || planDetails.pro;
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authMode, setAuthMode] = useState<"login" | "register">("login");
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authForm, setAuthForm] = useState({ fullName: "", email: "", password: "" });
+  const [turnstileToken, setTurnstileToken] = useState("");
+
+  useEffect(() => {
+    setIsAuthenticated(Boolean(localStorage.getItem("token")));
+  }, []);
+
+  const handleAuthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setAuthForm(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setAuthError(null);
+
+    try {
+      const passwordHash = await hashSHA256(authForm.password);
+      const res: any = await AuthAPI.login(authForm.email, passwordHash);
+      if (res?.data?.token) {
+        localStorage.setItem("token", res.data.token);
+        setIsAuthenticated(true);
+        setAuthError(null);
+        setAuthForm({ fullName: "", email: "", password: "" });
+        toast({ title: "Signed in", description: "Continue your checkout now." });
+      } else {
+        setAuthError("Invalid login credentials.");
+      }
+    } catch (err: any) {
+      setAuthError(err.message || "Login failed.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleRegister = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAuthLoading(true);
+    setAuthError(null);
+
+    if (!authForm.fullName.trim()) {
+      setAuthError("Please enter your full name.");
+      setAuthLoading(false);
+      return;
+    }
+
+    if (!turnstileToken) {
+      setAuthError("Please complete the CAPTCHA to register.");
+      setAuthLoading(false);
+      return;
+    }
+
+    try {
+      const passwordHash = await hashSHA256(authForm.password);
+      const nameParts = authForm.fullName.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+      const username = authForm.fullName.toLowerCase().replace(/[^a-z0-9]/g, "") + Math.floor(Math.random() * 1000);
+
+      const res: any = await AuthAPI.register({
+        username,
+        first_name: firstName,
+        last_name: lastName,
+        email: authForm.email,
+        password_hash: passwordHash,
+        password_hash_confirmation: passwordHash,
+      });
+
+      if (res?.data?.token) {
+        localStorage.setItem("token", res.data.token);
+        setIsAuthenticated(true);
+        setAuthError(null);
+        setTurnstileToken("");
+        setAuthForm({ fullName: "", email: "", password: "" });
+        toast({ title: "Account created", description: "You can now complete your checkout." });
+      } else {
+        setAuthError("Registration failed.");
+      }
+    } catch (err: any) {
+      setAuthError(err.message || "Registration failed.");
+    } finally {
+      setAuthLoading(false);
+    }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -162,6 +253,179 @@ const Checkout = () => {
             <Loader2 className="h-8 w-8 animate-spin mx-auto text-accent" />
           </motion.div>
         </div>
+      </Layout>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <Layout>
+        <section className="relative overflow-hidden bg-background pt-32 pb-24">
+          <DataStreamBg density="low" />
+          <div className="container relative z-10 px-4">
+            <div className="mb-8">
+              <Button 
+                variant="ghost" 
+                className="group text-muted-foreground hover:text-foreground pl-0"
+                onClick={() => navigate("/pricing")}
+              >
+                <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                Back to Pricing
+              </Button>
+            </div>
+
+            <div className="grid gap-12 lg:grid-cols-12 items-start">
+              <div className="lg:col-span-5">
+                <AnimatedSection>
+                  <div className="space-y-6">
+                    <h1 className="text-4xl font-extrabold tracking-tight">Sign in to complete checkout</h1>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Please sign in or create an account to proceed with your subscription purchase.
+                    </p>
+
+                    <GlowCard className="bg-card/30 backdrop-blur-md border hover:border-accent/40">
+                      <div className="p-6 space-y-6">
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <Badge variant="outline" className="bg-accent/5 text-accent border-accent/20">
+                              {billing.toUpperCase()} PLAN
+                            </Badge>
+                            <h3 className="text-2xl font-bold mt-2">{currentPlan.name}</h3>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-2xl font-extrabold">${currentPlan.price}</span>
+                            <p className="text-xs text-muted-foreground">/{billing === "yearly" ? "yr" : "mo"}</p>
+                          </div>
+                        </div>
+
+                        <Separator className="bg-foreground/10" />
+
+                        <ul className="space-y-3">
+                          {currentPlan.features.map((f: string) => (
+                            <li key={f} className="flex items-center gap-3 text-sm text-foreground/80">
+                              <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </GlowCard>
+                  </div>
+                </AnimatedSection>
+              </div>
+
+              <div className="lg:col-span-7">
+                <AnimatedSection delay={0.2}>
+                  <Card className="border-border bg-card/50 backdrop-blur-xl shadow-2xl overflow-hidden">
+                    <CardHeader className="bg-muted/30 pb-8">
+                      <CardTitle className="flex items-center gap-2">
+                        <User className="h-5 w-5 text-accent" />
+                        Access Required
+                      </CardTitle>
+                      <CardDescription>
+                        Log in or register now to continue your checkout process.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-8">
+                      <div className="grid gap-3 mb-6 sm:grid-cols-2">
+                        <Button variant="outline" asChild className="w-full">
+                          <a href={`${API_BASE_URL}/auth/google/redirect`} className="flex items-center justify-center gap-2">
+                            <span className="h-5 w-5 rounded-full bg-white flex items-center justify-center text-black">G</span>
+                            Continue with Google
+                          </a>
+                        </Button>
+                        <Button variant="outline" asChild className="w-full">
+                          <a href={`${API_BASE_URL}/auth/github/redirect`} className="flex items-center justify-center gap-2">
+                            <Github className="h-5 w-5" />
+                            Continue with GitHub
+                          </a>
+                        </Button>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        <Button
+                          variant={authMode === "login" ? "default" : "outline"}
+                          onClick={() => setAuthMode("login")}
+                          className="min-w-[120px]"
+                        >
+                          Login
+                        </Button>
+                        <Button
+                          variant={authMode === "register" ? "default" : "outline"}
+                          onClick={() => setAuthMode("register")}
+                          className="min-w-[120px]"
+                        >
+                          Register
+                        </Button>
+                      </div>
+
+                      {authError && (
+                        <div className="rounded-xl border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive mb-6">
+                          {authError}
+                        </div>
+                      )}
+
+                      <form onSubmit={authMode === "login" ? handleLogin : handleRegister} className="space-y-4">
+                        {authMode === "register" && (
+                          <div className="grid gap-2">
+                            <Label htmlFor="fullName">Full name</Label>
+                            <Input
+                              id="fullName"
+                              placeholder="Enter your full name"
+                              value={authForm.fullName}
+                              onChange={handleAuthChange}
+                              required
+                              className="bg-background/50"
+                            />
+                          </div>
+                        )}
+
+                        <div className="grid gap-2">
+                          <Label htmlFor="email">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            value={authForm.email}
+                            onChange={handleAuthChange}
+                            required
+                            className="bg-background/50"
+                          />
+                        </div>
+
+                        <div className="grid gap-2">
+                          <Label htmlFor="password">Password</Label>
+                          <Input
+                            id="password"
+                            type="password"
+                            placeholder="Enter secure password"
+                            value={authForm.password}
+                            onChange={handleAuthChange}
+                            required
+                            className="bg-background/50"
+                          />
+                        </div>
+
+                        {authMode === "register" && (
+                          <div className="flex justify-center mt-4">
+                            <Turnstile
+                              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || "1x00000000000000000000AA"}
+                              onSuccess={(token) => setTurnstileToken(token)}
+                              options={{ action: "register" }}
+                            />
+                          </div>
+                        )}
+                        <Button type="submit" disabled={authLoading} className="w-full mt-4">
+                          {authLoading ? "Processing..." : authMode === "login" ? "Continue to Checkout" : "Create Account"}
+                        </Button>
+                      </form>
+                    </CardContent>
+                  </Card>
+                </AnimatedSection>
+              </div>
+            </div>
+          </div>
+        </section>
       </Layout>
     );
   }

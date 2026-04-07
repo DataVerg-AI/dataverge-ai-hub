@@ -33,7 +33,7 @@ const Index = () => (
           transition={{ duration: 0.7, delay: 0.1 }}
           className="max-w-5xl text-5xl font-extrabold leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
         >
-          DataVerg AI: The Intelligent{" "}
+          The Intelligent{" "}
           <span className="relative inline-block">
             <span className="text-shine">Data Convergence</span>
             <motion.span
