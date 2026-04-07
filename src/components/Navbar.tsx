@@ -62,7 +62,7 @@ const Navbar = () => {
 
         <div className="hidden md:flex">
           <Button variant="accent" size="lg" asChild>
-            <Link to="/product">Get Started</Link>
+            <Link to="/product">Try DataVerg AI</Link>
           </Button>
         </div>
 

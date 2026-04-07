@@ -377,10 +377,23 @@ const BlogPost = () => {
                     <Share2 size={16} /> Share article
                   </span>
                   <div className="flex gap-2">
-                    <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
+                    <button 
+                      onClick={() => {
+                        const url = encodeURIComponent(window.location.href);
+                        const text = encodeURIComponent(post.title);
+                        window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+                      }}
+                      className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all"
+                    >
                       <Twitter size={18} />
                     </button>
-                    <button className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all">
+                    <button 
+                      onClick={() => {
+                        const url = encodeURIComponent(window.location.href);
+                        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+                      }}
+                      className="w-10 h-10 rounded-full bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all"
+                    >
                       <Linkedin size={18} />
                     </button>
                   </div>

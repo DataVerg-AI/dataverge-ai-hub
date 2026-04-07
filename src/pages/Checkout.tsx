@@ -33,6 +33,7 @@ const Checkout = () => {
     card_holder: "",
     street: "",
     city: "",
+    state: "",
     country: "USA"
   });
 
@@ -54,7 +55,15 @@ const Checkout = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+    
+    if (id === "card_number") {
+      // Limit to 12 digits and format as XXXX XXXX XXXX
+      const digitsOnly = value.replace(/\s/g, "").replace(/\D/g, "").slice(0, 12);
+      const formatted = digitsOnly.replace(/(\d{4})(?=\d)/g, "$1 ");
+      setFormData(prev => ({ ...prev, [id]: formatted }));
+    } else {
+      setFormData(prev => ({ ...prev, [id]: value }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -62,10 +71,31 @@ const Checkout = () => {
     setIsLoading(true);
     
     // Simple validation
-    if (formData.card_number.length < 13) {
+    if (formData.card_number.replace(/\s/g, "").length !== 12) {
       toast({
         title: "Invalid Card",
-        description: "Please enter a valid card number.",
+        description: "Please enter a valid 12-digit card number.",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    if (formData.cvv.length < 3) {
+      toast({
+        title: "Invalid CVV",
+        description: "Please enter a valid CVV (3-4 digits).",
+        variant: "destructive"
+      });
+      setIsLoading(false);
+      return;
+    }
+
+    const [expiry_month, expiry_year] = formData.expiry.split("/");
+    if (!expiry_month || !expiry_year || expiry_month.length !== 2 || expiry_year.length !== 2) {
+      toast({
+        title: "Invalid Expiry",
+        description: "Please enter expiry date in MM/YY format.",
         variant: "destructive"
       });
       setIsLoading(false);
@@ -73,7 +103,6 @@ const Checkout = () => {
     }
 
     try {
-      const [expiry_month, expiry_year] = formData.expiry.split("/");
       
       const res: any = await SubscriptionAPI.subscribe({
         plan_slug: planSlug,
@@ -87,9 +116,9 @@ const Checkout = () => {
         billing_address: {
           street: formData.street,
           city: formData.city,
+          state: formData.state,
           country: formData.country,
           zip: "10001", // Default for demo
-          state: "NY"
         }
       });
 
@@ -217,7 +246,7 @@ const Checkout = () => {
                        Payment Parameters
                     </CardTitle>
                     <CardDescription>
-                      Use any card for sandbox testing (e.g. starting with 4111)
+                      Use any 12-digit card for sandbox testing (e.g. 411111111111)
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="pt-8">
@@ -240,14 +269,21 @@ const Checkout = () => {
                           <div className="relative">
                             <Input 
                               id="card_number" 
-                              placeholder="0000 0000 0000 0000" 
+                              placeholder="0000 0000 0000" 
                               value={formData.card_number}
                               onChange={handleInputChange}
+                              maxLength={15} // 12 digits + 2 spaces
                               required
-                              className="bg-background/50 pr-10" 
+                              className="bg-background/50 pr-12 font-mono text-lg tracking-wider border-2 border-border/50 focus:border-accent/50 transition-colors" 
                             />
-                            <CreditCard className="absolute right-3 top-2.5 h-5 w-5 text-muted-foreground/50" />
+                            <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                              <div className="w-8 h-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-sm flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">DV</span>
+                              </div>
+                              <CreditCard className="h-4 w-4 text-muted-foreground/50" />
+                            </div>
                           </div>
+                          <p className="text-xs text-muted-foreground">Enter 12-digit card number for secure processing</p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
@@ -309,13 +345,14 @@ const Checkout = () => {
                             />
                           </div>
                           <div className="grid gap-2">
-                            <Label htmlFor="country">Entity Location (Country)</Label>
+                            <Label htmlFor="state">State/Province</Label>
                             <Input 
-                              id="country" 
-                              value={formData.country}
+                              id="state" 
+                              placeholder="NY" 
+                              value={formData.state}
                               onChange={handleInputChange}
-                              readOnly 
-                              className="bg-muted text-muted-foreground cursor-not-allowed" 
+                              required
+                              className="bg-background/50" 
                             />
                           </div>
                         </div>

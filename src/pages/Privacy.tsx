@@ -74,7 +74,7 @@ const Privacy = () => {
               <div className="relative z-10 space-y-8 text-muted-foreground leading-relaxed">
                 <div className="space-y-4">
                   <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
-                  <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">TermsFeed Privacy Policy Generator</a>.</p>
+                  <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
                 </div>
 
                 <div className="space-y-4">

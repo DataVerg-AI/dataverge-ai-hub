@@ -33,9 +33,9 @@ const Index = () => (
           transition={{ duration: 0.7, delay: 0.1 }}
           className="max-w-5xl text-5xl font-extrabold leading-[1.1] tracking-tight md:text-7xl lg:text-8xl"
         >
-          The Intelligent Data{" "}
+          DataVerg AI: The Intelligent{" "}
           <span className="relative inline-block">
-            <span className="text-shine">Convergence</span>
+            <span className="text-shine">Data Convergence</span>
             <motion.span
               className="absolute -bottom-2 left-0 h-3 w-full bg-accent/30 -skew-x-6"
               initial={{ scaleX: 0 }}
@@ -63,7 +63,7 @@ const Index = () => (
           className="mt-10 flex flex-col gap-4 sm:flex-row"
         >
           <Button variant="accent" size="xl" className="glow-accent" asChild>
-            <Link to="/product" target="_blank" rel="noopener noreferrer">
+            <Link to="/product">
               Access the Platform <ArrowRight size={20} />
             </Link>
           </Button>

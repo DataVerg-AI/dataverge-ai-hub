@@ -96,7 +96,7 @@ const Footer = () => {
                 { to: "/pricing", label: "Pricing" },
                 { to: "/blog", label: "Blog" },
               ].map((link) => (
-                <motion.div key={link.to} whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
+                <motion.div key={link.to} whileHover={{ x: 4, backgroundColor: "hsl(var(--accent)/0.1)" }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
                   <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent">
                     {link.label}
                   </Link>
@@ -115,7 +115,7 @@ const Footer = () => {
                 { to: "/terms", label: "Terms" },
                 { to: "/privacy", label: "Privacy" },
               ].map((link) => (
-                <motion.div key={link.to} whileHover={{ x: 4 }} transition={{ type: "spring", stiffness: 300 }}>
+                <motion.div key={link.to} whileHover={{ x: 4, backgroundColor: "hsl(var(--accent)/0.1)" }} transition={{ type: "spring", stiffness: 300 }} className="rounded-md px-2 py-1">
                   <Link to={link.to} className="text-sm text-foreground/70 transition-colors hover:text-accent">
                     {link.label}
                   </Link>
