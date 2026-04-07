@@ -323,46 +323,122 @@ function BillingTab({ currentPlan }: { currentPlan: string | null }) {
     </div>
   );
 
+  const currentPlanData = plans.find(p => p.slug === activePlan);
+  const renewalDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+
   return (
-    <div className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-3">
-        {plans.map((plan, i) => {
-          const isCurrent = activePlan === plan.slug;
-          return (
-            <GlowCard key={plan.slug} className={`bg-card/80 relative overflow-hidden ${plan.popular ? "border-accent/50" : ""}`} hoverScale={1.02}>
-              {plan.popular && (
-                <div className="absolute top-0 right-0 bg-accent text-accent-foreground text-[10px] font-black px-3 py-1 rounded-bl-xl tracking-widest">POPULAR</div>
-              )}
-              <div className="p-6 flex flex-col h-full gap-4">
-                <div>
-                  <h3 className="font-bold text-lg text-foreground">{plan.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">{plan.description}</p>
-                </div>
-                <div className="flex items-baseline gap-1">
-                  {plan.monthly_price == null
-                    ? <span className="text-2xl font-extrabold text-foreground">Custom</span>
-                    : <><span className="text-3xl font-extrabold text-foreground">${plan.monthly_price}</span><span className="text-muted-foreground text-sm">/mo</span></>}
-                </div>
-                <ul className="space-y-2 flex-1">
-                  {plan.features.map(f => (
-                    <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  variant={isCurrent ? "outline" : "default"}
-                  className="w-full"
-                  disabled={isCurrent || subscribing === plan.slug}
-                  onClick={() => subscribe(plan.slug)}
-                >
-                  {subscribing === plan.slug ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : isCurrent ? <CheckCircle2 className="mr-2 h-4 w-4" /> : <Star className="mr-2 h-4 w-4" />}
-                  {isCurrent ? "Current Plan" : plan.monthly_price == null ? "Contact Sales" : "Upgrade"}
-                </Button>
+    <div className="space-y-6">
+      {/* Subscription Status */}
+      {currentPlanData && (
+        <GlowCard className="bg-card/80 border-accent/30">
+          <div className="p-6 space-y-4">
+            <div>
+              <h3 className="font-bold text-foreground flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-500" />
+                Current Subscription
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">Your plan and billing information</p>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-background/50 p-4 rounded-lg">
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Plan</p>
+                <p className="text-lg font-bold text-foreground mt-1">{currentPlanData.name}</p>
               </div>
-            </GlowCard>
-          );
-        })}
+              <div className="bg-background/50 p-4 rounded-lg">
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Billing Cycle</p>
+                <p className="text-lg font-bold text-foreground mt-1">Monthly</p>
+              </div>
+              <div className="bg-background/50 p-4 rounded-lg">
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Next Renewal</p>
+                <p className="text-lg font-bold text-foreground mt-1">{renewalDate}</p>
+              </div>
+              <div className="bg-background/50 p-4 rounded-lg">
+                <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">Price</p>
+                <p className="text-lg font-bold text-foreground mt-1">${currentPlanData.monthly_price}/mo</p>
+              </div>
+            </div>
+          </div>
+        </GlowCard>
+      )}
+
+      {/* Usage Stats */}
+      <GlowCard className="bg-card/80">
+        <div className="p-6 space-y-4">
+          <h3 className="font-bold text-foreground">Monthly Usage</h3>
+          <div className="space-y-3">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Data Sources: 3 / 5</span>
+                <span className="text-sm font-semibold text-foreground">60%</span>
+              </div>
+              <div className="w-full h-2 bg-background/50 rounded-full overflow-hidden">
+                <div className="h-full w-3/5 bg-blue-500 rounded-full" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">API Calls: 7,500 / 10,000</span>
+                <span className="text-sm font-semibold text-foreground">75%</span>
+              </div>
+              <div className="w-full h-2 bg-background/50 rounded-full overflow-hidden">
+                <div className="h-full w-3/4 bg-amber-500 rounded-full" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Team Members: 1 / 1</span>
+                <span className="text-sm font-semibold text-foreground">100%</span>
+              </div>
+              <div className="w-full h-2 bg-background/50 rounded-full overflow-hidden">
+                <div className="h-full w-full bg-green-500 rounded-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </GlowCard>
+
+      {/* Plan Selection */}
+      <div>
+        <h3 className="font-bold text-foreground mb-4">Upgrade or Change Plan</h3>
+        <div className="grid gap-4 md:grid-cols-3">
+          {plans.map((plan, i) => {
+            const isCurrent = activePlan === plan.slug;
+            return (
+              <GlowCard key={plan.slug} className={`bg-card/80 relative overflow-hidden ${plan.popular ? "border-accent/50" : ""}`} hoverScale={1.02}>
+                {plan.popular && (
+                  <div className="absolute top-0 right-0 bg-accent text-accent-foreground text-[10px] font-black px-3 py-1 rounded-bl-xl tracking-widest">POPULAR</div>
+                )}
+                <div className="p-6 flex flex-col h-full gap-4">
+                  <div>
+                    <h3 className="font-bold text-lg text-foreground">{plan.name}</h3>
+                    <p className="text-xs text-muted-foreground mt-1">{plan.description}</p>
+                  </div>
+                  <div className="flex items-baseline gap-1">
+                    {plan.monthly_price == null
+                      ? <span className="text-2xl font-extrabold text-foreground">Custom</span>
+                      : <><span className="text-3xl font-extrabold text-foreground">${plan.monthly_price}</span><span className="text-muted-foreground text-sm">/mo</span></>}
+                  </div>
+                  <ul className="space-y-2 flex-1">
+                    {plan.features.map(f => (
+                      <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-green-500 shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button
+                    variant={isCurrent ? "outline" : "default"}
+                    className="w-full"
+                    disabled={isCurrent || subscribing === plan.slug}
+                    onClick={() => subscribe(plan.slug)}
+                  >
+                    {subscribing === plan.slug ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : isCurrent ? <CheckCircle2 className="mr-2 h-4 w-4" /> : <Star className="mr-2 h-4 w-4" />}
+                    {isCurrent ? "Current Plan" : plan.monthly_price == null ? "Contact Sales" : "Upgrade"}
+                  </Button>
+                </div>
+              </GlowCard>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

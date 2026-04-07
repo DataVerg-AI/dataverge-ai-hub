@@ -4,12 +4,19 @@ import GlowCard from "@/components/GlowCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Plus, MoreHorizontal, Activity, Cpu, FolderKanban,
-  Play, Pause, Trash2, ExternalLink, Search
+  Play, Pause, Trash2, ExternalLink, Search, Loader2, Code2, Zap
 } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import {
+  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger
+} from "@/components/ui/dialog";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem,
@@ -30,9 +37,21 @@ const statusColors: Record<string, string> = {
   Paused:  "text-muted-foreground bg-muted/50 border-border",
 };
 
+const AVAILABLE_FUNCTIONS = [
+  { id: "recommendations", name: "Recommendation Engine", description: "ML-based product recommendations" },
+  { id: "sentiment", name: "Sentiment Analysis", description: "Real-time text sentiment classification" },
+  { id: "anomaly", name: "Anomaly Detection", description: "Detect unusual patterns in data" },
+  { id: "classification", name: "Text Classification", description: "Automatic content categorization" },
+  { id: "nlp", name: "NLP Processing", description: "Advanced natural language processing" },
+  { id: "timeseries", name: "Time Series Forecasting", description: "Predict future trends and patterns" },
+];
+
 export default function DashboardProjects() {
   const [projects, setProjects] = useState(INITIAL_PROJECTS);
   const [search, setSearch] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);
+  const [creating, setCreating] = useState(false);
+  const [formData, setFormData] = useState({ name: "", model: "DataVerGAI-4", function: "" });
 
   const toggle = (id: number, currentStatus: string) => {
     setProjects(prev => prev.map(p => {
@@ -51,6 +70,37 @@ export default function DashboardProjects() {
     });
   };
 
+  const handleCreateProject = async () => {
+    if (!formData.name.trim() || !formData.function) {
+      toast.error("Missing information", { description: "Please fill in all fields." });
+      return;
+    }
+
+    setCreating(true);
+    toast.loading("Creating project...");
+
+    setTimeout(() => {
+      const selectedFunc = AVAILABLE_FUNCTIONS.find(f => f.id === formData.function);
+      const newProject = {
+        id: Math.max(...projects.map(p => p.id), 0) + 1,
+        name: formData.name,
+        status: "Active" as const,
+        calls: "0",
+        latency: "—",
+        lastDeploy: "Just now",
+        model: formData.model,
+      };
+
+      setProjects([newProject, ...projects]);
+      setCreating(false);
+      setOpenDialog(false);
+      setFormData({ name: "", model: "DataVerGAI-4", function: "" });
+      toast.success("Project created successfully!", {
+        description: `${formData.name} with ${selectedFunc?.name} is now live.`,
+      });
+    }, 1500);
+  };
+
   const filtered = projects.filter(p => p.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
@@ -63,10 +113,110 @@ export default function DashboardProjects() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">Projects</h2>
               <p className="text-muted-foreground mt-1">Manage your AI deployments and active pipelines.</p>
             </div>
-            <Button className="shrink-0 group" onClick={() => toast.success("New project created", { description: "Your AI project has been initialized successfully." })}>
-              <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
-              New Project
-            </Button>
+            <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+              <DialogTrigger asChild>
+                <Button className="shrink-0 group" disabled={creating}>
+                  <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
+                  New Project
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[500px] bg-card/95 backdrop-blur-lg border-border">
+                <DialogHeader>
+                  <DialogTitle>Create New Project</DialogTitle>
+                  <DialogDescription>Set up a new AI project with function configuration</DialogDescription>
+                </DialogHeader>
+                <div className="space-y-5 py-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="project-name">Project Name</Label>
+                    <Input
+                      id="project-name"
+                      placeholder="e.g., Customer Churn Prediction"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="bg-background/50 border-border"
+                      disabled={creating}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="function-select">Function</Label>
+                    <Select value={formData.function} onValueChange={(val) => setFormData({ ...formData, function: val })}>
+                      <SelectTrigger id="function-select" className="bg-background/50 border-border">
+                        <SelectValue placeholder="Select a function" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card/95 border-border">
+                        {AVAILABLE_FUNCTIONS.map((func) => (
+                          <SelectItem key={func.id} value={func.id}>
+                            <div className="flex items-center gap-2">
+                              <Code2 className="h-4 w-4" />
+                              <span>{func.name}</span>
+                            </div>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {formData.function && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {AVAILABLE_FUNCTIONS.find(f => f.id === formData.function)?.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="model-select">AI Model</Label>
+                    <Select value={formData.model} onValueChange={(val) => setFormData({ ...formData, model: val })}>
+                      <SelectTrigger id="model-select" className="bg-background/50 border-border">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-card/95 border-border">
+                        <SelectItem value="DataVerGAI-4">DataVerGAI-4 Turbo (Foundation)</SelectItem>
+                        <SelectItem value="DataVerGAI-3.5">DataVerGAI-3.5 Fast (Inference)</SelectItem>
+                        <SelectItem value="ConvergeEmbed-v2">ConvergeEmbed v2 (Embedding)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="bg-accent/5 border border-accent/20 rounded-lg p-4 space-y-2">
+                    <p className="text-sm font-medium text-foreground flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-accent-foreground" />
+                      What you'll get
+                    </p>
+                    <ul className="text-xs text-muted-foreground space-y-1">
+                      <li>• Automatic API endpoint generation</li>
+                      <li>• Real-time inference monitoring</li>
+                      <li>• Performance metrics dashboard</li>
+                      <li>• Webhook integration support</li>
+                    </ul>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button
+                      variant="outline"
+                      onClick={() => setOpenDialog(false)}
+                      disabled={creating}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onClick={handleCreateProject}
+                      disabled={creating || !formData.name.trim() || !formData.function}
+                    >
+                      {creating ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Creating...
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="mr-2 h-4 w-4" />
+                          Create Project
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </AnimatedSection>
 

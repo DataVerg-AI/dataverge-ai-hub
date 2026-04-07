@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, ArrowRight, Zap } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import DataStreamBg from "@/components/DataStreamBg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { UserAPI } from "@/lib/api";
 
 const plans = [
   {
@@ -36,6 +37,23 @@ const plans = [
 
 const Pricing = () => {
   const [yearly, setYearly] = useState(false);
+  const [currentPlan, setCurrentPlan] = useState<string | null>(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    UserAPI.getProfile()
+      .then((res: any) => {
+        const plan = res.data?.current_plan;
+        if (plan) {
+          setCurrentPlan(String(plan).toLowerCase());
+        }
+      })
+      .catch(() => {
+        setCurrentPlan(null);
+      });
+  }, []);
 
   return (
     <Layout>
@@ -85,9 +103,19 @@ const Pricing = () => {
             </div>
           </AnimatedSection>
 
+          {currentPlan && (
+            <AnimatedSection delay={0.1}>
+              <div className="mx-auto mb-6 max-w-3xl rounded-3xl border border-accent/20 bg-accent/5 p-5 text-center text-sm text-foreground shadow-sm">
+                <span className="font-semibold">Your active plan:</span> {currentPlan === "professional" ? "Professional" : currentPlan === "starter" ? "Starter" : currentPlan === "enterprise" ? "Enterprise" : currentPlan}
+              </div>
+            </AnimatedSection>
+          )}
+
           <div className="mx-auto mt-14 grid max-w-5xl gap-8 lg:grid-cols-3">
             {plans.map((plan, i) => {
               const price = yearly ? plan.yearlyPrice : plan.monthlyPrice;
+              const planSlug = plan.name.toLowerCase();
+              const isCurrent = currentPlan === planSlug;
               return (
                 <AnimatedSection key={plan.name} delay={i * 0.12}>
                   <motion.div
@@ -220,17 +248,28 @@ const Pricing = () => {
                         ))}
                       </ul>
 
-                      <Button
-                        variant={plan.popular ? "accent" : "outline"}
-                        size="lg"
-                        className={`mt-8 w-full ${plan.popular ? "glow-accent" : ""}`}
-                        asChild
-                      >
-                        <Link to={price == null ? "/contact" : `/checkout?plan=${plan.name.toLowerCase() === "starter" ? "basic" : "pro"}&billing=${yearly ? "yearly" : "monthly"}`}>
-                          {price == null ? "Contact Sales" : "Get Started"}
-                          <ArrowRight size={16} />
-                        </Link>
-                      </Button>
+                      {isCurrent ? (
+                        <Button
+                          variant="outline"
+                          size="lg"
+                          className="mt-8 w-full"
+                          disabled
+                        >
+                          Current Plan
+                        </Button>
+                      ) : (
+                        <Button
+                          variant={plan.popular ? "accent" : "outline"}
+                          size="lg"
+                          className={`mt-8 w-full ${plan.popular ? "glow-accent" : ""}`}
+                          asChild
+                        >
+                          <Link to={price == null ? "/contact" : `/checkout?plan=${plan.name.toLowerCase() === "starter" ? "starter" : plan.name.toLowerCase() === "professional" ? "professional" : "enterprise"}&billing=${yearly ? "yearly" : "monthly"}`}>
+                            {price == null ? "Contact Sales" : "Get Started"}
+                            <ArrowRight size={16} />
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </motion.div>
                 </AnimatedSection>

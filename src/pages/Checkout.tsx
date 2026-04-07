@@ -21,7 +21,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   
-  const planSlug = searchParams.get("plan") || "pro";
+  const planSlug = searchParams.get("plan") || "professional";
   const billing = searchParams.get("billing") || "monthly";
   
   const [isLoading, setIsLoading] = useState(false);
@@ -40,12 +40,12 @@ const Checkout = () => {
 
   // Plan metadata mapping
   const planDetails: Record<string, any> = {
-    basic: {
+    starter: {
       name: "Starter",
       price: billing === "yearly" ? 39 : 49,
       features: ["Up to 5 data sources", "10K records/month", "Basic analytics"]
     },
-    pro: {
+    professional: {
       name: "Professional",
       price: billing === "yearly" ? 119 : 149,
       features: ["Unlimited data sources", "1M records/month", "Advanced analytics & AI"]

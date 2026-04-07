@@ -4,15 +4,20 @@ import GlowCard from "@/components/GlowCard";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Brain, Zap, Play, Pause, Settings2, RefreshCw, TrendingUp,
-  BarChart3, Star, Clock, CheckCircle2, AlertCircle, MoreHorizontal, Plus
+  BarChart3, Star, Clock, CheckCircle2, AlertCircle, MoreHorizontal, Plus, Copy, Check, X
 } from "lucide-react";
 import { toast } from "sonner";
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import {
+  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger
+} from "@/components/ui/dialog";
 import { Progress } from "@/components/ui/progress";
 
 const MODELS = [
@@ -21,30 +26,35 @@ const MODELS = [
     type: "Foundation", accuracy: 98.4, latency: 12, calls: "3.4M", cost: "$0.002/1k",
     description: "Flagship multi-modal convergence model. Optimized for real-time data unification across heterogeneous sources.",
     tags: ["Production", "Multi-modal"],
+    webhook: "https://hooks.dataverg.com/models/dgai4t",
   },
   {
     id: 2, name: "DataVerGAI-3.5 Fast", version: "v3.5.8", status: "Running",
     type: "Inference", accuracy: 94.1, latency: 8, calls: "12.1M", cost: "$0.0005/1k",
     description: "Ultra-low latency inference model for high-throughput pipeline orchestration.",
     tags: ["Production", "High-throughput"],
+    webhook: "https://hooks.dataverg.com/models/dgai35",
   },
   {
     id: 3, name: "ConvergeEmbed v2", version: "v2.0.3", status: "Running",
     type: "Embedding", accuracy: 96.7, latency: 5, calls: "8.9M", cost: "$0.0001/1k",
     description: "Semantic embedding engine for cross-source data identification and deduplication.",
     tags: ["Production"],
+    webhook: "https://hooks.dataverg.com/models/cembed2",
   },
   {
     id: 4, name: "AnomalyDetector Pro", version: "v1.4.0", status: "Tuning",
     type: "Specialist", accuracy: 91.2, latency: 35, calls: "450K", cost: "$0.003/1k",
     description: "Fine-tuned anomaly detection model currently undergoing continuous learning on new pipeline data.",
     tags: ["Beta"],
+    webhook: "https://hooks.dataverg.com/models/anom-pro",
   },
   {
     id: 5, name: "SchemaMerge AI", version: "v0.9.2", status: "Paused",
     type: "Specialist", accuracy: 88.5, latency: 22, calls: "120K", cost: "$0.002/1k",
     description: "Experimental schema resolution model. Intelligently resolves conflicts when merging heterogeneous data schemas.",
     tags: ["Experimental"],
+    webhook: null,
   },
 ];
 
@@ -61,7 +71,7 @@ const typeColors: Record<string, string> = {
   Specialist: "bg-orange-500/10 text-orange-400",
 };
 
-function ModelCard({ model }: { model: typeof MODELS[0] }) {
+function ModelCard({ model, onCopyWebhook, copiedWebhook }: { model: typeof MODELS[0]; onCopyWebhook: (text: string) => void; copiedWebhook: string | null }) {
   const [status, setStatus] = useState(model.status);
   const [tuning, setTuning] = useState(false);
 
@@ -128,6 +138,26 @@ function ModelCard({ model }: { model: typeof MODELS[0] }) {
               <span key={tag} className="text-[10px] border border-border text-muted-foreground px-2 py-0.5 rounded-full">{tag}</span>
             ))}
           </div>
+
+          {/* Webhook */}
+          {model.webhook && (
+            <div className="mt-4 p-3 bg-background/50 border border-border/50 rounded-lg">
+              <p className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider mb-1">Webhook</p>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] font-mono text-foreground truncate">{model.webhook}</span>
+                <button
+                  onClick={() => onCopyWebhook(model.webhook!)}
+                  className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {copiedWebhook === model.webhook ? (
+                    <Check className="h-3.5 w-3.5 text-green-500" />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Metrics */}
@@ -196,6 +226,54 @@ function TuningProgress() {
 }
 
 export default function DashboardModels() {
+  const [models, setModels] = useState(MODELS);
+  const [deploying, setDeploying] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [webhookUrl, setWebhookUrl] = useState("");
+  const [copiedWebhook, setCopiedWebhook] = useState<string | null>(null);
+
+  const handleDeployModel = () => {
+    if (!webhookUrl.trim()) {
+      toast.error("Webhook URL required", { description: "Please provide a webhook URL for the model." });
+      return;
+    }
+
+    setDeploying(true);
+    toast.loading("Deploying new model with webhook...");
+    
+    setTimeout(() => {
+      const generatedWebhook = `https://hooks.dataverg.com/models/custom-${models.length}`;
+      const newModel = {
+        id: models.length + 1,
+        name: `Custom Model v${models.length}`,
+        version: "v1.0.0",
+        status: "Running" as const,
+        type: "Specialist" as const,
+        accuracy: 87.5,
+        latency: 18,
+        calls: "0",
+        cost: "$0.001/1k",
+        description: "Custom fine-tuned model deployed from your training data.",
+        tags: ["Custom", "Recent"],
+        webhook: webhookUrl,
+      };
+      setModels([...models, newModel]);
+      setDeploying(false);
+      setOpenDialog(false);
+      setWebhookUrl("");
+      toast.success("Model deployed successfully!", { 
+        description: `${newModel.name} is now live with webhook configured.` 
+      });
+    }, 2000);
+  };
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedWebhook(text);
+    toast.success("Copied to clipboard!");
+    setTimeout(() => setCopiedWebhook(null), 2000);
+  };
+
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-6 max-w-7xl mx-auto">
@@ -206,20 +284,81 @@ export default function DashboardModels() {
               <h2 className="text-3xl font-bold tracking-tight text-foreground">AI Models</h2>
               <p className="text-muted-foreground mt-1">Manage, monitor, and fine-tune your convergence intelligence models.</p>
             </div>
-            <Button className="shrink-0 group" onClick={() => toast.success("Model deployment initiated", { description: "Your model is being deployed to production." })}>
-              <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
-              Deploy Model
-            </Button>
+            <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+              <DialogTrigger asChild>
+                <Button className="shrink-0 group" disabled={deploying}>
+                  <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90 duration-300" />
+                  Deploy Model
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[500px] bg-card/95 backdrop-blur-lg border-border">
+                <DialogHeader>
+                  <DialogTitle>Deploy Custom Model</DialogTitle>
+                  <DialogDescription>Set up your model with custom webhook configuration</DialogDescription>
+                </DialogHeader>
+                <div className="space-y-5 py-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="webhook">Webhook URL</Label>
+                    <Input
+                      id="webhook"
+                      placeholder="https://your-service.com/webhook"
+                      value={webhookUrl}
+                      onChange={(e) => setWebhookUrl(e.target.value)}
+                      className="bg-background/50 border-border"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      DataVerg will send model inference results to this webhook endpoint
+                    </p>
+                  </div>
+
+                  <div className="bg-accent/5 border border-accent/20 rounded-lg p-4 space-y-2">
+                    <p className="text-sm font-medium text-foreground">Webhook Events</p>
+                    <ul className="text-xs text-muted-foreground space-y-1">
+                      <li>• Model inference completed</li>
+                      <li>• Fine-tuning finished</li>
+                      <li>• Performance threshold exceeded</li>
+                      <li>• Errors or anomalies detected</li>
+                    </ul>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setOpenDialog(false)}
+                      disabled={deploying}
+                    >
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleDeployModel} 
+                      disabled={deploying || !webhookUrl.trim()}
+                    >
+                      {deploying ? (
+                        <>
+                          <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                          Deploying...
+                        </>
+                      ) : (
+                        <>
+                          <Zap className="mr-2 h-4 w-4" />
+                          Deploy Now
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
           </div>
         </AnimatedSection>
 
         {/* Stats */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { label: "Active Models", value: MODELS.filter(m => m.status === "Running").length, icon: CheckCircle2, color: "text-green-500 bg-green-500/10" },
+            { label: "Active Models", value: models.filter(m => m.status === "Running").length, icon: CheckCircle2, color: "text-green-500 bg-green-500/10" },
             { label: "Total Inferences", value: "24.9M", icon: Zap, color: "text-accent-foreground bg-accent/10" },
             { label: "Avg Accuracy", value: "93.8%", icon: BarChart3, color: "text-blue-400 bg-blue-400/10" },
-            { label: "In Fine-Tuning", value: MODELS.filter(m => m.status === "Tuning").length, icon: AlertCircle, color: "text-amber-500 bg-amber-500/10" },
+            { label: "In Fine-Tuning", value: models.filter(m => m.status === "Tuning").length, icon: AlertCircle, color: "text-amber-500 bg-amber-500/10" },
           ].map((s, i) => (
             <AnimatedSection key={s.label} delay={0.06 * i}>
               <GlowCard className="bg-card/80" hoverY={-3}>
@@ -239,9 +378,9 @@ export default function DashboardModels() {
 
         {/* Model Cards Grid */}
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {MODELS.map((model, i) => (
+          {models.map((model, i) => (
             <AnimatedSection key={model.id} delay={0.07 * i}>
-              <ModelCard model={model} />
+              <ModelCard model={model} onCopyWebhook={copyToClipboard} copiedWebhook={copiedWebhook} />
             </AnimatedSection>
           ))}
         </div>
