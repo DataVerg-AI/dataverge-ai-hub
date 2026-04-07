@@ -1,3 +1,3 @@
-# Welcome to your Lovable project
+# DataVerg AI
 
-TODO: Document your project here
+Welcome

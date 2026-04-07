@@ -199,6 +199,163 @@ const ProductShowcase = () => (
       </div>
     </section>
 
+    {/* Tech Stack — Powered by NVIDIA */}
+    <section className="relative overflow-hidden bg-gradient-to-b from-background via-secondary/50 to-background py-24">
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: "radial-gradient(circle at 10px 10px, hsl(var(--accent)) 2px, transparent 0)",
+        backgroundSize: "80px 80px",
+      }} />
+      <div className="container relative">
+        <AnimatedSection>
+          <div className="mx-auto max-w-3xl text-center mb-16">
+            <span className="mb-4 inline-block rounded-full bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent-foreground">AI Infrastructure</span>
+            <h2 className="text-3xl font-extrabold md:text-5xl">Built on NVIDIA's most advanced AI frameworks</h2>
+            <p className="mt-6 text-muted-foreground">Enterprise-grade performance, real-time intelligence, and production-ready deployment</p>
+          </div>
+        </AnimatedSection>
+
+        {/* AI Data Engine & Analytics */}
+        <div className="grid gap-8 md:grid-cols-2 mb-12">
+          <AnimatedSection delay={0}>
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="rounded-2xl border border-border bg-secondary/50 p-8 backdrop-blur-sm"
+            >
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-rose-500/10">
+                <Brain size={28} className="text-rose-500" />
+              </div>
+              <h3 className="text-2xl font-extrabold mb-4">AI Data Engine & Core Analytics</h3>
+              <p className="text-muted-foreground mb-6">The quantitative foundation of your platform—GPU-accelerated data processing and predictive intelligence.</p>
+              
+              <div className="space-y-4">
+                <div className="rounded-lg bg-background p-4 border border-border/50">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-rose-500/20 text-xs font-bold text-rose-500">1</span>
+                    NVIDIA RAPIDS
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-3">GPU-accelerated libraries for end-to-end data science and analytics</p>
+                  <ul className="text-sm space-y-2 text-foreground/80">
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>cuDF:</strong> GPU-accelerated ETL for Auto-clean and Smart Mapping</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>cuML:</strong> High-performance ML algorithms for predictive intelligence</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+
+          {/* Real-time Sync & Alerts */}
+          <AnimatedSection delay={0.1}>
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="rounded-2xl border border-border bg-secondary/50 p-8 backdrop-blur-sm"
+            >
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-500/10">
+                <RefreshCw size={28} className="text-blue-500" />
+              </div>
+              <h3 className="text-2xl font-extrabold mb-4">Real-Time Sync & Proactive Alerts</h3>
+              <p className="text-muted-foreground mb-6">Ingest continuous data streams and immediately flag anomalies and critical events.</p>
+              
+              <div className="space-y-4">
+                <div className="rounded-lg bg-background p-4 border border-border/50">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-blue-500/20 text-xs font-bold text-blue-500">2</span>
+                    NVIDIA Morpheus
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-3">Real-time AI application framework for streaming data pipelines</p>
+                  <ul className="text-sm space-y-2 text-foreground/80">
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>GPU-Speed Ingestion:</strong> Process 30+ connectors at scale</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>Live Alerts:</strong> AI-powered anomaly detection in real-time</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+        </div>
+
+        {/* Strategic Reports & Deployment */}
+        <div className="grid gap-8 md:grid-cols-2">
+          <AnimatedSection delay={0.2}>
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="rounded-2xl border border-border bg-secondary/50 p-8 backdrop-blur-sm"
+            >
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-purple-500/10">
+                <Sparkles size={28} className="text-purple-500" />
+              </div>
+              <h3 className="text-2xl font-extrabold mb-4">Strategic Report Generation</h3>
+              <p className="text-muted-foreground mb-6">Transform complex analytics into actionable, human-readable insights.</p>
+              
+              <div className="space-y-4">
+                <div className="rounded-lg bg-background p-4 border border-border/50">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-purple-500/20 text-xs font-bold text-purple-500">3</span>
+                    NVIDIA NeMo Framework
+                  </h4>
+                  <p className="text-sm text-muted-foreground mb-3">Build and deploy custom LLMs for business intelligence</p>
+                  <ul className="text-sm space-y-2 text-foreground/80">
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>Business Analyst LLM:</strong> Fine-tuned for your metrics</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span className="text-accent">✓</span>
+                      <span><strong>Board-Ready Reports:</strong> Automated narrative generation</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.3}>
+            <motion.div
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="rounded-2xl border border-border bg-secondary/50 p-8 backdrop-blur-sm"
+            >
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10">
+                <Layers size={28} className="text-accent" />
+              </div>
+              <h3 className="text-2xl font-extrabold mb-4">Production Deployment</h3>
+              <p className="text-muted-foreground mb-6">Unified infrastructure for deploying all AI models and pipelines.</p>
+              
+              <div className="space-y-4">
+                <div className="rounded-lg bg-background p-4 border border-border/50 mb-3">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-accent/20 text-xs font-bold text-accent">✓</span>
+                    NVIDIA Triton Inference Server
+                  </h4>
+                  <p className="text-sm text-muted-foreground">Single unified server for Morpheus pipelines, RAPIDS models, and NeMo LLMs</p>
+                </div>
+                <div className="rounded-lg bg-background p-4 border border-border/50">
+                  <h4 className="font-bold text-foreground mb-2 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded bg-accent/20 text-xs font-bold text-accent">✓</span>
+                    NVIDIA TensorRT
+                  </h4>
+                  <p className="text-sm text-muted-foreground">Model optimization for lowest latency and highest throughput</p>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </div>
+    </section>
+
     {/* Integrations — Bubble cloud (unchanged structurally, visually updated) */}
     <section className="relative overflow-hidden bg-background py-24 border-y border-border/50">
       <div className="absolute inset-0 opacity-[0.03]" style={{
