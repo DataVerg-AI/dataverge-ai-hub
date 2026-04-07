@@ -463,7 +463,7 @@ function SecurityTab() {
       const res = await fetch("https://api.dataverg.com/api/auth/password/change", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ current_password_hash, password_hash }),
+        body: JSON.stringify({ current_password_hash, password_hash, password_hash_confirmation: password_hash }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message);
