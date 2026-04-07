@@ -329,13 +329,13 @@ const Checkout = () => {
                     <CardContent className="pt-8">
                       <div className="grid gap-3 mb-6 sm:grid-cols-2">
                         <Button variant="outline" asChild className="w-full">
-                          <a href={`${API_BASE_URL}/auth/google/redirect`} className="flex items-center justify-center gap-2">
+                          <a href={`${API_BASE_URL}/auth/google/redirect?redirect_to=${encodeURIComponent(`/checkout?plan=${planSlug}&billing=${billing}`)}`} className="flex items-center justify-center gap-2">
                             <span className="h-5 w-5 rounded-full bg-white flex items-center justify-center text-black">G</span>
                             Continue with Google
                           </a>
                         </Button>
                         <Button variant="outline" asChild className="w-full">
-                          <a href={`${API_BASE_URL}/auth/github/redirect`} className="flex items-center justify-center gap-2">
+                          <a href={`${API_BASE_URL}/auth/github/redirect?redirect_to=${encodeURIComponent(`/checkout?plan=${planSlug}&billing=${billing}`)}`} className="flex items-center justify-center gap-2">
                             <Github className="h-5 w-5" />
                             Continue with GitHub
                           </a>

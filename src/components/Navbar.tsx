@@ -1,9 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, LayoutDashboard, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/components/ui/logo";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { UserAPI } from "@/lib/api";
+import { toast } from "sonner";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -16,13 +26,38 @@ const navItems = [
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState<{ first_name: string; last_name: string; email: string } | null>(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(Boolean(token));
+
+    if (token) {
+      UserAPI.getProfile()
+        .then((res: any) => setUser(res.data))
+        .catch(() => {
+          localStorage.removeItem("token");
+          setIsAuthenticated(false);
+        });
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setUser(null);
+    toast.success("Signed out successfully.");
+    navigate("/");
+  };
 
   return (
     <header
@@ -60,10 +95,54 @@ const Navbar = () => {
           })}
         </nav>
 
-        <div className="hidden md:flex">
-          <Button variant="accent" size="lg" asChild>
-            <Link to="/product">Try DataVerg AI</Link>
-          </Button>
+        <div className="flex items-center gap-3">
+          {isAuthenticated ? (
+            <>
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+                <Link to="/pricing">Pricing</Link>
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-2">
+                    <User className="h-4 w-4" />
+                    <span className="hidden sm:inline text-xs">
+                      {user?.first_name || "Profile"}
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <DropdownMenuLabel className="font-normal">
+                    <p className="font-semibold text-foreground">
+                      {user?.first_name} {user?.last_name}
+                    </p>
+                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/dashboard" className="flex items-center gap-2 cursor-pointer">
+                      <LayoutDashboard className="h-4 w-4" /> Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
+                    <LogOut className="h-4 w-4 mr-2" /> Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <>
+              <Button variant="outline" size="sm" asChild className="hidden sm:flex">
+                <Link to="/pricing">Pricing</Link>
+              </Button>
+              <Button variant="accent" size="sm" asChild className="hidden md:flex">
+                <Link to="/login">Sign In</Link>
+              </Button>
+              <Button variant="accent" size="sm" asChild className="md:hidden">
+                <Link to="/product">Get Started</Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle */}
@@ -133,11 +212,20 @@ const Navbar = () => {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: navItems.length * 0.05 }}
               >
-                <Button variant="accent" size="lg" className="mt-2 w-full" asChild>
-                  <Link to="/product" onClick={() => setMobileOpen(false)}>
-                    Get Started
-                  </Link>
-                </Button>
+                {isAuthenticated ? (
+                  <Button variant="destructive" className="mt-2 w-full" onClick={() => {
+                    handleLogout();
+                    setMobileOpen(false);
+                  }}>
+                    <LogOut className="h-4 w-4 mr-2" /> Sign Out
+                  </Button>
+                ) : (
+                  <Button variant="accent" size="lg" className="mt-2 w-full" asChild>
+                    <Link to="/login" onClick={() => setMobileOpen(false)}>
+                      Sign In
+                    </Link>
+                  </Button>
+                )}
               </motion.div>
             </nav>
           </motion.div>

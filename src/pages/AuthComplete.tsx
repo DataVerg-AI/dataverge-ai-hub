@@ -9,11 +9,12 @@ export default function AuthComplete() {
 
   useEffect(() => {
     const token = searchParams.get("token");
+    const redirectTo = searchParams.get("redirect_to") || "/dashboard";
 
     if (token) {
       localStorage.setItem("token", token);
       toast.success("Successfully authenticated!");
-      navigate("/dashboard", { replace: true });
+      navigate(redirectTo, { replace: true });
     } else {
       toast.error("Authentication failed. Please try again.");
       navigate("/login", { replace: true });
