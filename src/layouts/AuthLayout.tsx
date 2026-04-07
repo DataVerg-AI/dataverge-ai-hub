@@ -33,8 +33,9 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
       <div className="flex-1 flex flex-col justify-center items-center p-6 md:p-10 relative">
         <div className="w-full max-w-[400px]">
           <div className="md:hidden flex items-center gap-2 mb-8">
-            <Database className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl tracking-tight">DataVerge AI</span>
+            <Link to="/" className="flex items-center gap-2">
+              <Logo />
+            </Link>
           </div>
           {children}
         </div>

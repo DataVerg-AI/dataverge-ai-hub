@@ -70,6 +70,12 @@ export const AuthAPI = {
     return apiRequest('/auth/logout', {
       method: 'POST'
     });
+  },
+  forgotPassword: async (email: string, turnstile_token?: string) => {
+    return apiRequest('/auth/password/forgot', {
+      method: 'POST',
+      body: JSON.stringify({ email, turnstile_token })
+    });
   }
 };
 

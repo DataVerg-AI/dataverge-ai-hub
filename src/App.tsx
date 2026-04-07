@@ -19,6 +19,7 @@ import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
 import AuthComplete from "./pages/AuthComplete";
 import DashboardOverview from "./pages/DashboardOverview";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
@@ -53,6 +54,7 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<PageTransition><Privacy /></PageTransition>} />
         <Route path="/login" element={<PageTransition><Login /></PageTransition>} />
         <Route path="/signup" element={<PageTransition><Signup /></PageTransition>} />
+        <Route path="/forgot-password" element={<PageTransition><ForgotPassword /></PageTransition>} />
         <Route path="/auth/complete" element={<PageTransition><AuthComplete /></PageTransition>} />
         <Route path="/dashboard" element={<ProtectedRoute><PageTransition><DashboardOverview /></PageTransition></ProtectedRoute>} />
         <Route path="/dashboard/analytics" element={<ProtectedRoute><PageTransition><DashboardAnalytics /></PageTransition></ProtectedRoute>} />

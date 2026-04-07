@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import AuthLayout from "@/layouts/AuthLayout";
-import { Github, Loader2 } from "lucide-react";
+import { Github, Loader2, Check, X } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Signup() {
@@ -20,6 +20,21 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [turnstileToken, setTurnstileToken] = useState("");
   const [error, setError] = useState<string | null>(null);
+
+  const getPasswordStrength = (password: string) => {
+    const criteria = {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /\d/.test(password),
+      special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+    };
+
+    const score = Object.values(criteria).filter(Boolean).length;
+    return { criteria, score };
+  };
+
+  const passwordStrength = getPasswordStrength(password);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,7 +144,7 @@ export default function Signup() {
             <Label htmlFor="name">Full Name</Label>
             <Input
               id="name"
-              placeholder="John Doe"
+              placeholder="Enter your name"
               type="text"
               autoCapitalize="words"
               autoComplete="name"
@@ -163,6 +178,50 @@ export default function Signup() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+            {password && (
+              <div className="space-y-2">
+                <div className="flex gap-1">
+                  {[1, 2, 3, 4, 5].map((level) => (
+                    <div
+                      key={level}
+                      className={`h-1 flex-1 rounded-full transition-colors ${
+                        level <= passwordStrength.score
+                          ? passwordStrength.score <= 2
+                            ? "bg-red-500"
+                            : passwordStrength.score <= 3
+                            ? "bg-yellow-500"
+                            : passwordStrength.score <= 4
+                            ? "bg-blue-500"
+                            : "bg-green-500"
+                          : "bg-muted"
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div className={`flex items-center gap-1 ${passwordStrength.criteria.length ? "text-green-600" : "text-muted-foreground"}`}>
+                    {passwordStrength.criteria.length ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                    8+ characters
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordStrength.criteria.uppercase ? "text-green-600" : "text-muted-foreground"}`}>
+                    {passwordStrength.criteria.uppercase ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                    Uppercase
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordStrength.criteria.lowercase ? "text-green-600" : "text-muted-foreground"}`}>
+                    {passwordStrength.criteria.lowercase ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                    Lowercase
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordStrength.criteria.number ? "text-green-600" : "text-muted-foreground"}`}>
+                    {passwordStrength.criteria.number ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                    Number
+                  </div>
+                  <div className={`flex items-center gap-1 ${passwordStrength.criteria.special ? "text-green-600" : "text-muted-foreground"}`}>
+                    {passwordStrength.criteria.special ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
+                    Special char
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex justify-center mt-2">
             <Turnstile
