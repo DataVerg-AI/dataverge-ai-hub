@@ -77,10 +77,10 @@ function AccountTab({ profile, onUpdate }: { profile: UserProfile | null; onUpda
   useEffect(() => {
     if (profile) {
       setForm({
-        first_name: profile.first_name,
-        last_name: profile.last_name,
-        username: profile.username,
-        email: profile.email,
+        first_name: profile.first_name || "",
+        last_name: profile.last_name || "",
+        username: profile.username || "",
+        email: profile.email || "",
       });
     }
   }, [profile]);
@@ -122,7 +122,9 @@ function AccountTab({ profile, onUpdate }: { profile: UserProfile | null; onUpda
     }
   };
 
-  const initials = `${(form.first_name[0] ?? "").toUpperCase()}${(form.last_name[0] ?? "").toUpperCase()}`;
+  const firstName = (form.first_name || "").trim();
+  const lastName = (form.last_name || "").trim();
+  const initials = `${(firstName[0] ?? "").toUpperCase()}${(lastName[0] ?? "").toUpperCase()}`;
 
   return (
     <div className="space-y-6">

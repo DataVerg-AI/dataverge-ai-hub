@@ -129,7 +129,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       </Sidebar>
 
       {/* ─────────────── MAIN CONTENT ─────────────── */}
-      <SidebarInset className="relative flex flex-col min-h-screen overflow-hidden">
+      <SidebarInset className="relative flex flex-col h-screen overflow-hidden">
         {/* Topbar */}
         <header className="sticky top-0 z-30 flex h-16 items-center gap-4 bg-background/70 backdrop-blur-xl px-4 sm:px-6 border-b border-border/50">
           {/* Desktop sidebar trigger */}
@@ -250,7 +250,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 min-h-0 overflow-auto p-4 sm:p-6 relative bg-background">
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 pb-20 md:pb-6 relative bg-background">
           <div className="pointer-events-none fixed inset-0 overflow-hidden">
             <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-accent/4 blur-[120px] -translate-y-1/3 translate-x-1/4" />
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-blue-500/3 blur-[100px] translate-y-1/3 -translate-x-1/4" />
@@ -259,7 +259,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </main>
 
         {/* ─── MOBILE BOTTOM NAV ─── */}
-        <nav className="md:hidden sticky bottom-0 z-30 flex items-center justify-around border-t border-border/50 bg-background/80 backdrop-blur-xl px-2 py-2 pb-[env(safe-area-inset-bottom,8px)]">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 z-30 flex items-center justify-around border-t border-border/50 bg-background/95 backdrop-blur-xl px-2 py-2 pb-[max(env(safe-area-inset-bottom),8px)]">
           {MOBILE_NAV.map(item => {
             const active = isActive(item.url);
             return (
